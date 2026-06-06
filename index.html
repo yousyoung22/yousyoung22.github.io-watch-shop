@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>시계 매장</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background: #0b0b0b;
+    color: white;
+}
+
+/* 상단 */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.85);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h2 {
+    margin: 0;
+    color: gold;
+}
+
+/* 장바구니 버튼 */
+.cart-btn {
+    background: gold;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+/* 메인 */
+.container {
+    padding: 100px 20px;
+    text-align: center;
+}
+
+/* 카드 */
+.card {
+    display: inline-block;
+    width: 220px;
+    margin: 15px;
+    padding: 15px;
+    border: 1px solid gold;
+    background: rgba(255,255,255,0.05);
+}
+
+.card img {
+    width: 100%;
+}
+
+/* 버튼 */
+button {
+    background: gold;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* 장바구니 창 */
+.cart {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background: #111;
+    padding: 20px;
+    overflow-y: auto;
+    display: none;
+}
+
+.cart h3 {
+    color: gold;
+}
+
+.item {
+    border-bottom: 1px solid #333;
+    padding: 10px 0;
+}
+
+.remove {
+    color: red;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>시계 매장</h2>
+    <button class="cart-btn" onclick="toggleCart()">장바구니</button>
+</header>
+
+<!-- 제품 -->
+<div class="container">
+
+    <h1>시계 컬렉션</h1>
+
+    <div class="card">
+        <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=600">
+        <h3>클래식 시계</h3>
+        <p>120,000원</p>
+        <button onclick="addCart('클래식 시계',120000)">담기</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg?auto=compress&cs=tinysrgb&w=600">
+        <h3>메탈 시계</h3>
+        <p>250,000원</p>
+        <button onclick="addCart('메탈 시계',250000)">담기</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.pexels.com/photos/364822/pexels-photo-364822.jpeg?auto=compress&cs=tinysrgb&w=600">
+        <h3>럭셔리 시계</h3>
+        <p>500,000원</p>
+        <button onclick="addCart('럭셔리 시계',500000)">담기</button>
+    </div>
+
+</div>
+
+<!-- 장바구니 -->
+<div class="cart" id="cart">
+    <h3>장바구니</h3>
+    <div id="cartItems"></div>
+    <h3 id="total">총 0원</h3>
+</div>
+
+<script>
+let cart = [];
+
+function addCart(name, price) {
+    cart.push({name, price});
+    renderCart();
+}
+
+function renderCart() {
+    let box = document.getElementById("cartItems");
+    box.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        total += item.price;
+
+        box.innerHTML += `
+        <div class="item">
+            ${item.name} - ${item.price}원
+            <span class="remove" onclick="removeItem(${index})"> [삭제]</span>
+        </div>`;
+    });
+
+    document.getElementById("total").innerText = "총 " + total + "원";
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    renderCart();
+}
+
+function toggleCart() {
+    let c = document.getElementById("cart");
+    c.style.display = (c.style.display === "block") ? "none" : "block";
+}
+</script>
+
+</body>
+</html>
