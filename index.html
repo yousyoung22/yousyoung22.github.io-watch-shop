@@ -11,7 +11,9 @@
 <body>
 
 <header>
-    <div class="logo">LUXE JEWELRY</div>
+    <div class="logo">
+        <img src="images/logo.png" alt="logo">
+    </div>
 
     <nav>
         <a href="#home">HOME</a>
@@ -26,8 +28,8 @@
 
 <!-- HOME -->
 <section id="home" class="section home">
-    <h1>Luxury Jewelry</h1>
-    <p>World Class Premium Collection</p>
+    <h1>Luxury Collection</h1>
+    <p>Premium Jewelry Brand</p>
 </section>
 
 <!-- PRODUCTS -->
@@ -39,37 +41,38 @@
 <!-- BRAND -->
 <section id="about" class="section">
     <h2>BRAND STORY</h2>
-    <p>최고급 다이아몬드와 장인의 기술로 완성된 럭셔리 컬렉션</p>
+    <p>Luxury handmade jewelry collection</p>
 </section>
 
 <!-- HELP -->
 <section id="help" class="section">
     <h2>CUSTOMER SERVICE</h2>
-    <p>1588-0000 (09:00 - 18:00)</p>
+    <p>1588-0000</p>
 </section>
 
 <!-- PAYMENT -->
 <section id="payment" class="section">
-    <h2>PAYMENT METHOD</h2>
-    <p>카드 / 계좌이체 / 간편결제</p>
+    <h2>PAYMENT</h2>
+    <p>Card / Bank / Pay</p>
 </section>
 
 <!-- CART -->
 <div id="cart-panel">
     <div class="cart-header">
-        <h3>장바구니</h3>
+        <h3>Cart</h3>
         <button onclick="closeCart()">✕</button>
     </div>
 
     <div id="cart-items"></div>
 
     <div class="cart-footer">
-        <p>총액: <span id="total">0</span>원</p>
-        <button onclick="buy()">구매하기</button>
-        <button onclick="clearCart()">전체삭제</button>
+        <p>Total: <span id="total">0</span></p>
+        <button onclick="buy()">BUY</button>
+        <button onclick="clearCart()">CLEAR</button>
     </div>
 </div>
 
 <script src="js/app.js"></script>
+
 </body>
 </html>
