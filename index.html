@@ -32,39 +32,33 @@
 
 </header>
 
-<!-- HOME -->
 <section id="home" class="section">
     <h1>DAEHO JEWELRY</h1>
     <p class="sub">Luxury Handmade Collection</p>
 </section>
 
-<!-- PRODUCTS -->
 <section id="products" class="section">
     <h2>COLLECTION</h2>
     <div id="product-grid"></div>
 </section>
 
-<!-- BRAND -->
 <section id="about" class="section">
     <h2>BRAND</h2>
-    <p class="sub">대호 쥬얼리 프리미엄 브랜드</p>
+    <p class="sub">대호 쥬얼리 프리미엄 핸드메이드 브랜드</p>
 </section>
 
-<!-- HELP -->
 <section id="help" class="section">
     <h2>HELP</h2>
     <p class="sub">고객센터 1588-0000</p>
 </section>
 
-<!-- PAYMENT -->
 <section id="payment" class="section">
     <h2>PAYMENT</h2>
-    <p class="sub">카드 / 계좌이체 / 간편결제</p>
+    <p class="sub">카드 / 계좌이체 / 간편결제 지원</p>
 </section>
 
 <!-- CART -->
 <div id="cart-panel">
-
     <div class="cart-header">
         <h3>장바구니</h3>
         <button onclick="closeCart()">✕</button>
@@ -73,23 +67,13 @@
     <div id="cart-items"></div>
 
     <div class="cart-footer">
-
-        <p class="total-text">
-            총 결제금액<br>
-            <span id="total">₩0</span>
-        </p>
-
-        <div class="cart-bottom-buttons">
-            <button class="buy-btn" onclick="buy()">구매하기</button>
-            <button class="back-btn" onclick="closeCart()">뒤로가기</button>
-        </div>
-
+        <p>총액: <span id="total">0</span>원</p>
+        <button onclick="buy()">구매하기</button>
+        <button onclick="clearCart()">전체삭제</button>
     </div>
-
 </div>
 
-<!-- BACKDROP -->
-<div id="backdrop" onclick="closeCart()"></div>
+<div class="cart-backdrop" onclick="closeCart()"></div>
 
 <script src="js/app.js"></script>
 
