@@ -191,3 +191,95 @@ nav a:hover{
     border:none;
     cursor:pointer;
 }
+
+/* =========================
+   TABLET (중간 화면)
+========================= */
+@media (max-width: 1024px) {
+    #product-grid{
+        grid-template-columns:repeat(3, 1fr);
+    }
+
+    .hero-text h1{
+        font-size:50px;
+    }
+}
+
+/* =========================
+   MOBILE (핸드폰)
+========================= */
+@media (max-width: 768px) {
+
+    header{
+        padding:0 15px;
+    }
+
+    .logo span{
+        font-size:12px;
+    }
+
+    nav{
+        gap:10px;
+    }
+
+    nav a{
+        font-size:11px;
+    }
+
+    #cart-btn{
+        font-size:14px;
+    }
+
+    /* HOME 글씨 */
+    .hero-text h1{
+        font-size:32px;
+        letter-spacing:2px;
+    }
+
+    .hero-text p{
+        font-size:13px;
+    }
+
+    /* 상품 2열로 변경 */
+    #product-grid{
+        grid-template-columns:repeat(2, 1fr);
+        gap:10px;
+        width:95%;
+    }
+
+    .product img{
+        height:180px;
+    }
+
+    .product h3{
+        font-size:12px;
+    }
+
+    .product p{
+        font-size:12px;
+    }
+
+    /* 장바구니 */
+    #cart-panel{
+        width:100%;
+        right:-100%;
+    }
+
+    #cart-panel.active{
+        right:0;
+    }
+}
+
+/* =========================
+   SMALL MOBILE (아주 작은 폰)
+========================= */
+@media (max-width: 480px) {
+
+    .hero-text h1{
+        font-size:26px;
+    }
+
+    #product-grid{
+        grid-template-columns:repeat(1, 1fr);
+    }
+}
