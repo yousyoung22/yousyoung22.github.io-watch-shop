@@ -89,11 +89,10 @@ document.getElementById("cart-panel").classList.remove("active");
 document.querySelector(".cart-backdrop").classList.remove("active");
 }
 
-document.getElementById("cart-btn").onclick=openCart;
+/* ✅ 햄버거 */
+function toggleMenu(){
+document.getElementById("nav-menu").classList.toggle("active");
+}
 
-function toggleMenu(){
-document.querySelector("nav").classList.toggle("active");
-}
-function toggleMenu(){
-    document.getElementById("nav-menu").classList.toggle("active");
-}
+/* cart 버튼 */
+document.getElementById("cart-btn").onclick=openCart;
