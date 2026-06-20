@@ -11,22 +11,26 @@
 <body>
 
 <header>
+
     <div class="logo">
         <img src="images/logo.png">
         <span>대호 쥬얼리</span>
     </div>
 
-<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <!-- 모바일 좌/우 버튼 -->
+    <div class="mobile-bar">
+        <div id="cart-btn">🛒 <span id="cart-count">0</span></div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    </div>
 
-<nav id="nav-menu">
-    <a href="#home">HOME</a>
-    <a href="#products">COLLECTION</a>
-    <a href="#about">BRAND</a>
-    <a href="#help">HELP</a>
-    <a href="#payment">PAYMENT</a>
+    <nav id="nav-menu">
+        <a href="#home">HOME</a>
+        <a href="#products">COLLECTION</a>
+        <a href="#about">BRAND</a>
+        <a href="#help">HELP</a>
+        <a href="#payment">PAYMENT</a>
+    </nav>
 
-    <div id="cart-btn">🛒 <span id="cart-count">0</span></div>
-</nav>
 </header>
 
 <section id="home" class="section">
@@ -46,7 +50,7 @@
 
 <section id="help" class="section">
     <h2>HELP</h2>
-    <p class="sub">고객센터 1588-0000 / 1:1 문의 가능</p>
+    <p class="sub">고객센터 1588-0000</p>
 </section>
 
 <section id="payment" class="section">
@@ -56,7 +60,6 @@
 
 <!-- CART -->
 <div id="cart-panel">
-
     <div class="cart-header">
         <h3>장바구니</h3>
         <button onclick="closeCart()">✕</button>
@@ -65,35 +68,10 @@
     <div id="cart-items"></div>
 
     <div class="cart-footer">
-
-        <div class="cart-total">
-            <div class="total-label">
-                총 결제금액
-            </div>
-
-            <div class="total-price">
-                <span id="total">0</span>원
-            </div>
-        </div>
-
-        <div class="cart-actions">
-
-            <button
-                class="buy-btn"
-                onclick="buy()">
-                구매하기
-            </button>
-
-            <button
-                class="clear-btn"
-                onclick="clearCart()">
-                전체취소
-            </button>
-
-        </div>
-
+        <p>총액: <span id="total">0</span>원</p>
+        <button onclick="buy()">구매하기</button>
+        <button onclick="clearCart()">전체삭제</button>
     </div>
-
 </div>
 
 <div class="cart-backdrop" onclick="closeCart()"></div>
