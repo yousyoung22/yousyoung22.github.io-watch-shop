@@ -3,23 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LUXE JEWELRY</title>
+<title>대호 쥬얼리</title>
 
 <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<div class="company-nam">
-        대호 쥬얼리
-    </div>
-
-    <!-- CENTER: 로고 -->
-    <div class="center-logo">
+<!-- HEADER -->
+<header>
+    <div class="logo">
         <img src="images/logo.png" alt="logo">
+        <span>대호 쥬얼리</span>
     </div>
 
-    <!-- RIGHT: 메뉴 -->
     <nav>
         <a href="#home">HOME</a>
         <a href="#products">COLLECTION</a>
@@ -29,18 +26,13 @@
 
         <div id="cart-btn">🛒 <span id="cart-count">0</span></div>
     </nav>
-
-</header>
 </header>
 
 <!-- HOME -->
-<section id="home" class="hero">
-    <div class="hero-overlay"></div>
-
-    <div class="hero-content">
-        <h1>대호 쥬얼리</h1>
-        <p>Handcrafted Premium Collection</p>
-        <button onclick="location.href='#products'">SHOP NOW</button>
+<section id="home" class="section home">
+    <div class="hero-text">
+        <h1>DAEHO JEWELRY</h1>
+        <p>Luxury Handmade Collection</p>
     </div>
 </section>
 
@@ -52,35 +44,35 @@
 
 <!-- BRAND -->
 <section id="about" class="section">
-    <h2>BRAND STORY</h2>
-    <p>Luxury handmade jewelry collection</p>
+    <h2>BRAND</h2>
+    <p>최고급 주얼리 컬렉션 대호 쥬얼리</p>
 </section>
 
 <!-- HELP -->
 <section id="help" class="section">
-    <h2>CUSTOMER SERVICE</h2>
-    <p>1588-0000</p>
+    <h2>HELP</h2>
+    <p>고객센터 1588-0000</p>
 </section>
 
 <!-- PAYMENT -->
 <section id="payment" class="section">
     <h2>PAYMENT</h2>
-    <p>Card / Bank / Pay</p>
+    <p>카드 / 계좌이체 / 간편결제</p>
 </section>
 
 <!-- CART -->
 <div id="cart-panel">
     <div class="cart-header">
-        <h3>Cart</h3>
+        <h3>장바구니</h3>
         <button onclick="closeCart()">✕</button>
     </div>
 
     <div id="cart-items"></div>
 
     <div class="cart-footer">
-        <p>Total: <span id="total">0</span></p>
-        <button onclick="buy()">구매</button>
-        <button onclick="clearCart()">취소</button>
+        <p>총액: <span id="total">0</span>원</p>
+        <button onclick="buy()">구매하기</button>
+        <button onclick="clearCart()">전체삭제</button>
     </div>
 </div>
 
