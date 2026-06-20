@@ -1,4 +1,7 @@
 
+/* =========================
+   RESET
+========================= */
 *{
     margin:0;
     padding:0;
@@ -46,9 +49,6 @@ header{
     letter-spacing:2px;
 }
 
-/* =========================
-   NAV
-========================= */
 nav{
     display:flex;
     align-items:center;
@@ -62,15 +62,16 @@ nav a{
 }
 
 /* =========================
-   SECTION
+   SECTION (🔥 핵심 수정)
 ========================= */
 .section{
     min-height:100vh;
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-start; /* ⭐ 중요 */
     text-align:center;
+    padding-top:80px;
 }
 
 /* =========================
@@ -136,7 +137,6 @@ nav a{
     right:0;
 }
 
-/* BACKDROP */
 .cart-backdrop{
     position:fixed;
     top:0;
@@ -152,15 +152,15 @@ nav a{
     display:block;
 }
 
+/* =========================
+   📱 MOBILE ONLY FIX (완전 핵심)
+========================= */
+@media (max-width:768px){
 
-@media (max-width: 768px){
-
-    /* 로고 텍스트 숨김 */
     .logo span{
         display:none;
     }
 
-    /* ⭐ 2열 고정 */
     #product-grid{
         display:grid !important;
         grid-template-columns:repeat(2,1fr) !important;
@@ -168,17 +168,10 @@ nav a{
         width:95% !important;
     }
 
-    .product{
-        width:100% !important;
-        min-width:0 !important;
-    }
-
     .product img{
         height:160px !important;
-        object-fit:cover;
     }
 
-    /* 장바구니 모바일 */
     #cart-panel{
         width:50%;
         right:-50%;
@@ -190,10 +183,9 @@ nav a{
 }
 
 /* =========================
-   SMALL PHONE (1열 유지)
+   SMALL PHONE (1열)
 ========================= */
-@media (max-width: 480px){
-
+@media (max-width:480px){
     #product-grid{
         grid-template-columns:repeat(1,1fr) !important;
     }
