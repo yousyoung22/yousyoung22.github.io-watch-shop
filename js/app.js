@@ -32,14 +32,14 @@ grid.innerHTML += `
 <div class="product">
 <img src="${p.image}">
 <h3>${p.name}</h3>
-<p>${p.price.toLocaleString()}</p>
+<p>${p.price.toLocaleString()}원</p>
 <button onclick="add(${p.id})">장바구니</button>
 </div>
 `;
 });
 
 function add(id){
-let item = products.find(p=>p.id===id);
+const item = products.find(p=>p.id===id);
 cart.push(item);
 update();
 openCart();
@@ -47,22 +47,22 @@ openCart();
 
 function update(){
 let box = document.getElementById("cart-items");
-box.innerHTML="";
-let total=0;
+box.innerHTML = "";
+let total = 0;
 
 cart.forEach((c,i)=>{
 total += c.price;
 box.innerHTML += `
 <div>
 <p>${c.name}</p>
-<p>${c.price}</p>
+<p>${c.price.toLocaleString()}</p>
 <button onclick="remove(${i})">삭제</button>
 </div>
 `;
 });
 
-document.getElementById("total").innerText=total;
-document.getElementById("cart-count").innerText=cart.length;
+document.getElementById("total").innerText = total;
+document.getElementById("cart-count").innerText = cart.length;
 }
 
 function remove(i){
@@ -71,12 +71,12 @@ update();
 }
 
 function clearCart(){
-cart=[];
+cart = [];
 update();
 }
 
 function buy(){
-alert("구매 완료");
+alert("결제 완료");
 }
 
 function openCart(){
@@ -89,4 +89,4 @@ document.getElementById("cart-panel").classList.remove("active");
 document.querySelector(".cart-backdrop").classList.remove("active");
 }
 
-document.getElementById("cart-btn").onclick=openCart;
+document.getElementById("cart-btn").onclick = openCart;
