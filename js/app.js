@@ -25,8 +25,9 @@ const products = [
 { id:22, name:"흰오", price:1700000, image:"images/흰오.jpg" }
 ];
 
-const grid = document.getElementById("product-grid");
 let cart = [];
+
+const grid = document.getElementById("product-grid");
 
 /* PRODUCTS */
 products.forEach(p=>{
@@ -86,10 +87,12 @@ alert("결제 진행");
 
 window.openCart = function(){
 document.getElementById("cart-panel").classList.add("active");
+document.querySelector(".cart-backdrop").classList.add("active");
 }
 
 window.closeCart = function(){
 document.getElementById("cart-panel").classList.remove("active");
+document.querySelector(".cart-backdrop").classList.remove("active");
 }
 
 document.getElementById("cart-btn").onclick = openCart;
