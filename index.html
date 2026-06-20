@@ -7,141 +7,69 @@
 
 <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
 <header>
-<div class="logo">
-    <img src="images/logo.png" alt="logo">
-</div>
+    <div class="logo">LUXE JEWELRY</div>
 
-<nav>
-<a href="#home">HOME</a>
-<a href="#products">제품</a>
-<a href="#about">상세페이지</a>
-<a href="#help">도움말</a>
-<a href="#payment">결제방법</a>
-</nav>
+    <nav>
+        <a href="#home">HOME</a>
+        <a href="#products">COLLECTION</a>
+        <a href="#about">BRAND</a>
+        <a href="#help">HELP</a>
+        <a href="#payment">PAYMENT</a>
 
+        <div id="cart-btn">🛒 <span id="cart-count">0</span></div>
+    </nav>
 </header>
 
-<img src="images/logo.png" alt="logo" class="brand-logo">
-
+<!-- HOME -->
+<section id="home" class="section home">
+    <h1>Luxury Jewelry</h1>
+    <p>World Class Premium Collection</p>
 </section>
 
-<section id="home" class="hero">
-
-<div id="cart-btn">
-🛒 <span id="cart-count">0</span>
-</div>
-</header>
-
-<section id="home" class="hero">
-
-<div class="hero-content">
-<h1>Luxury Collection</h1>
-<p>
-세계 최고 수준의 프리미엄 주얼리 컬렉션
-</p>
-</div>
-
+<!-- PRODUCTS -->
+<section id="products" class="section">
+    <h2>COLLECTION</h2>
+    <div id="product-grid"></div>
 </section>
 
-<section id="about" class="about">
-
-<h2>브랜드 스토리</h2>
-
-<p>
-최고급 다이아몬드와 정교한 장인 정신으로
-완성된 럭셔리 컬렉션.
-</p>
-
+<!-- BRAND -->
+<section id="about" class="section">
+    <h2>BRAND STORY</h2>
+    <p>최고급 다이아몬드와 장인의 기술로 완성된 럭셔리 컬렉션</p>
 </section>
 
-<section id="products">
-
-<h2 class="title">COLLECTION</h2>
-
-<div class="product-grid" id="product-grid">
-</div>
-
+<!-- HELP -->
+<section id="help" class="section">
+    <h2>CUSTOMER SERVICE</h2>
+    <p>1588-0000 (09:00 - 18:00)</p>
 </section>
 
-<section id="help" class="info-section">
-
-<h2>고객센터</h2>
-
-<p>문의전화 : 1588-0000</p>
-<p>운영시간 : 09:00 ~ 18:00</p>
-
+<!-- PAYMENT -->
+<section id="payment" class="section">
+    <h2>PAYMENT METHOD</h2>
+    <p>카드 / 계좌이체 / 간편결제</p>
 </section>
 
-<section id="payment" class="info-section">
+<!-- CART -->
+<div id="cart-panel">
+    <div class="cart-header">
+        <h3>장바구니</h3>
+        <button onclick="closeCart()">✕</button>
+    </div>
 
-<h2>결제 방법</h2>
+    <div id="cart-items"></div>
 
-<p>신용카드</p>
-<p>계좌이체</p>
-<p>카카오페이</p>
-<p>네이버페이</p>
-
-</section>
-
-<div class="cart-panel" id="cart-panel">
-
-<div class="cart-header">
-
-<h2>장바구니</h2>
-
-<button id="close-cart">✕</button>
-
-</div>
-
-<div id="cart-items"></div>
-
-<div class="cart-footer">
-
-<h3>
-총 금액 :
-<span id="total-price">0</span>원
-</h3>
-
-<button class="buy-btn">
-구매하기
-</button>
-
-<button class="clear-btn">
-전체 삭제
-</button>
-
-</div>
-
-</div>
-
-<div class="product-modal" id="product-modal">
-
-<div class="modal-content">
-
-<button id="close-modal">✕</button>
-
-<img id="modal-img">
-
-<h2 id="modal-title"></h2>
-
-<h3 id="modal-price"></h3>
-
-<p>
-최고급 소재로 제작된 프리미엄 쥬얼리입니다.
-</p>
-
-<button id="modal-cart-btn">
-장바구니 담기
-</button>
-
-</div>
-
+    <div class="cart-footer">
+        <p>총액: <span id="total">0</span>원</p>
+        <button onclick="buy()">구매하기</button>
+        <button onclick="clearCart()">전체삭제</button>
+    </div>
 </div>
 
 <script src="js/app.js"></script>
-
 </body>
 </html>
