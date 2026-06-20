@@ -54,6 +54,7 @@
 
 <!-- CART -->
 <div id="cart-panel">
+
     <div class="cart-header">
         <h3>장바구니</h3>
         <button onclick="closeCart()">✕</button>
@@ -62,10 +63,35 @@
     <div id="cart-items"></div>
 
     <div class="cart-footer">
-        <p>총액: <span id="total">0</span>원</p>
-        <button onclick="buy()">구매하기</button>
-        <button onclick="clearCart()">전체삭제</button>
+
+        <div class="cart-total">
+            <div class="total-label">
+                총 결제금액
+            </div>
+
+            <div class="total-price">
+                <span id="total">0</span>원
+            </div>
+        </div>
+
+        <div class="cart-actions">
+
+            <button
+                class="buy-btn"
+                onclick="buy()">
+                구매하기
+            </button>
+
+            <button
+                class="clear-btn"
+                onclick="clearCart()">
+                전체취소
+            </button>
+
+        </div>
+
     </div>
+
 </div>
 
 <div class="cart-backdrop" onclick="closeCart()"></div>

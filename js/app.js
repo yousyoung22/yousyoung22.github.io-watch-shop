@@ -27,66 +27,110 @@ let cart = [];
 
 const grid = document.getElementById("product-grid");
 
+/* =========================
+   상품 출력
+========================= */
 products.forEach(p=>{
-grid.innerHTML += `
-<div class="product">
-<img src="${p.image}">
-<h3>${p.name}</h3>
-<p>${p.price.toLocaleString()}원</p>
-<button onclick="add(${p.id})">장바구니</button>
-</div>
-`;
+    grid.innerHTML += `
+    <div class="product">
+        <img src="${p.image}">
+        <h3>${p.name}</h3>
+        <p>${p.price.toLocaleString()}원</p>
+        <button onclick="add(${p.id})">장바구니</button>
+    </div>
+    `;
 });
 
+/* =========================
+   장바구니 추가
+========================= */
 function add(id){
-const item = products.find(p=>p.id===id);
-cart.push(item);
-update();
-openCart();
+    const item = products.find(p => p.id === id);
+    cart.push(item);
+    update();
+    openCart();
 }
 
+/* =========================
+   장바구니 UI 업데이트 (핵심)
+========================= */
 function update(){
-let box = document.getElementById("cart-items");
-box.innerHTML = "";
-let total = 0;
+    const box = document.getElementById("cart-items");
+    box.innerHTML = "";
 
-cart.forEach((c,i)=>{
-total += c.price;
-box.innerHTML += `
-<div>
-<p>${c.name}</p>
-<p>${c.price.toLocaleString()}원</p>
-<button onclick="remove(${i})">삭제</button>
-</div>
-`;
-});
+    let total = 0;
 
-document.getElementById("total").innerText = total;
-document.getElementById("cart-count").innerText = cart.length;
+    cart.forEach((c, i)=>{
+        total += c.price;
+
+        box.innerHTML += `
+        <div class="cart-item">
+
+            <img src="${c.image}" class="cart-item-img">
+
+            <div class="cart-item-info">
+
+                <div class="cart-item-name">
+                    ${c.name}
+                </div>
+
+                <div class="cart-item-price">
+                    ₩${c.price.toLocaleString()}
+                </div>
+
+                <button
+                    class="cart-delete-btn"
+                    onclick="remove(${i})">
+                    삭제하기
+                </button>
+
+            </div>
+
+        </div>
+        `;
+    });
+
+    document.getElementById("total").innerText = total.toLocaleString();
+    document.getElementById("cart-count").innerText = cart.length;
 }
 
+/* =========================
+   삭제
+========================= */
 function remove(i){
-cart.splice(i,1);
-update();
+    cart.splice(i,1);
+    update();
 }
 
+/* =========================
+   전체 삭제
+========================= */
 function clearCart(){
-cart=[];
-update();
+    cart = [];
+    update();
 }
 
+/* =========================
+   구매
+========================= */
 function buy(){
-alert("결제 완료");
+    alert("결제 완료");
 }
 
+/* =========================
+   장바구니 열기/닫기
+========================= */
 function openCart(){
-document.getElementById("cart-panel").classList.add("active");
-document.querySelector(".cart-backdrop").classList.add("active");
+    document.getElementById("cart-panel").classList.add("active");
+    document.querySelector(".cart-backdrop").classList.add("active");
 }
 
 function closeCart(){
-document.getElementById("cart-panel").classList.remove("active");
-document.querySelector(".cart-backdrop").classList.remove("active");
+    document.getElementById("cart-panel").classList.remove("active");
+    document.querySelector(".cart-backdrop").classList.remove("active");
 }
 
-document.getElementById("cart-btn").onclick=openCart;
+/* =========================
+   버튼 연결
+========================= */
+document.getElementById("cart-btn").onclick = openCart;
