@@ -134,3 +134,7 @@ function closeCart(){
    버튼 연결
 ========================= */
 document.getElementById("cart-btn").onclick = openCart;
+
+function toggleMenu(){
+    document.getElementById("nav-menu").classList.toggle("active");
+}
