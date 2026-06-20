@@ -228,3 +228,22 @@ nav a{
         object-fit: cover;
     }
 }
+
+@media (max-width: 768px) {
+
+    #product-grid{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        width: 95%;
+    }
+
+    .product img{
+        height: 160px;
+        object-fit: cover;
+    }
+
+    .logo span{
+        display: none;
+    }
+}
