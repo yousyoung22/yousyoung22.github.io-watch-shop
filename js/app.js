@@ -89,7 +89,7 @@ alert("결제 완료");
 }
 
 function toggleMenu(){
-document.getElementById("nav-menu").classList.toggle("menu-active");
+document.getElementById("nav-menu").classList.toggle("active");
 }
 
 document.getElementById("cart-btn").onclick = openCart;
