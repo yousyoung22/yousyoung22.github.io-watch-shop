@@ -167,3 +167,62 @@ nav a{
         width:95%;
     }
 }
+/* =========================
+   MOBILE HEADER FIX (좌/우 끝 정렬)
+========================= */
+
+.mobile-icons{
+    display:none;
+    align-items:center;
+    gap:15px;
+}
+
+/* 햄버거 */
+.menu-toggle{
+    font-size:26px;
+    cursor:pointer;
+    color:#fff;
+}
+
+/* 핵심 */
+@media (max-width:768px){
+
+    header{
+        display:flex;
+        justify-content:space-between; /* ⭐ 양 끝 배치 핵심 */
+        align-items:center;
+    }
+
+    .logo{
+        flex:1;
+        justify-content:flex-start;
+    }
+
+    .mobile-icons{
+        display:flex;
+        justify-content:flex-end;
+        gap:18px;
+    }
+
+    /* 메뉴 슬라이드 */
+    nav{
+        position:fixed;
+        top:70px;
+        right:-100%;
+        width:70%;
+        height:calc(100vh - 70px);
+        background:#111;
+        flex-direction:column;
+        padding:20px;
+        transition:0.3s;
+        z-index:9999;
+    }
+
+    nav.active{
+        right:0;
+    }
+
+    .logo span{
+        display:none;
+    }
+}

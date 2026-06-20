@@ -94,3 +94,6 @@ document.getElementById("cart-btn").onclick=openCart;
 function toggleMenu(){
 document.querySelector("nav").classList.toggle("active");
 }
+function toggleMenu(){
+    document.getElementById("nav-menu").classList.toggle("active");
+}
