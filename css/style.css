@@ -175,3 +175,55 @@ nav a{
         right:-80%;
     }
 }
+
+/* =========================
+   CART TOTAL TEXT
+========================= */
+
+.total-text{
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.total-text span{
+    display:block;
+    margin-top:5px;
+    color:#d4af37;
+}
+
+/* =========================
+   BOTTOM BUTTONS (2 BUTTON UI)
+========================= */
+
+.cart-bottom-buttons{
+    display:flex;
+    gap:10px;
+}
+
+/* 공통 버튼 */
+.cart-bottom-buttons button{
+    flex:1;
+    height:48px;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+    border:none;
+}
+
+/* 구매 */
+.buy-btn{
+    background:#d4af37;
+    color:#000;
+}
+
+/* 뒤로가기 */
+.back-btn{
+    background:#2a2a2a;
+    color:#fff;
+}
+
+.back-btn:hover{
+    background:#444;
+}
