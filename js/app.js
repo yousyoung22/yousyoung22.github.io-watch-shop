@@ -55,7 +55,7 @@ total += c.price;
 box.innerHTML += `
 <div>
 <p>${c.name}</p>
-<p>${c.price.toLocaleString()}</p>
+<p>${c.price.toLocaleString()}원</p>
 <button onclick="remove(${i})">삭제</button>
 </div>
 `;
@@ -71,7 +71,7 @@ update();
 }
 
 function clearCart(){
-cart = [];
+cart=[];
 update();
 }
 
@@ -89,4 +89,4 @@ document.getElementById("cart-panel").classList.remove("active");
 document.querySelector(".cart-backdrop").classList.remove("active");
 }
 
-document.getElementById("cart-btn").onclick = openCart;
+document.getElementById("cart-btn").onclick=openCart;
