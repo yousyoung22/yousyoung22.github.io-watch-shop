@@ -283,3 +283,111 @@ nav a:hover{
         grid-template-columns:repeat(1, 1fr);
     }
 }
+
+/* =========================
+   모바일 스크롤 고정 (핵심)
+========================= */
+html, body {
+    overflow-x: hidden;   /* 좌우 흔들림 완전 제거 */
+    touch-action: pan-y;  /* 상하 스크롤만 허용 */
+}
+
+/* =========================
+   헤더 글씨 깨짐 해결
+========================= */
+.logo span{
+    font-size:14px;
+    white-space:nowrap;   /* 줄바꿈 방지 */
+}
+
+/* =========================
+   모바일 전체 (핸드폰)
+========================= */
+@media (max-width: 768px) {
+
+    /* 헤더 안정화 */
+    header{
+        padding:0 12px;
+    }
+
+    .logo{
+        gap:6px;
+    }
+
+    .logo img{
+        height:22px; /* 로고 더 작게 */
+    }
+
+    .logo span{
+        font-size:12px;
+        letter-spacing:1px;
+    }
+
+    nav{
+        gap:8px;
+    }
+
+    nav a{
+        font-size:11px;
+    }
+
+    /* HOME 글씨 */
+    .hero-text h1{
+        font-size:28px;
+        letter-spacing:2px;
+    }
+
+    .hero-text p{
+        font-size:12px;
+    }
+
+    /* 상품 → 2열 고정 (핵심) */
+    #product-grid{
+        grid-template-columns:repeat(2, 1fr);
+        gap:10px;
+        width:95%;
+    }
+
+    /* 카드 깨짐 방지 */
+    .product{
+        min-width:0;
+        overflow:hidden;
+    }
+
+    .product img{
+        height:160px;
+    }
+
+    .product h3{
+        font-size:12px;
+        word-break:keep-all;
+    }
+
+    .product p{
+        font-size:12px;
+    }
+
+    /* 장바구니 전체화면 */
+    #cart-panel{
+        width:100%;
+        right:-100%;
+    }
+
+    #cart-panel.active{
+        right:0;
+    }
+}
+
+/* =========================
+   초소형 폰 (아이폰 SE급)
+========================= */
+@media (max-width: 480px) {
+
+    #product-grid{
+        grid-template-columns:repeat(1, 1fr);
+    }
+
+    .hero-text h1{
+        font-size:22px;
+    }
+}
