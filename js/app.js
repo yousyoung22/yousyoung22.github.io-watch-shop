@@ -145,7 +145,7 @@ grid.innerHTML += `
 <img src="${p.image}" onerror="this.src='https://via.placeholder.com/300'">
 <h3>${p.name}</h3>
 <p>${p.price.toLocaleString()}원</p>
-<button onclick="add(${p.id})">ADD</button>
+<button onclick="add(${p.id})">구매</button>
 </div>
 `;
 });

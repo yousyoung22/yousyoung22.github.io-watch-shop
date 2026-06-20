@@ -10,11 +10,16 @@
 
 <body>
 
-<header>
-    <div class="logo">
+<div class="company-nam">
+        대호 쥬얼리
+    </div>
+
+    <!-- CENTER: 로고 -->
+    <div class="center-logo">
         <img src="images/logo.png" alt="logo">
     </div>
 
+    <!-- RIGHT: 메뉴 -->
     <nav>
         <a href="#home">HOME</a>
         <a href="#products">COLLECTION</a>
@@ -24,12 +29,19 @@
 
         <div id="cart-btn">🛒 <span id="cart-count">0</span></div>
     </nav>
+
+</header>
 </header>
 
 <!-- HOME -->
-<section id="home" class="section home">
-    <h1>Luxury Collection</h1>
-    <p>Premium Jewelry Brand</p>
+<section id="home" class="hero">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1>대호 쥬얼리</h1>
+        <p>Handcrafted Premium Collection</p>
+        <button onclick="location.href='#products'">SHOP NOW</button>
+    </div>
 </section>
 
 <!-- PRODUCTS -->
@@ -67,8 +79,8 @@
 
     <div class="cart-footer">
         <p>Total: <span id="total">0</span></p>
-        <button onclick="buy()">BUY</button>
-        <button onclick="clearCart()">CLEAR</button>
+        <button onclick="buy()">구매</button>
+        <button onclick="clearCart()">취소</button>
     </div>
 </div>
 
