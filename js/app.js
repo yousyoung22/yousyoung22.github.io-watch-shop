@@ -1,5 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-
 const products = [
 { id:1, name:"3체인", price:1200000, image:"images/3체인.jpg" },
 { id:2, name:"검", price:900000, image:"images/검.jpg" },
@@ -29,72 +27,66 @@ let cart = [];
 
 const grid = document.getElementById("product-grid");
 
-/* PRODUCTS */
 products.forEach(p=>{
 grid.innerHTML += `
 <div class="product">
 <img src="${p.image}">
 <h3>${p.name}</h3>
-<p>${p.price.toLocaleString()}원</p>
+<p>${p.price.toLocaleString()}</p>
 <button onclick="add(${p.id})">장바구니</button>
 </div>
 `;
 });
 
-/* CART */
-window.add = function(id){
-const item = products.find(p=>p.id===id);
+function add(id){
+let item = products.find(p=>p.id===id);
 cart.push(item);
 update();
 openCart();
 }
 
 function update(){
-const box = document.getElementById("cart-items");
-box.innerHTML = "";
-
-let total = 0;
+let box = document.getElementById("cart-items");
+box.innerHTML="";
+let total=0;
 
 cart.forEach((c,i)=>{
 total += c.price;
-
 box.innerHTML += `
 <div>
 <p>${c.name}</p>
-<p>${c.price.toLocaleString()}</p>
+<p>${c.price}</p>
 <button onclick="remove(${i})">삭제</button>
 </div>
 `;
 });
 
-document.getElementById("total").innerText = total;
-document.getElementById("cart-count").innerText = cart.length;
+document.getElementById("total").innerText=total;
+document.getElementById("cart-count").innerText=cart.length;
 }
 
-window.remove = function(i){
+function remove(i){
 cart.splice(i,1);
 update();
 }
 
-window.clearCart = function(){
-cart = [];
+function clearCart(){
+cart=[];
 update();
 }
 
-window.buy = function(){
-alert("결제 진행");
+function buy(){
+alert("구매 완료");
 }
 
-window.openCart = function(){
+function openCart(){
 document.getElementById("cart-panel").classList.add("active");
 document.querySelector(".cart-backdrop").classList.add("active");
 }
 
-window.closeCart = function(){
+function closeCart(){
 document.getElementById("cart-panel").classList.remove("active");
 document.querySelector(".cart-backdrop").classList.remove("active");
 }
 
-document.getElementById("cart-btn").onclick = openCart;
-
-});
+document.getElementById("cart-btn").onclick=openCart;
