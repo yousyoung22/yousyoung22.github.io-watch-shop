@@ -52,16 +52,20 @@ let total = 0;
 
 cart.forEach((c,i)=>{
 total += c.price;
+
 box.innerHTML += `
-<div>
-<p>${c.name}</p>
-<p>${c.price.toLocaleString()}원</p>
-<button onclick="remove(${i})">삭제</button>
+<div class="cart-card">
+<img src="${c.image}">
+<div class="cart-info">
+<div>${c.name}</div>
+<div>${c.price.toLocaleString()}원</div>
+</div>
+<button class="cart-delete" onclick="remove(${i})">삭제</button>
 </div>
 `;
 });
 
-document.getElementById("total").innerText = total;
+document.getElementById("total").innerText = "₩" + total.toLocaleString();
 document.getElementById("cart-count").innerText = cart.length;
 }
 
@@ -70,29 +74,16 @@ cart.splice(i,1);
 update();
 }
 
-function clearCart(){
-cart=[];
-update();
+function openCart(){
+document.getElementById("cart-panel").classList.add("active");
+document.getElementById("backdrop").classList.add("active");
+}
+
+function closeCart(){
+document.getElementById("cart-panel").classList.remove("active");
+document.getElementById("backdrop").classList.remove("active");
 }
 
 function buy(){
 alert("결제 완료");
 }
-
-function openCart(){
-document.getElementById("cart-panel").classList.add("active");
-document.querySelector(".cart-backdrop").classList.add("active");
-}
-
-function closeCart(){
-document.getElementById("cart-panel").classList.remove("active");
-document.querySelector(".cart-backdrop").classList.remove("active");
-}
-
-/* ✅ 햄버거 */
-function toggleMenu(){
-document.getElementById("nav-menu").classList.toggle("active");
-}
-
-/* cart 버튼 */
-document.getElementById("cart-btn").onclick=openCart;
