@@ -274,3 +274,9 @@ cursor:pointer;
     max-width:300px;
     height:auto;
 }
+
+.logo img{
+    height:60px;
+    width:auto;
+    display:block;
+}
