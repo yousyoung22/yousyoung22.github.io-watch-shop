@@ -2,215 +2,158 @@ const products = [
 
 {
 id:1,
-name:"다이아몬드 링",
+name:"3체인",
 price:4900000,
-image:"images/1.jpg"
+image:"images/3체인.jpg"
 },
 
 {
 id:2,
-name:"럭셔리 목걸이",
+name:"검",
 price:3200000,
-image:"images/2.jpg"
+image:"images/검.jpg"
 },
 
 {
 id:3,
-name:"화이트골드 팔찌",
+name:"글씨",
 price:2100000,
-image:"images/3.jpg"
+image:"images/글씨.jpg"
 },
 
 {
 id:4,
-name:"프리미엄 이어링",
+name:"나무",
 price:1800000,
-image:"images/4.jpg"
+image:"images/나무.jpg"
 },
 
 {
 id:5,
-name:"로얄 다이아 반지",
+name:"노랑오",
 price:6500000,
-image:"images/5.jpg"
+image:"images/노랑오.jpg"
 },
 
 {
 id:6,
-name:"클래식 목걸이",
+name:"별",
 price:2700000,
-image:"images/6.jpg"
+image:"images/별.jpg"
 },
 
 {
 id:7,
-name:"18K 골드 링",
+name:"빨간오",
 price:3400000,
-image:"images/7.jpg"
+image:"images/빨간오.jpg"
 },
 
 {
 id:8,
-name:"플래티넘 팔찌",
+name:"빨강예티",
 price:3900000,
-image:"images/8.jpg"
+image:"images/빨강예티.jpg"
 },
 
 {
 id:9,
-name:"시그니처 이어링",
+name:"사탕",
 price:1700000,
-image:"images/9.jpg"
+image:"images/사탕.jpg"
 },
 
 {
 id:10,
-name:"럭셔리 세트",
+name:"소닉",
 price:7200000,
-image:"images/10.jpg"
+image:"images/소닉.jpg"
 },
 
 {
 id:11,
-name:"상품11",
+name:"십자가",
 price:1100000,
-image:"images/11.jpg"
+image:"images/십자가.jpg"
 },
 
 {
 id:12,
-name:"상품12",
+name:"얼굴",
 price:1200000,
-image:"images/12.jpg"
+image:"images/얼굴.jpg"
 },
 
 {
 id:13,
-name:"상품13",
+name:"왼쪽얼굴",
 price:1300000,
-image:"images/13.jpg"
+image:"images/왼쪽얼굴.jpg"
 },
 
 {
 id:14,
-name:"상품14",
+name:"주황예티",
 price:1400000,
-image:"images/14.jpg"
+image:"images/주황예티.jpg"
 },
 
 {
 id:15,
-name:"상품15",
+name:"키티",
 price:1500000,
-image:"images/15.jpg"
+image:"images/키티.jpg"
 },
 
 {
 id:16,
-name:"상품16",
+name:"토끼",
 price:1600000,
-image:"images/16.jpg"
+image:"images/토끼.jpg"
 },
 
 {
 id:17,
-name:"상품17",
+name:"파랑소닉",
 price:1700000,
-image:"images/17.jpg"
+image:"images/파랑소닉.jpg"
 },
 
 {
 id:18,
-name:"상품18",
+name:"파랑예티",
 price:1800000,
-image:"images/18.jpg"
+image:"images/파랑예티.jpg"
 },
 
 {
 id:19,
-name:"상품19",
+name:"하늘예티",
 price:1900000,
-image:"images/19.jpg"
+image:"images/하늘예티.jpg"
 },
 
 {
 id:20,
-name:"상품20",
+name:"해골",
 price:2000000,
-image:"images/20.jpg"
+image:"images/해골.jpg"
 },
 
 {
 id:21,
-name:"상품21",
+name:"흰색예티",
 price:2100000,
-image:"images/21.jpg"
+image:"images/흰색예티.jpg"
 },
 
 {
 id:22,
-name:"상품22",
+name:"흰오",
 price:2200000,
-image:"images/22.jpg"
+image:"images/흰오.jpg"
 },
 
-{
-id:23,
-name:"상품23",
-price:2300000,
-image:"images/23.jpg"
-},
-
-{
-id:24,
-name:"상품24",
-price:2400000,
-image:"images/24.jpg"
-},
-
-{
-id:25,
-name:"상품25",
-price:2500000,
-image:"images/25.jpg"
-},
-
-{
-id:26,
-name:"상품26",
-price:2600000,
-image:"images/26.jpg"
-},
-
-{
-id:27,
-name:"상품27",
-price:2700000,
-image:"images/27.jpg"
-},
-
-{
-id:28,
-name:"상품28",
-price:2800000,
-image:"images/28.jpg"
-},
-
-{
-id:29,
-name:"상품29",
-price:2900000,
-image:"images/29.jpg"
-},
-
-{
-id:30,
-name:"상품30",
-price:3000000,
-image:"images/30.jpg"
-}
-
-];
 
 const grid=document.getElementById("product-grid");
 
