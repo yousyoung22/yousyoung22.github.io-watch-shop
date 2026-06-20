@@ -206,3 +206,25 @@ nav a{
         font-size:28px;
     }
 }
+
+
+@media (max-width: 768px) {
+
+    #product-grid{
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        width: 95% !important;
+    }
+
+    .product{
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    .product img{
+        width: 100% !important;
+        height: 160px !important;
+        object-fit: cover;
+    }
+}
