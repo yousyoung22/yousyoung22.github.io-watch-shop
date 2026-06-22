@@ -41,6 +41,7 @@ align-items:center;
 gap:10px;
 letter-spacing:2px;
 text-transform:uppercase;
+flex-shrink:0;
 }
 
 .logo img{
@@ -48,7 +49,7 @@ height:26px;
 }
 
 /* =========================
-   NAV (PC 기본)
+   NAV (PC)
 ========================= */
 nav{
 display:flex;
@@ -57,6 +58,7 @@ gap:18px;
 margin-left:40px;
 }
 
+/* 메뉴 링크 */
 nav a{
 color:#fff;
 text-decoration:none;
@@ -67,7 +69,7 @@ text-transform:uppercase;
 }
 
 /* =========================
-   CART BUTTON
+   CART (핵심 수정)
 ========================= */
 #cart-btn{
 display:flex;
@@ -76,7 +78,7 @@ gap:6px;
 cursor:pointer;
 color:#fff;
 font-size:15px;
-margin-left:auto;
+margin-left:auto; /* ← 이게 핵심 (무조건 오른쪽 끝) */
 }
 
 /* =========================
@@ -86,7 +88,7 @@ margin-left:auto;
 font-size:20px;
 cursor:pointer;
 display:none;
-margin-left:20px;
+margin-left:15px;
 }
 
 /* =========================
@@ -241,7 +243,7 @@ color:#fff;
 grid-template-columns:repeat(2,1fr);
 }
 
-/* nav hidden */
+/* nav mobile 숨김 */
 nav{
 display:none;
 position:absolute;
@@ -258,12 +260,12 @@ nav.active{
 display:flex;
 }
 
-/* hamburger */
+/* 햄버거 */
 .menu-toggle{
 display:block;
 }
 
-/* cart stays visible */
+/* cart 유지 */
 #cart-btn{
 margin-left:auto;
 }
@@ -271,7 +273,7 @@ margin-left:auto;
 }
 
 /* =========================
-   PC ONLY FIX (IMPORTANT)
+   PC ONLY FIX (FINAL)
 ========================= */
 @media(min-width:769px){
 
@@ -280,7 +282,7 @@ display:flex;
 align-items:center;
 }
 
-/* nav stays center-right */
+/* nav */
 nav{
 display:flex;
 align-items:center;
@@ -288,7 +290,7 @@ gap:18px;
 margin-left:40px;
 }
 
-/* cart forced to far right */
+/* cart 무조건 오른쪽 끝 */
 #cart-btn{
 margin-left:auto;
 display:flex;
