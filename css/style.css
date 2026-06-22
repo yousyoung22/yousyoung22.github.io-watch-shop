@@ -15,9 +15,7 @@ overflow-x:hidden;
 padding-top:70px;
 }
 
-/* =========================
-   HEADER (FIXED CLEAN VERSION)
-========================= */
+/* HEADER */
 header{
 position:fixed;
 top:0;
@@ -40,6 +38,14 @@ gap:10px;
 letter-spacing:2px;
 text-transform:uppercase;
 flex-shrink:0;
+}
+
+.logo img{
+height:26px;
+width:auto;
+display:block;
+object-fit:contain;
+max-width:120px;
 }
 
 /* RIGHT AREA */
@@ -76,16 +82,14 @@ color:#fff;
 font-size:15px;
 }
 
-/* MOBILE MENU ICON */
+/* MOBILE MENU */
 .menu-toggle{
 font-size:20px;
 cursor:pointer;
 display:none;
 }
 
-/* =========================
-   SECTION
-========================= */
+/* SECTION */
 .section{
 padding:80px 0;
 text-align:center;
@@ -213,19 +217,35 @@ border-radius:10px;
 cursor:pointer;
 }
 
-.buy-btn{background:#bfa24a;}
-.back-btn{background:#333;color:#fff;}
+.buy-btn{
+background:#bfa24a;
+}
 
-/* =========================
-   MOBILE FIX
-========================= */
+.back-btn{
+background:#333;
+color:#fff;
+}
+
+/* MOBILE */
 @media(max-width:768px){
 
 #product-grid{
 grid-template-columns:repeat(2,1fr);
 }
 
-/* NAV */
+.logo img{
+height:20px;
+max-width:80px;
+}
+
+.logo{
+gap:8px;
+}
+
+.logo span{
+font-size:12px;
+}
+
 nav{
 display:none;
 position:absolute;
@@ -241,12 +261,10 @@ nav.active{
 display:flex;
 }
 
-/* HAMBURGER */
 .menu-toggle{
 display:block;
 }
 
-/* RIGHT AREA FIX */
 .right-area{
 margin-left:auto;
 display:flex;
