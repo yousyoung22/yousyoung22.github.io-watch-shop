@@ -1,93 +1,247 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEOUL ICE</title>
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700&display=swap');
 
-<link rel="stylesheet" href="css/style.css">
-</head>
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Bodoni Moda',serif;
+}
 
-<body>
+body{
+background:#000;
+color:#fff;
+overflow-x:hidden;
+padding-top:70px;
+}
 
-<header>
+/* =========================
+   HEADER
+========================= */
+header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:70px;
+background:#000;
+display:flex;
+align-items:center;
+padding:0 20px;
+z-index:9999;
+border-bottom:1px solid #222;
+}
 
-    <div class="logo">
-        <img src="images/logo.png">
-        <span>SEOUL ICE</span>
-    </div>
+/* LOGO */
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+letter-spacing:2px;
+text-transform:uppercase;
+}
 
-    <nav id="nav-menu">
-        <a href="#home">HOME</a>
-        <a href="#products">COLLECTION</a>
-        <a href="#about">BRAND</a>
-        <a href="#help">HELP</a>
-        <a href="#payment">PAYMENT</a>
-    </nav>
+/* RIGHT AREA (핵심) */
+.right-area{
+margin-left:auto;
+display:flex;
+align-items:center;
+gap:20px;
+}
 
-    <div class="right-area">
-        <div id="cart-btn">
-            🛒 <span id="cart-count">0</span>
-        </div>
+/* NAV */
+nav{
+display:flex;
+align-items:center;
+gap:18px;
+}
 
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    </div>
+nav a{
+color:#fff;
+text-decoration:none;
+font-size:13px;
+opacity:.8;
+letter-spacing:2px;
+text-transform:uppercase;
+}
 
-</header>
-<section id="home" class="section">
-    <h1>DAEHO JEWELRY</h1>
-    <p class="sub">Luxury Handmade Collection</p>
-</section>
+/* CART */
+#cart-btn{
+display:flex;
+align-items:center;
+gap:6px;
+cursor:pointer;
+color:#fff;
+font-size:15px;
+}
 
-<section id="products" class="section">
-    <h2>COLLECTION</h2>
-    <div id="product-grid"></div>
-</section>
+/* MOBILE MENU */
+.menu-toggle{
+font-size:20px;
+cursor:pointer;
+display:none;
+margin-left:15px;
+}
 
-<section id="about" class="section">
-    <h2>BRAND</h2>
-    <p class="sub">정교한 세팅과 타협 없는 퀄리티로 완성된 아이스만이 당신의 일상을 스테이지로 만듭니다.
-서울의 트렌디함과 힙합의 역사가 공존하는 SEOUL ICE 만의 럭셔리 바이브를 경험해 보세요.</p>
-</section>
+/* SECTION */
+.section{
+padding:80px 0;
+text-align:center;
+}
 
-<section id="help" class="section">
-    <h2>HELP</h2>
-    <p class="sub">010-779-7273</p>
-</section>
+.sub{
+margin-top:10px;
+color:#888;
+font-size:13px;
+}
 
-<section id="payment" class="section">
-    <h2>PAYMENT</h2>
-    <p class="sub">카드 / 계좌이체 / 간편결제</p>
-</section>
+/* PRODUCT GRID */
+#product-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+width:90%;
+margin:40px auto;
+}
 
-<!-- CART -->
-<div id="cart-panel">
+.product{
+background:#111;
+border:1px solid #222;
+border-radius:12px;
+padding:12px;
+display:flex;
+flex-direction:column;
+}
 
-    <div class="cart-header">
-        <h3>장바구니</h3>
-    </div>
+.product img{
+width:100%;
+aspect-ratio:1/1;
+object-fit:cover;
+border-radius:10px;
+}
 
-    <div id="cart-items"></div>
+.product button{
+margin-top:10px;
+padding:10px;
+border:none;
+border-radius:8px;
+background:#444;
+color:#fff;
+cursor:pointer;
+}
 
-    <div class="cart-footer">
+/* CART PANEL */
+#cart-panel{
+position:fixed;
+top:0;
+right:-420px;
+width:380px;
+height:100%;
+background:#111;
+z-index:10001;
+transition:.3s;
+display:flex;
+flex-direction:column;
+}
 
-        <p class="total-text">
-            총 결제금액<br>
-            <span id="total">₩0</span>
-        </p>
+#cart-panel.active{
+right:0;
+}
 
-        <div class="cart-bottom-buttons">
-            <button class="buy-btn" onclick="buy()">구매하기</button>
-            <button class="back-btn" onclick="closeCart()">뒤로가기</button>
-        </div>
+#backdrop{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+z-index:10000;
+}
 
-    </div>
+#backdrop.active{
+display:block;
+}
 
-</div>
+#cart-items{
+flex:1;
+overflow-y:auto;
+padding:12px;
+}
 
-<div id="backdrop" onclick="closeCart()"></div>
+.cart-card{
+display:flex;
+gap:10px;
+align-items:center;
+background:#1a1a1a;
+padding:12px;
+margin-bottom:10px;
+border-radius:12px;
+}
 
-<script src="js/app.js"></script>
+.cart-card img{
+width:60px;
+height:60px;
+object-fit:cover;
+}
 
-</body>
-</html>
+.cart-delete{
+background:#333;
+color:#fff;
+border:none;
+padding:6px 10px;
+}
+
+/* FOOTER */
+.cart-footer{
+padding:15px;
+border-top:1px solid #333;
+}
+
+.cart-bottom-buttons{
+display:flex;
+gap:10px;
+}
+
+.cart-bottom-buttons button{
+flex:1;
+padding:12px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+.buy-btn{background:#bfa24a;}
+.back-btn{background:#333;color:#fff;}
+
+/* MOBILE */
+@media(max-width:768px){
+
+#product-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+nav{
+display:none;
+position:absolute;
+top:70px;
+left:0;
+width:100%;
+flex-direction:column;
+background:#000;
+padding:20px;
+}
+
+nav.active{
+display:flex;
+}
+
+.menu-toggle{
+display:block;
+}
+
+.right-area{
+margin-left:auto;
+}
+
+}

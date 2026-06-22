@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700&display=swap');
 
-/* =========================
-   RESET
-========================= */
+/* RESET */
 *{
 margin:0;
 padding:0;
@@ -41,24 +39,23 @@ align-items:center;
 gap:10px;
 letter-spacing:2px;
 text-transform:uppercase;
-flex-shrink:0;
 }
 
-.logo img{
-height:26px;
+/* RIGHT AREA (핵심) */
+.right-area{
+margin-left:auto;
+display:flex;
+align-items:center;
+gap:20px;
 }
 
-/* =========================
-   NAV (PC)
-========================= */
+/* NAV */
 nav{
 display:flex;
 align-items:center;
 gap:18px;
-margin-left:40px;
 }
 
-/* 메뉴 링크 */
 nav a{
 color:#fff;
 text-decoration:none;
@@ -68,9 +65,7 @@ letter-spacing:2px;
 text-transform:uppercase;
 }
 
-/* =========================
-   CART (핵심 수정)
-========================= */
+/* CART */
 #cart-btn{
 display:flex;
 align-items:center;
@@ -78,12 +73,9 @@ gap:6px;
 cursor:pointer;
 color:#fff;
 font-size:15px;
-margin-left:auto; /* ← 이게 핵심 (무조건 오른쪽 끝) */
 }
 
-/* =========================
-   HAMBURGER
-========================= */
+/* MOBILE MENU */
 .menu-toggle{
 font-size:20px;
 cursor:pointer;
@@ -91,9 +83,7 @@ display:none;
 margin-left:15px;
 }
 
-/* =========================
-   SECTION
-========================= */
+/* SECTION */
 .section{
 padding:80px 0;
 text-align:center;
@@ -105,9 +95,7 @@ color:#888;
 font-size:13px;
 }
 
-/* =========================
-   PRODUCT GRID
-========================= */
+/* PRODUCT GRID */
 #product-grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -142,9 +130,7 @@ color:#fff;
 cursor:pointer;
 }
 
-/* =========================
-   CART PANEL
-========================= */
+/* CART PANEL */
 #cart-panel{
 position:fixed;
 top:0;
@@ -225,25 +211,16 @@ border-radius:10px;
 cursor:pointer;
 }
 
-.buy-btn{
-background:#bfa24a;
-}
+.buy-btn{background:#bfa24a;}
+.back-btn{background:#333;color:#fff;}
 
-.back-btn{
-background:#333;
-color:#fff;
-}
-
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 @media(max-width:768px){
 
 #product-grid{
 grid-template-columns:repeat(2,1fr);
 }
 
-/* nav mobile 숨김 */
 nav{
 display:none;
 position:absolute;
@@ -253,55 +230,18 @@ width:100%;
 flex-direction:column;
 background:#000;
 padding:20px;
-margin-left:0;
 }
 
 nav.active{
 display:flex;
 }
 
-/* 햄버거 */
 .menu-toggle{
 display:block;
 }
 
-/* cart 유지 */
-#cart-btn{
+.right-area{
 margin-left:auto;
-}
-
-}
-
-/* =========================
-   PC ONLY FIX (FINAL)
-========================= */
-@media(min-width:769px){
-
-header{
-display:flex;
-align-items:center;
-}
-
-/* nav */
-nav{
-display:flex;
-align-items:center;
-gap:18px;
-margin-left:40px;
-}
-
-/* cart 무조건 오른쪽 끝 */
-#cart-btn{
-margin-left:auto;
-display:flex;
-align-items:center;
-gap:6px;
-cursor:pointer;
-font-size:15px;
-}
-
-.menu-toggle{
-display:none;
 }
 
 }
