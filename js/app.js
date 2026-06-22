@@ -32,7 +32,7 @@ grid.innerHTML += `
 <div class="product">
 <img src="${p.image}">
 <h3>${p.name}</h3>
-<p>${p.price.toLocaleString()}원</p>
+<p>${p.price.toLocaleString()}KRW</p>
 <button onclick="add(${p.id})">장바구니</button>
 </div>
 `;
