@@ -1,247 +1,93 @@
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700&display=swap');
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEOUL ICE</title>
 
-/* RESET */
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Bodoni Moda',serif;
-}
+<link rel="stylesheet" href="css/style.css">
+</head>
 
-body{
-background:#000;
-color:#fff;
-overflow-x:hidden;
-padding-top:70px;
-}
+<body>
 
-/* =========================
-   HEADER
-========================= */
-header{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:70px;
-background:#000;
-display:flex;
-align-items:center;
-padding:0 20px;
-z-index:9999;
-border-bottom:1px solid #222;
-}
+<header>
 
-/* LOGO */
-.logo{
-display:flex;
-align-items:center;
-gap:10px;
-letter-spacing:2px;
-text-transform:uppercase;
-}
+    <div class="logo">
+        <img src="images/logo.png">
+        <span>SEOUL ICE</span>
+    </div>
 
-/* RIGHT AREA (핵심) */
-.right-area{
-margin-left:auto;
-display:flex;
-align-items:center;
-gap:20px;
-}
+    <div class="right-area">
 
-/* NAV */
-nav{
-display:flex;
-align-items:center;
-gap:18px;
-}
+        <nav id="nav-menu">
+            <a href="#home">HOME</a>
+            <a href="#products">COLLECTION</a>
+            <a href="#about">BRAND</a>
+            <a href="#help">HELP</a>
+            <a href="#payment">PAYMENT</a>
+        </nav>
 
-nav a{
-color:#fff;
-text-decoration:none;
-font-size:13px;
-opacity:.8;
-letter-spacing:2px;
-text-transform:uppercase;
-}
+        <div id="cart-btn">
+            🛒 <span id="cart-count">0</span>
+        </div>
 
-/* CART */
-#cart-btn{
-display:flex;
-align-items:center;
-gap:6px;
-cursor:pointer;
-color:#fff;
-font-size:15px;
-}
+    </div>
 
-/* MOBILE MENU */
-.menu-toggle{
-font-size:20px;
-cursor:pointer;
-display:none;
-margin-left:15px;
-}
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-/* SECTION */
-.section{
-padding:80px 0;
-text-align:center;
-}
+</header>
 
-.sub{
-margin-top:10px;
-color:#888;
-font-size:13px;
-}
+<section id="home" class="section">
+    <h1>DAEHO JEWELRY</h1>
+    <p class="sub">Luxury Handmade Collection</p>
+</section>
 
-/* PRODUCT GRID */
-#product-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:20px;
-width:90%;
-margin:40px auto;
-}
+<section id="products" class="section">
+    <h2>COLLECTION</h2>
+    <div id="product-grid"></div>
+</section>
 
-.product{
-background:#111;
-border:1px solid #222;
-border-radius:12px;
-padding:12px;
-display:flex;
-flex-direction:column;
-}
+<section id="about" class="section">
+    <h2>BRAND</h2>
+    <p class="sub">대호 쥬얼리 프리미엄 브랜드</p>
+</section>
 
-.product img{
-width:100%;
-aspect-ratio:1/1;
-object-fit:cover;
-border-radius:10px;
-}
+<section id="help" class="section">
+    <h2>HELP</h2>
+    <p class="sub">고객센터 1588-0000</p>
+</section>
 
-.product button{
-margin-top:10px;
-padding:10px;
-border:none;
-border-radius:8px;
-background:#444;
-color:#fff;
-cursor:pointer;
-}
+<section id="payment" class="section">
+    <h2>PAYMENT</h2>
+    <p class="sub">카드 / 계좌이체 / 간편결제</p>
+</section>
 
-/* CART PANEL */
-#cart-panel{
-position:fixed;
-top:0;
-right:-420px;
-width:380px;
-height:100%;
-background:#111;
-z-index:10001;
-transition:.3s;
-display:flex;
-flex-direction:column;
-}
+<!-- CART -->
+<div id="cart-panel">
 
-#cart-panel.active{
-right:0;
-}
+    <div class="cart-header">
+        <h3>장바구니</h3>
+    </div>
 
-#backdrop{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-display:none;
-z-index:10000;
-}
+    <div id="cart-items"></div>
 
-#backdrop.active{
-display:block;
-}
+    <div class="cart-footer">
+        <p class="total-text">
+            총 결제금액<br>
+            <span id="total">₩0</span>
+        </p>
 
-#cart-items{
-flex:1;
-overflow-y:auto;
-padding:12px;
-}
+        <div class="cart-bottom-buttons">
+            <button class="buy-btn" onclick="buy()">구매하기</button>
+            <button class="back-btn" onclick="closeCart()">뒤로가기</button>
+        </div>
+    </div>
 
-.cart-card{
-display:flex;
-gap:10px;
-align-items:center;
-background:#1a1a1a;
-padding:12px;
-margin-bottom:10px;
-border-radius:12px;
-}
+</div>
 
-.cart-card img{
-width:60px;
-height:60px;
-object-fit:cover;
-}
+<div id="backdrop" onclick="closeCart()"></div>
 
-.cart-delete{
-background:#333;
-color:#fff;
-border:none;
-padding:6px 10px;
-}
+<script src="js/app.js"></script>
 
-/* FOOTER */
-.cart-footer{
-padding:15px;
-border-top:1px solid #333;
-}
-
-.cart-bottom-buttons{
-display:flex;
-gap:10px;
-}
-
-.cart-bottom-buttons button{
-flex:1;
-padding:12px;
-border:none;
-border-radius:10px;
-cursor:pointer;
-}
-
-.buy-btn{background:#bfa24a;}
-.back-btn{background:#333;color:#fff;}
-
-/* MOBILE */
-@media(max-width:768px){
-
-#product-grid{
-grid-template-columns:repeat(2,1fr);
-}
-
-nav{
-display:none;
-position:absolute;
-top:70px;
-left:0;
-width:100%;
-flex-direction:column;
-background:#000;
-padding:20px;
-}
-
-nav.active{
-display:flex;
-}
-
-.menu-toggle{
-display:block;
-}
-
-.right-area{
-margin-left:auto;
-}
-
-}
+</body>
+</html>
