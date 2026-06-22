@@ -116,6 +116,13 @@ margin-left:auto;
 margin-right:auto;
 }
 
+#help .sub{
+font-size:24px;
+color:#fff;
+font-weight:600;
+letter-spacing:1px;
+}
+
 /* PRODUCT GRID */
 #product-grid{
 display:grid;
@@ -303,8 +310,28 @@ font-size:26px;
 }
 
 .sub{
-font-size:15px;
-line-height:1.7;
+font-size:16px;
+line-height:1.85;
+width:88%;
+max-width:420px;
+}
+
+#about .sub{
+font-size:15.5px;
+line-height:1.9;
+word-break:keep-all;
+}
+
+#about .sub br{
+display:none;
+}
+
+#help .sub{
+font-size:26px;
+line-height:1.4;
+color:#fff;
+font-weight:700;
+letter-spacing:1px;
 }
 
 .logo img{

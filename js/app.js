@@ -32,7 +32,7 @@ grid.innerHTML += `
 <div class="product">
 <img src="${p.image}">
 <h3>${p.name}</h3>
-<p>${p.price.toLocaleString()}KRW</p>
+<p>₩${p.price.toLocaleString()}</p>
 <button onclick="add(${p.id})">장바구니</button>
 </div>
 `;
@@ -58,7 +58,7 @@ box.innerHTML += `
 <img src="${c.image}">
 <div class="cart-info">
 <div>${c.name}</div>
-<div>${c.price.toLocaleString()}원</div>
+<div>₩${c.price.toLocaleString()}</div>
 </div>
 <button class="cart-delete" onclick="remove(${i})">삭제</button>
 </div>
