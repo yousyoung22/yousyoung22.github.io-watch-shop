@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700&display=swap');
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:'Bodoni Moda',serif;
 }
 
 body{
@@ -32,9 +34,13 @@ border-bottom:1px solid #222;
 display:flex;
 gap:10px;
 align-items:center;
+letter-spacing:2px;
+text-transform:uppercase;
 }
 
-.logo img{height:26px;}
+.logo img{
+height:26px;
+}
 
 /* NAV */
 nav{
@@ -48,6 +54,8 @@ color:#fff;
 text-decoration:none;
 font-size:13px;
 opacity:.8;
+letter-spacing:2px;
+text-transform:uppercase;
 }
 
 .mobile-icons{
@@ -74,7 +82,7 @@ color:#888;
 font-size:13px;
 }
 
-/* PRODUCT GRID FIX (핵심) */
+/* PRODUCT GRID FIX */
 #product-grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -123,7 +131,9 @@ display:flex;
 flex-direction:column;
 }
 
-#cart-panel.active{right:0;}
+#cart-panel.active{
+right:0;
+}
 
 #backdrop{
 position:fixed;
@@ -136,7 +146,9 @@ display:none;
 z-index:10000;
 }
 
-#backdrop.active{display:block;}
+#backdrop.active{
+display:block;
+}
 
 #cart-items{
 flex:1;
@@ -186,14 +198,28 @@ border-radius:10px;
 cursor:pointer;
 }
 
-.buy-btn{background:#bfa24a;}
-.back-btn{background:#333;color:#fff;}
+.buy-btn{
+background:#bfa24a;
+}
+
+.back-btn{
+background:#333;
+color:#fff;
+}
 
 /* MOBILE */
 @media(max-width:768px){
-#product-grid{grid-template-columns:repeat(2,1fr);}
-nav{display:none;}
-.menu-toggle{display:block;}
+#product-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+nav{
+display:none;
+}
+
+.menu-toggle{
+display:block;
+}
 
 nav.active{
 display:flex;
