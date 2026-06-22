@@ -232,3 +232,76 @@ background:#000;
 padding:20px;
 }
 }
+
+/* =========================
+   PC ONLY HEADER LAYOUT FIX
+========================= */
+@media(min-width:769px){
+
+header{
+display:flex;
+align-items:center;
+}
+
+/* 로고 */
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+/* nav을 오른쪽으로 밀기 */
+nav{
+display:flex;
+align-items:center;
+gap:18px;
+margin-left:auto;
+}
+
+/* 장바구니를 맨 끝으로 */
+#cart-btn{
+display:flex;
+align-items:center;
+gap:6px;
+cursor:pointer;
+color:#fff;
+font-size:15px;
+margin-left:20px;
+}
+
+/* 햄버거 PC에서는 숨김 */
+.menu-toggle{
+display:none;
+}
+
+}
+
+/* =========================
+   MOBILE (기존 그대로 유지)
+========================= */
+@media(max-width:768px){
+
+nav{
+display:none;
+position:absolute;
+top:70px;
+left:0;
+width:100%;
+flex-direction:column;
+background:#000;
+padding:20px;
+}
+
+nav.active{
+display:flex;
+}
+
+.menu-toggle{
+display:block;
+}
+
+#cart-btn{
+display:flex;
+}
+
+}
