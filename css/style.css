@@ -34,18 +34,18 @@ border-bottom:1px solid #222;
 .logo{
 display:flex;
 align-items:center;
-gap:10px;
+gap:12px;
 letter-spacing:2px;
 text-transform:uppercase;
 flex-shrink:0;
 }
 
 .logo img{
-height:24px;
+height:34px;
 width:auto;
 display:block;
 object-fit:contain;
-max-width:110px;
+max-width:150px;
 }
 
 /* RIGHT AREA */
@@ -117,7 +117,7 @@ margin-right:auto;
 }
 
 #help .sub{
-font-size:24px;
+font-size:21px;
 color:#fff;
 font-weight:600;
 letter-spacing:1px;
@@ -335,7 +335,7 @@ display:none;
 }
 
 #help .sub{
-font-size:26px;
+font-size:22px;
 line-height:1.4;
 color:#fff;
 font-weight:700;
@@ -343,12 +343,12 @@ letter-spacing:1px;
 }
 
 .logo img{
-height:26px;
-max-width:120px;
+height:36px;
+max-width:155px;
 }
 
 .logo{
-gap:8px;
+gap:9px;
 }
 
 .logo span{
@@ -372,6 +372,7 @@ display:flex;
 
 .menu-toggle{
 display:block;
+margin-left:16px;
 }
 
 .right-area{
