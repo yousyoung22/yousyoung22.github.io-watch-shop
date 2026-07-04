@@ -164,25 +164,17 @@ nav a:hover{
     text-align:center;
     position:relative;
     overflow:hidden;
-    background:#020304;
-}
-
-.hero-video{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    opacity:.42;
-    filter:brightness(.52) contrast(1.12) saturate(.85);
+    background:
+        linear-gradient(180deg,rgba(2,3,4,.18),#020304 96%),
+        url("../images/hero-bg.jpg") center center / cover no-repeat;
 }
 
 .hero-overlay{
     position:absolute;
     inset:0;
     background:
-        radial-gradient(circle at center,rgba(0,200,255,.12),transparent 360px),
-        linear-gradient(180deg,rgba(2,3,4,.2),#020304 96%);
+        radial-gradient(circle at center,rgba(0,200,255,.13),transparent 360px),
+        linear-gradient(180deg,rgba(0,0,0,.16),rgba(2,3,4,.78) 72%,#020304 100%);
 }
 
 .hero-inner{
@@ -915,6 +907,9 @@ h1,h2,h3{
     .hero{
         min-height:76vh;
         padding:70px 20px;
+        background:
+            linear-gradient(180deg,rgba(2,3,4,.16),#020304 96%),
+            url("../images/hero-bg.jpg") center center / cover no-repeat;
     }
 
     .hero-logo{
