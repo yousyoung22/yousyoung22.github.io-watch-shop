@@ -317,23 +317,24 @@ function renderProducts(){
 
             <div class="product-actions">
                 <button class="detail-btn" type="button" onclick="openProductModal(${p.id})">상세보기</button>
-                <button class="add-btn" type="button" onclick="quickAdd(${p.id})">담기</button>
+                <button class="add-btn" type="button" onclick="handleProductAdd(${p.id})">
+                    ${p.options && p.options.length > 0 ? "옵션 선택" : "담기"}
+                </button>
             </div>
         </div>
     `).join("");
 }
 
-function quickAdd(id){
+function handleProductAdd(id){
     const item = products.find(p => p.id === id);
     if(!item) return;
 
-    let option = "";
-
     if(item.options && item.options.length > 0){
-        option = item.options[0].label;
+        openProductModal(id);
+        return;
     }
 
-    add(id, option);
+    add(id);
 }
 
 function add(id, option = ""){
@@ -438,6 +439,7 @@ function openProductModal(id){
 
     document.getElementById("modal-add-btn").onclick = () => {
         const optionValue = selectedOption ? selectedOption.label : "";
+        closeProductModal();
         add(currentProduct.id, optionValue);
     };
 
@@ -462,16 +464,14 @@ function renderOptions(){
                 <option value="${option.label}">${option.label}</option>
             `).join("")}
         </select>
+        <p class="option-required">옵션을 확인한 뒤 장바구니에 담아주세요.</p>
     `;
 }
 
 function changeProductOption(optionLabel){
     selectedOption = currentProduct.options.find(option => option.label === optionLabel);
-
-    if(selectedOption){
-        document.getElementById("modal-image").src = selectedOption.image;
-        document.getElementById("modal-image").alt = currentProduct.name + " " + selectedOption.label;
-    }
+    currentSlide = 0;
+    renderSlide();
 }
 
 function closeProductModal(){
@@ -482,12 +482,29 @@ function closeProductModal(){
     }
 }
 
+function getCurrentModalImages(){
+    if(!currentProduct) return [];
+
+    const baseImages = currentProduct.detailImages && currentProduct.detailImages.length
+        ? currentProduct.detailImages
+        : [currentProduct.image];
+
+    if(selectedOption){
+        const restImages = baseImages.filter(img => img !== currentProduct.image);
+        return [selectedOption.image, ...restImages];
+    }
+
+    return baseImages;
+}
+
 function renderSlide(){
     if(!currentProduct) return;
 
-    const images = currentProduct.detailImages && currentProduct.detailImages.length
-        ? currentProduct.detailImages
-        : [currentProduct.image];
+    const images = getCurrentModalImages();
+
+    if(currentSlide >= images.length){
+        currentSlide = 0;
+    }
 
     document.getElementById("modal-image").src = images[currentSlide];
     document.getElementById("modal-image").alt = currentProduct.name;
@@ -502,7 +519,7 @@ function renderSlide(){
 function changeSlide(direction){
     if(!currentProduct) return;
 
-    const images = currentProduct.detailImages;
+    const images = getCurrentModalImages();
     currentSlide = (currentSlide + direction + images.length) % images.length;
     renderSlide();
 }
