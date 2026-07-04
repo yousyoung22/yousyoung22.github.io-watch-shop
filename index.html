@@ -8,6 +8,12 @@
 </head>
 
 <body>
+<div class="top-strip">
+    <span>SEOUL ICE CUSTOM JEWELRY</span>
+    <span>1:1 ORDER AVAILABLE</span>
+    <span>BLACK LUXURY COLLECTION</span>
+</div>
+
 <header class="site-header">
     <a class="logo" href="#home">
         <img src="images/logo.png" alt="SEOUL ICE">
@@ -16,11 +22,11 @@
 
     <div class="right-area">
         <nav id="nav-menu">
-            <a href="#home">HOME</a>
-            <a href="#products">COLLECTION</a>
+            <a href="#products">JEWELRY</a>
+            <a href="#custom">CUSTOM</a>
             <a href="#about">BRAND</a>
-            <a href="#help">CONTACT</a>
-            <a href="#payment">PAYMENT</a>
+            <a href="#services">SERVICES</a>
+            <a href="#contact">CONTACT</a>
         </nav>
 
         <button id="cart-btn" type="button">
@@ -38,25 +44,56 @@
             <p class="eyebrow">Custom iced jewelry</p>
             <h1>SEOUL ICE</h1>
             <p class="hero-text">
-                서울의 밤, 스트릿 무드, 정교한 세팅을 담은 커스텀 주얼리 컬렉션.
+                체인, 펜던트, 캐릭터 커스텀까지 블랙 럭셔리 무드로 완성한 주얼리 컬렉션.
             </p>
 
             <div class="hero-buttons">
-                <a href="#products" class="primary-btn">컬렉션 보기</a>
-                <a href="#help" class="ghost-btn">상담 문의</a>
+                <a href="#products" class="primary-btn">Shop Jewelry</a>
+                <a href="#custom" class="ghost-btn">Start Custom</a>
             </div>
         </div>
     </section>
 
-    <section id="products" class="section">
+    <section class="category-band">
+        <a href="#products" data-filter-link="all">All Jewelry</a>
+        <a href="#products" data-filter-link="chain">Chains</a>
+        <a href="#products" data-filter-link="pendant">Pendants</a>
+        <a href="#products" data-filter-link="character">Characters</a>
+        <a href="#custom">Custom Order</a>
+    </section>
+
+    <section id="products" class="section product-section">
         <div class="section-head">
-            <p class="eyebrow">Collection</p>
+            <p class="eyebrow">Shop Seoul Ice</p>
+            <h2>Jewelry</h2>
             <p class="sub">
-                체인, 펜던트, 캐릭터 커스텀까지 SEOUL ICE만의 블랙 럭셔리 무드로 완성한 피스들.
+                기존 이미지와 상품명은 유지하면서, 쇼핑몰처럼 카테고리별로 보기 쉽게 구성했습니다.
             </p>
         </div>
 
+        <div id="filter-buttons" class="filter-buttons">
+            <button class="active" type="button" data-filter="all">All</button>
+            <button type="button" data-filter="chain">Chains</button>
+            <button type="button" data-filter="pendant">Pendants</button>
+            <button type="button" data-filter="character">Characters</button>
+        </div>
+
         <div id="product-grid"></div>
+    </section>
+
+    <section id="custom" class="section custom-section">
+        <div class="custom-copy">
+            <p class="eyebrow">SEOUL ICE CUSTOM</p>
+            <h2>Begin a Custom Project</h2>
+            <p class="sub">
+                원하는 이미지, 이름, 컬러, 펜던트 디자인을 기준으로 커스텀 제작 상담을 진행할 수 있습니다.
+            </p>
+            <a href="#contact" class="primary-btn">문의하기</a>
+        </div>
+
+        <div class="custom-preview">
+            <img src="images/3체인.jpg" alt="SEOUL ICE Custom Jewelry">
+        </div>
     </section>
 
     <section id="about" class="section brand-section">
@@ -68,22 +105,44 @@
         </p>
     </section>
 
-    <section class="section service-section">
-        <div id="help" class="service-box">
-            <p class="eyebrow">Private contact</p>
+    <section id="services" class="section service-section">
+        <div class="service-box">
+            <p class="eyebrow">Concierge</p>
             <h2>1:1 Order</h2>
-            <p class="sub">+82 01-7799-7273</p>
-            <span>커스텀 제작, 재고 확인, 사이즈 상담 가능</span>
+            <p class="sub">커스텀 제작, 재고 확인, 사이즈 상담 가능</p>
         </div>
 
-        <div id="payment" class="service-box">
-            <p class="eyebrow">Secure payment</p>
-            <h2>Payment</h2>
+        <div class="service-box">
+            <p class="eyebrow">Payment</p>
+            <h2>Secure Payment</h2>
             <p class="sub">카드 / 계좌이체 / 간편결제</p>
-            <span>주문 확정 후 개별 안내</span>
+        </div>
+
+        <div class="service-box">
+            <p class="eyebrow">Custom</p>
+            <h2>Design Request</h2>
+            <p class="sub">이미지 기반 커스텀 제작 상담</p>
+        </div>
+
+        <div id="contact" class="service-box">
+            <p class="eyebrow">Contact</p>
+            <h2>+82 01-7799-7273</h2>
+            <p class="sub">주문 및 상담 문의</p>
         </div>
     </section>
 </main>
+
+<footer class="footer">
+    <div>
+        <strong>SEOUL ICE</strong>
+        <p>Custom iced jewelry and black luxury pieces.</p>
+    </div>
+    <div>
+        <span>JEWELRY</span>
+        <span>CUSTOM</span>
+        <span>CONTACT</span>
+    </div>
+</footer>
 
 <aside id="cart-panel">
     <div class="cart-header">
