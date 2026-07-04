@@ -848,7 +848,8 @@ h1,h2,h3{
 
     .hero{
         min-height:76vh;
-        background:url("../images/hero-bg.jpg") center center / cover no-repeat;
+        background:url("../images/hero-bg-mobile.jpg") center center / contain no-repeat;
+        background-color:#020304;
     }
 
     .category-band{
