@@ -7,7 +7,7 @@ function detailImages(image){
 
 const products = [
 { id:1, category:"chain", name:"Moissanite tennis chain", price:450000, image:"images/3체인.jpg", detailImages:detailImages("images/3체인.jpg"), material:"Moissanite setting" },
-{ id:2, category:"pendant", name:"Corteiz pendant", price:250000, image:"images/검.jpg", detailImages:detailImages("images/검.jpg"), material:"Custom pendant" },
+{ id:2, category:"pendant", name:"Corteiz pendant", price:250000, image:"images/검.jpg", detailImages:detailImages("images/검.jpg"), material:"Pendant" },
 { id:3, category:"pendant", name:"LIVE YOURS pendant", price:410000, image:"images/글씨.jpg", detailImages:detailImages("images/글씨.jpg"), material:"Lettering pendant" },
 { id:4, category:"pendant", name:"YVL pendant", price:370000, image:"images/나무.jpg", detailImages:detailImages("images/나무.jpg"), material:"Hand-set stones" },
 {
@@ -17,7 +17,7 @@ const products = [
     price:370000,
     image:"images/노랑오.jpg",
     detailImages:detailImages("images/노랑오.jpg"),
-    material:"Color custom pendant",
+    material:"Color pendant",
     optionName:"컬러",
     options:[
         { label:"노랑", image:"images/노랑오.jpg" },
@@ -33,7 +33,7 @@ const products = [
     price:370000,
     image:"images/빨간오.jpg",
     detailImages:detailImages("images/빨간오.jpg"),
-    material:"Color custom pendant",
+    material:"Color pendant",
     optionName:"컬러",
     options:[
         { label:"빨강", image:"images/빨간오.jpg" },
@@ -58,7 +58,7 @@ const products = [
         { label:"흰색", image:"images/흰색예티.jpg" }
     ]
 },
-{ id:9, category:"pendant", name:"Candy pendant", price:270000, image:"images/사탕.jpg", detailImages:detailImages("images/사탕.jpg"), material:"Custom pendant" },
+{ id:9, category:"pendant", name:"Candy pendant", price:270000, image:"images/사탕.jpg", detailImages:detailImages("images/사탕.jpg"), material:"Pendant" },
 {
     id:10,
     category:"character",
@@ -168,7 +168,7 @@ const products = [
     price:370000,
     image:"images/흰오.jpg",
     detailImages:detailImages("images/흰오.jpg"),
-    material:"Color custom pendant",
+    material:"Color pendant",
     optionName:"컬러",
     options:[
         { label:"흰색", image:"images/흰오.jpg" },
