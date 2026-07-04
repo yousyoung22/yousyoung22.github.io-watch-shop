@@ -5,9 +5,7 @@ const products = [
     price:450000,
     image:"images/3체인.jpg",
     detailImages:["images/3체인.jpg","images/3체인_상세1.jpg","images/3체인_상세2.jpg"],
-    description:"강한 광택과 볼륨감이 돋보이는 테니스 체인입니다.",
-    material:"Moissanite setting",
-    delivery:"주문 후 개별 안내"
+    material:"Moissanite setting"
 },
 {
     id:2,
@@ -15,9 +13,7 @@ const products = [
     price:250000,
     image:"images/검.jpg",
     detailImages:["images/검.jpg","images/검_상세1.jpg","images/검_상세2.jpg"],
-    description:"스트릿 무드를 강하게 담은 커스텀 펜던트입니다.",
-    material:"Custom pendant",
-    delivery:"주문 후 개별 안내"
+    material:"Custom pendant"
 },
 {
     id:3,
@@ -25,9 +21,7 @@ const products = [
     price:410000,
     image:"images/글씨.jpg",
     detailImages:["images/글씨.jpg","images/글씨_상세1.jpg","images/글씨_상세2.jpg"],
-    description:"레터링 디테일이 돋보이는 커스텀 펜던트입니다.",
-    material:"Lettering pendant",
-    delivery:"주문 후 개별 안내"
+    material:"Lettering pendant"
 },
 {
     id:4,
@@ -35,9 +29,7 @@ const products = [
     price:370000,
     image:"images/나무.jpg",
     detailImages:["images/나무.jpg","images/나무_상세1.jpg","images/나무_상세2.jpg"],
-    description:"독특한 실루엣과 아이스 세팅이 조화롭게 들어간 펜던트입니다.",
-    material:"Hand-set stones",
-    delivery:"주문 후 개별 안내"
+    material:"Hand-set stones"
 },
 {
     id:5,
@@ -45,9 +37,7 @@ const products = [
     price:370000,
     image:"images/노랑오.jpg",
     detailImages:["images/노랑오.jpg","images/노랑오_상세1.jpg","images/노랑오_상세2.jpg"],
-    description:"King von O'block 펜던트입니다. 옵션에서 원하는 컬러를 선택할 수 있습니다.",
     material:"Color custom pendant",
-    delivery:"주문 후 개별 안내",
     optionName:"컬러",
     options:[
         { label:"노랑", image:"images/노랑오.jpg" },
@@ -61,9 +51,7 @@ const products = [
     price:380000,
     image:"images/별.jpg",
     detailImages:["images/별.jpg","images/별_상세1.jpg","images/별_상세2.jpg"],
-    description:"스타 쉐입의 실루엣과 촘촘한 세팅이 돋보이는 펜던트입니다.",
-    material:"Star pendant",
-    delivery:"주문 후 개별 안내"
+    material:"Star pendant"
 },
 {
     id:7,
@@ -71,9 +59,7 @@ const products = [
     price:370000,
     image:"images/빨간오.jpg",
     detailImages:["images/빨간오.jpg","images/빨간오_상세1.jpg","images/빨간오_상세2.jpg"],
-    description:"King von O'block 펜던트입니다. 옵션에서 원하는 컬러를 선택할 수 있습니다.",
     material:"Color custom pendant",
-    delivery:"주문 후 개별 안내",
     optionName:"컬러",
     options:[
         { label:"빨강", image:"images/빨간오.jpg" },
@@ -87,9 +73,7 @@ const products = [
     price:290000,
     image:"images/빨강예티.jpg",
     detailImages:["images/빨강예티.jpg","images/빨강예티_상세1.jpg","images/빨강예티_상세2.jpg"],
-    description:"예티 캐릭터 무드와 아이스 세팅이 섞인 펜던트입니다. 옵션에서 컬러를 선택할 수 있습니다.",
     material:"Character pendant",
-    delivery:"주문 후 개별 안내",
     optionName:"예티 컬러",
     options:[
         { label:"빨강", image:"images/빨강예티.jpg" },
@@ -105,9 +89,7 @@ const products = [
     price:270000,
     image:"images/사탕.jpg",
     detailImages:["images/사탕.jpg","images/사탕_상세1.jpg","images/사탕_상세2.jpg"],
-    description:"작지만 확실한 포인트를 주는 캔디 쉐입 펜던트입니다.",
-    material:"Custom pendant",
-    delivery:"주문 후 개별 안내"
+    material:"Custom pendant"
 },
 {
     id:10,
@@ -115,9 +97,7 @@ const products = [
     price:380000,
     image:"images/소닉.jpg",
     detailImages:["images/소닉.jpg","images/소닉_상세1.jpg","images/소닉_상세2.jpg"],
-    description:"소닉 커스텀 펜던트입니다. 옵션에서 컬러를 선택할 수 있습니다.",
     material:"Character pendant",
-    delivery:"주문 후 개별 안내",
     optionName:"소닉 컬러",
     options:[
         { label:"기본", image:"images/소닉.jpg" },
@@ -130,9 +110,7 @@ const products = [
     price:260000,
     image:"images/십자가.jpg",
     detailImages:["images/십자가.jpg","images/십자가_상세1.jpg","images/십자가_상세2.jpg"],
-    description:"클래식한 크로스 쉐입을 SEOUL ICE 무드로 재해석한 펜던트입니다.",
-    material:"Cross pendant",
-    delivery:"주문 후 개별 안내"
+    material:"Cross pendant"
 },
 {
     id:12,
@@ -140,9 +118,7 @@ const products = [
     price:300000,
     image:"images/얼굴.jpg",
     detailImages:["images/얼굴.jpg","images/얼굴_상세1.jpg","images/얼굴_상세2.jpg"],
-    description:"페이스 디테일이 들어간 개성 있는 커스텀 펜던트입니다.",
-    material:"Portrait pendant",
-    delivery:"주문 후 개별 안내"
+    material:"Portrait pendant"
 },
 {
     id:13,
@@ -150,9 +126,7 @@ const products = [
     price:300000,
     image:"images/왼쪽얼굴.jpg",
     detailImages:["images/왼쪽얼굴.jpg","images/왼쪽얼굴_상세1.jpg","images/왼쪽얼굴_상세2.jpg"],
-    description:"측면 실루엣이 매력적인 커스텀 펜던트입니다.",
-    material:"Portrait pendant",
-    delivery:"주문 후 개별 안내"
+    material:"Portrait pendant"
 },
 {
     id:14,
@@ -160,9 +134,7 @@ const products = [
     price:290000,
     image:"images/주황예티.jpg",
     detailImages:["images/주황예티.jpg","images/주황예티_상세1.jpg","images/주황예티_상세2.jpg"],
-    description:"예티 캐릭터 무드와 아이스 세팅이 섞인 펜던트입니다. 옵션에서 컬러를 선택할 수 있습니다.",
     material:"Character pendant",
-    delivery:"주문 후 개별 안내",
     optionName:"예티 컬러",
     options:[
         { label:"주황", image:"images/주황예티.jpg" },
@@ -178,9 +150,7 @@ const products = [
     price:320000,
     image:"images/키티.jpg",
     detailImages:["images/키티.jpg","images/키티_상세1.jpg","images/키티_상세2.jpg"],
-    description:"귀여운 실루엣과 아이스 세팅이 대비되는 커스텀 펜던트입니다.",
-    material:"Character pendant",
-    delivery:"주문 후 개별 안내"
+    material:"Character pendant"
 },
 {
     id:16,
@@ -188,9 +158,7 @@ const products = [
     price:230000,
     image:"images/토끼.jpg",
     detailImages:["images/토끼.jpg","images/토끼_상세1.jpg","images/토끼_상세2.jpg"],
-    description:"캐릭터 포인트로 가볍게 착용하기 좋은 펜던트입니다.",
-    material:"Character pendant",
-    delivery:"주문 후 개별 안내"
+    material:"Character pendant"
 },
 {
     id:17,
@@ -198,9 +166,7 @@ const products = [
     price:380000,
     image:"images/파랑소닉.jpg",
     detailImages:["images/파랑소닉.jpg","images/파랑소닉_상세1.jpg","images/파랑소닉_상세2.jpg"],
-    description:"소닉 커스텀 펜던트입니다. 옵션에서 컬러를 선택할 수 있습니다.",
     material:"Character pendant",
-    delivery:"주문 후 개별 안내",
     optionName:"소닉 컬러",
     options:[
         { label:"파랑", image:"images/파랑소닉.jpg" },
@@ -213,9 +179,7 @@ const products = [
     price:290000,
     image:"images/파랑예티.jpg",
     detailImages:["images/파랑예티.jpg","images/파랑예티_상세1.jpg","images/파랑예티_상세2.jpg"],
-    description:"예티 캐릭터 무드와 아이스 세팅이 섞인 펜던트입니다. 옵션에서 컬러를 선택할 수 있습니다.",
     material:"Character pendant",
-    delivery:"주문 후 개별 안내",
     optionName:"예티 컬러",
     options:[
         { label:"파랑", image:"images/파랑예티.jpg" },
@@ -231,9 +195,7 @@ const products = [
     price:290000,
     image:"images/하늘예티.jpg",
     detailImages:["images/하늘예티.jpg","images/하늘예티_상세1.jpg","images/하늘예티_상세2.jpg"],
-    description:"예티 캐릭터 무드와 아이스 세팅이 섞인 펜던트입니다. 옵션에서 컬러를 선택할 수 있습니다.",
     material:"Character pendant",
-    delivery:"주문 후 개별 안내",
     optionName:"예티 컬러",
     options:[
         { label:"하늘", image:"images/하늘예티.jpg" },
@@ -249,9 +211,7 @@ const products = [
     price:370000,
     image:"images/해골.jpg",
     detailImages:["images/해골.jpg","images/해골_상세1.jpg","images/해골_상세2.jpg"],
-    description:"강한 인상의 스컬 쉐입과 디테일한 세팅이 특징입니다.",
-    material:"Skull pendant",
-    delivery:"주문 후 개별 안내"
+    material:"Skull pendant"
 },
 {
     id:21,
@@ -259,9 +219,7 @@ const products = [
     price:290000,
     image:"images/흰색예티.jpg",
     detailImages:["images/흰색예티.jpg","images/흰색예티_상세1.jpg","images/흰색예티_상세2.jpg"],
-    description:"예티 캐릭터 무드와 아이스 세팅이 섞인 펜던트입니다. 옵션에서 컬러를 선택할 수 있습니다.",
     material:"Character pendant",
-    delivery:"주문 후 개별 안내",
     optionName:"예티 컬러",
     options:[
         { label:"흰색", image:"images/흰색예티.jpg" },
@@ -277,9 +235,7 @@ const products = [
     price:370000,
     image:"images/흰오.jpg",
     detailImages:["images/흰오.jpg","images/흰오_상세1.jpg","images/흰오_상세2.jpg"],
-    description:"King von O'block 펜던트입니다. 옵션에서 원하는 컬러를 선택할 수 있습니다.",
     material:"Color custom pendant",
-    delivery:"주문 후 개별 안내",
     optionName:"컬러",
     options:[
         { label:"흰색", image:"images/흰오.jpg" },
@@ -431,9 +387,7 @@ function openProductModal(id){
 
     document.getElementById("modal-name").innerText = currentProduct.name;
     document.getElementById("modal-price").innerText = money(currentProduct.price);
-    document.getElementById("modal-description").innerText = currentProduct.description;
     document.getElementById("modal-material").innerText = currentProduct.material;
-    document.getElementById("modal-delivery").innerText = currentProduct.delivery;
 
     renderOptions();
 
@@ -464,7 +418,7 @@ function renderOptions(){
                 <option value="${option.label}">${option.label}</option>
             `).join("")}
         </select>
-        <p class="option-required">옵션을 확인한 뒤 장바구니에 담아주세요.</p>
+        <p class="option-required">옵션 선택 후 장바구니에 담아주세요.</p>
     `;
 }
 

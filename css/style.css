@@ -8,8 +8,8 @@
     --text:#f2f2f2;
     --muted:#8b8f99;
     --soft:#c8cbd1;
-    --accent:#f2f2f2;
-    --accent2:#bfc2c8;
+    --point:#7f9dbd;
+    --point2:#b9c7d8;
 }
 
 *{
@@ -25,7 +25,7 @@ html{
 
 body{
     background:
-        radial-gradient(circle at top, rgba(255,255,255,.045), transparent 360px),
+        radial-gradient(circle at top, rgba(127,157,189,.08), transparent 360px),
         linear-gradient(180deg,#020304,#07080b 45%,#020304);
     color:var(--text);
     font-family:"Inter","Pretendard","Noto Sans KR",Arial,sans-serif;
@@ -131,7 +131,7 @@ nav a:hover{
     align-items:center;
     justify-content:center;
     border-radius:50%;
-    background:#f2f2f2;
+    background:#d9e0e8;
     color:#050505;
     font-size:.72rem;
 }
@@ -161,7 +161,7 @@ nav a:hover{
     inset:0;
     background:
         linear-gradient(180deg,rgba(2,3,4,.14),#020304 95%),
-        radial-gradient(circle at center,rgba(255,255,255,.07),transparent 330px);
+        radial-gradient(circle at center,rgba(127,157,189,.1),transparent 330px);
     z-index:-1;
 }
 
@@ -175,11 +175,11 @@ nav a:hover{
     margin:0 auto 28px;
     border-radius:18px;
     object-fit:cover;
-    box-shadow:0 0 90px rgba(255,255,255,.08);
+    box-shadow:0 0 90px rgba(127,157,189,.16);
 }
 
 .eyebrow{
-    color:#b7bac2;
+    color:var(--point);
     font-size:.76rem;
     font-weight:900;
     letter-spacing:.16em;
@@ -193,9 +193,11 @@ h1,h2,h3{
 
 .hero h1{
     margin-top:14px;
+    color:#f5f5f5;
     font-size:5.5rem;
     line-height:.9;
     letter-spacing:.02em;
+    text-shadow:0 0 28px rgba(127,157,189,.22);
 }
 
 .hero-text{
@@ -233,17 +235,17 @@ h1,h2,h3{
 #modal-add-btn{
     padding:0 22px;
     border:none;
-    background:linear-gradient(135deg,#ffffff,#bfc2c8);
-    color:#050505;
+    background:linear-gradient(135deg,#d9e0e8,#8794a3);
+    color:#030405;
 }
 
 .ghost-btn,
 .detail-btn,
 .back-btn{
     padding:0 22px;
-    border:1px solid rgba(255,255,255,.18);
+    border:1px solid rgba(185,199,216,.22);
     background:rgba(255,255,255,.045);
-    color:#f2f2f2;
+    color:#d9e0e8;
 }
 
 .section{
@@ -260,8 +262,11 @@ h1,h2,h3{
     margin-bottom:34px;
 }
 
-.section h2{
+.section h2,
+.service-box h2,
+.modal-info h2{
     margin-top:10px;
+    color:var(--point2);
     font-size:2.7rem;
     line-height:1;
 }
@@ -297,8 +302,8 @@ h1,h2,h3{
 
 .product:hover{
     transform:translateY(-5px);
-    border-color:rgba(255,255,255,.28);
-    background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
+    border-color:rgba(127,157,189,.42);
+    background:linear-gradient(180deg,rgba(127,157,189,.09),rgba(255,255,255,.02));
 }
 
 .product-img{
@@ -330,7 +335,7 @@ h1,h2,h3{
 
 .price{
     margin-top:8px;
-    color:#e8e8e8;
+    color:#b9c7d8;
     font-weight:900;
 }
 
@@ -342,17 +347,17 @@ h1,h2,h3{
 }
 
 .add-btn{
-    border:1px solid rgba(255,255,255,.22);
-    background:rgba(255,255,255,.08);
-    color:#f2f2f2;
+    border:1px solid rgba(127,157,189,.45);
+    background:rgba(127,157,189,.12);
+    color:#d9e0e8;
 }
 
 .add-btn:hover,
 .detail-btn:hover,
 .ghost-btn:hover,
 .back-btn:hover{
-    background:#f2f2f2;
-    color:#050505;
+    background:#d9e0e8;
+    color:#030405;
 }
 
 .brand-section{
@@ -375,12 +380,12 @@ h1,h2,h3{
     border:1px solid var(--line);
     border-radius:7px;
     background:
-        linear-gradient(135deg,rgba(255,255,255,.055),transparent 45%),
+        linear-gradient(135deg,rgba(127,157,189,.075),transparent 45%),
         #07080b;
 }
 
 .service-box .sub{
-    color:var(--text);
+    color:#d9e0e8;
     font-size:1.2rem;
     font-weight:900;
 }
@@ -388,7 +393,7 @@ h1,h2,h3{
 .service-box span{
     display:block;
     margin-top:18px;
-    color:var(--muted);
+    color:#8f9bab;
     font-size:.9rem;
 }
 
@@ -417,7 +422,7 @@ h1,h2,h3{
     display:flex;
     flex-direction:column;
     background:
-        linear-gradient(180deg,rgba(255,255,255,.055),transparent 240px),
+        linear-gradient(180deg,rgba(127,157,189,.055),transparent 240px),
         #050609;
     border-left:1px solid var(--line2);
     transform:translateX(100%);
@@ -439,6 +444,7 @@ h1,h2,h3{
 
 .cart-header h3{
     margin-top:4px;
+    color:var(--point2);
     font-size:1.7rem;
 }
 
@@ -474,7 +480,7 @@ h1,h2,h3{
     margin-bottom:12px;
     border:1px solid var(--line);
     border-radius:8px;
-    background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
+    background:linear-gradient(135deg,rgba(127,157,189,.075),rgba(255,255,255,.025));
 }
 
 .cart-card img{
@@ -494,13 +500,13 @@ h1,h2,h3{
 
 .cart-price{
     margin-top:7px;
-    color:#e8e8e8;
+    color:#b9c7d8;
     font-weight:900;
 }
 
 .cart-option{
     margin-top:5px;
-    color:var(--muted);
+    color:#95a6b8;
     font-size:.78rem;
     font-weight:800;
 }
@@ -531,7 +537,7 @@ h1,h2,h3{
 }
 
 #total{
-    color:var(--text);
+    color:#d9e0e8;
     font-size:1.35rem;
 }
 
@@ -567,7 +573,7 @@ h1,h2,h3{
     border:1px solid var(--line2);
     border-radius:10px;
     background:
-        linear-gradient(135deg,rgba(255,255,255,.055),transparent 45%),
+        linear-gradient(135deg,rgba(127,157,189,.075),transparent 45%),
         #07080b;
     box-shadow:0 30px 120px rgba(0,0,0,.78);
 }
@@ -643,7 +649,7 @@ h1,h2,h3{
 
 #modal-thumbs button.active{
     opacity:1;
-    border-color:#f2f2f2;
+    border-color:var(--point2);
 }
 
 #modal-thumbs img{
@@ -657,23 +663,15 @@ h1,h2,h3{
 }
 
 .modal-info h2{
-    margin-top:12px;
     font-size:2.5rem;
     line-height:1.04;
 }
 
 #modal-price{
     margin-top:16px;
-    color:#e8e8e8;
+    color:#b9c7d8;
     font-size:1.25rem;
     font-weight:900;
-}
-
-#modal-description{
-    margin-top:22px;
-    color:var(--soft);
-    line-height:1.8;
-    word-break:keep-all;
 }
 
 .detail-list{
@@ -691,11 +689,11 @@ h1,h2,h3{
 }
 
 .detail-list span{
-    color:var(--muted);
+    color:#7f8c9d;
 }
 
 .detail-list strong{
-    color:var(--text);
+    color:#d9e0e8;
     text-align:right;
 }
 
@@ -706,7 +704,7 @@ h1,h2,h3{
 .modal-options label{
     display:block;
     margin-bottom:10px;
-    color:var(--muted);
+    color:#7f8c9d;
     font-size:.85rem;
     font-weight:900;
 }
@@ -724,7 +722,7 @@ h1,h2,h3{
 
 .option-required{
     margin-top:10px;
-    color:#c9ccd2;
+    color:#95a6b8;
     font-size:.82rem;
     line-height:1.5;
 }
