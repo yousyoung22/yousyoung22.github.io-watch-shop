@@ -19,12 +19,12 @@
             <a href="#home">HOME</a>
             <a href="#products">COLLECTION</a>
             <a href="#about">BRAND</a>
-            <a href="#help">HELP</a>
+            <a href="#help">CONTACT</a>
             <a href="#payment">PAYMENT</a>
         </nav>
 
         <button id="cart-btn" type="button">
-            Cart <span id="cart-count">0</span>
+            BAG <span id="cart-count">0</span>
         </button>
     </div>
 
@@ -33,10 +33,13 @@
 
 <main>
     <section id="home" class="hero">
-        <div class="hero-content">
-            <p class="eyebrow">Handmade iced jewelry</p>
+        <div class="hero-inner">
+            <img class="hero-logo" src="images/logo.png" alt="SEOUL ICE">
+            <p class="eyebrow">Custom iced jewelry</p>
             <h1>SEOUL ICE</h1>
-            <p class="sub">서울의 스트릿 무드와 하이엔드 세팅 감각을 담은 커스텀 주얼리 컬렉션.</p>
+            <p class="hero-text">
+                서울의 밤, 스트릿 무드, 정교한 세팅을 담은 커스텀 주얼리 컬렉션.
+            </p>
 
             <div class="hero-buttons">
                 <a href="#products" class="primary-btn">컬렉션 보기</a>
@@ -47,42 +50,38 @@
 
     <section id="products" class="section">
         <div class="section-head">
-            <p class="eyebrow">Latest pieces</p>
-            <h2>COLLECTION</h2>
-            <p class="sub">펜던트, 체인, 캐릭터 커스텀까지 SEOUL ICE의 대표 피스를 만나보세요.</p>
+            <p class="eyebrow">Collection</p>
+            <h2>Signature Pieces</h2>
+            <p class="sub">
+                체인, 펜던트, 캐릭터 커스텀까지 SEOUL ICE만의 블랙 럭셔리 무드로 완성한 피스들.
+            </p>
         </div>
 
         <div id="product-grid"></div>
     </section>
 
     <section id="about" class="section brand-section">
-        <div>
-            <p class="eyebrow">Brand story</p>
-            <h2>BRAND</h2>
-            <p class="sub">
-                정교한 세팅과 타협 없는 퀄리티로 완성된 아이스만이 당신의 일상을 스테이지로 만듭니다.
-                서울의 트렌디함과 힙합의 역사가 공존하는 SEOUL ICE만의 럭셔리 바이브를 경험해 보세요.
-            </p>
-        </div>
-
-        <div class="brand-list">
-            <div><strong>01</strong><span>핸드메이드 세팅</span></div>
-            <div><strong>02</strong><span>스트릿 럭셔리 무드</span></div>
-            <div><strong>03</strong><span>커스텀 제작 상담</span></div>
-        </div>
+        <p class="eyebrow">Brand story</p>
+        <h2>Built for presence</h2>
+        <p class="sub">
+            SEOUL ICE는 단순히 반짝이는 액세서리가 아니라, 착용자의 분위기를 바꾸는 피스를 만듭니다.
+            어두운 배경 위에서 더 선명하게 살아나는 광택, 디테일한 세팅, 스트릿과 럭셔리 사이의 균형을 중심으로 제작합니다.
+        </p>
     </section>
 
-    <section class="section info-section">
-        <div id="help" class="info-box">
-            <p class="eyebrow">Help</p>
-            <h2>문의</h2>
+    <section class="section service-section">
+        <div id="help" class="service-box">
+            <p class="eyebrow">Private contact</p>
+            <h2>1:1 Order</h2>
             <p class="sub">+82 01-7799-7273</p>
+            <span>커스텀 제작, 재고 확인, 사이즈 상담 가능</span>
         </div>
 
-        <div id="payment" class="info-box">
-            <p class="eyebrow">Payment</p>
-            <h2>결제</h2>
+        <div id="payment" class="service-box">
+            <p class="eyebrow">Secure payment</p>
+            <h2>Payment</h2>
             <p class="sub">카드 / 계좌이체 / 간편결제</p>
+            <span>주문 확정 후 개별 안내</span>
         </div>
     </section>
 </main>
@@ -90,8 +89,8 @@
 <aside id="cart-panel">
     <div class="cart-header">
         <div>
-            <p class="eyebrow">Shopping bag</p>
-            <h3>장바구니</h3>
+            <p class="eyebrow">Selected pieces</p>
+            <h3>Shopping Bag</h3>
         </div>
         <button class="cart-close" type="button" onclick="closeCart()">×</button>
     </div>
@@ -99,10 +98,10 @@
     <div id="cart-items"></div>
 
     <div class="cart-footer">
-        <p class="total-text">
-            총 결제금액
-            <span id="total">₩0</span>
-        </p>
+        <div class="total-text">
+            <span>Total</span>
+            <strong id="total">₩0</strong>
+        </div>
 
         <div class="cart-bottom-buttons">
             <button class="buy-btn" type="button" onclick="buy()">구매하기</button>
@@ -111,7 +110,47 @@
     </div>
 </aside>
 
-<div id="backdrop" onclick="closeCart()"></div>
+<div id="product-modal">
+    <div class="modal-box">
+        <button class="modal-close" type="button" onclick="closeProductModal()">×</button>
+
+        <div class="modal-gallery">
+            <button class="slide-btn prev" type="button" onclick="changeSlide(-1)">‹</button>
+            <img id="modal-image" src="" alt="">
+            <button class="slide-btn next" type="button" onclick="changeSlide(1)">›</button>
+
+            <div id="modal-thumbs"></div>
+        </div>
+
+        <div class="modal-info">
+            <p class="eyebrow">SEOUL ICE SELECT</p>
+            <h2 id="modal-name"></h2>
+            <p id="modal-price"></p>
+            <p id="modal-description"></p>
+
+            <div class="detail-list">
+                <div>
+                    <span>Material</span>
+                    <strong id="modal-material"></strong>
+                </div>
+                <div>
+                    <span>Delivery</span>
+                    <strong id="modal-delivery"></strong>
+                </div>
+                <div>
+                    <span>Care</span>
+                    <strong>부드러운 천으로 관리</strong>
+                </div>
+            </div>
+
+            <div id="modal-options" class="modal-options"></div>
+
+            <button id="modal-add-btn" type="button">장바구니 담기</button>
+        </div>
+    </div>
+</div>
+
+<div id="backdrop" onclick="closeCart(); closeProductModal();"></div>
 
 <script src="js/app.js"></script>
 </body>
