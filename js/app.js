@@ -273,9 +273,7 @@ function renderProducts(){
 
             <div class="product-actions">
                 <button class="detail-btn" type="button" onclick="openProductModal(${p.id})">상세보기</button>
-                <button class="add-btn" type="button" onclick="handleProductAdd(${p.id})">
-                    ${p.options && p.options.length > 0 ? "옵션 선택" : "담기"}
-                </button>
+                <button class="add-btn" type="button" onclick="handleProductAdd(${p.id})">담기</button>
             </div>
         </div>
     `).join("");

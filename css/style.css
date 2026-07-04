@@ -8,8 +8,9 @@
     --text:#f2f2f2;
     --muted:#8b8f99;
     --soft:#c8cbd1;
-    --point:#7f9dbd;
-    --point2:#b9c7d8;
+    --point:#63c7ff;
+    --point2:#b9dfff;
+    --price:#8ed8ff;
 }
 
 *{
@@ -25,7 +26,7 @@ html{
 
 body{
     background:
-        radial-gradient(circle at top, rgba(127,157,189,.08), transparent 360px),
+        radial-gradient(circle at top, rgba(99,199,255,.075), transparent 370px),
         linear-gradient(180deg,#020304,#07080b 45%,#020304);
     color:var(--text);
     font-family:"Inter","Pretendard","Noto Sans KR",Arial,sans-serif;
@@ -161,7 +162,7 @@ nav a:hover{
     inset:0;
     background:
         linear-gradient(180deg,rgba(2,3,4,.14),#020304 95%),
-        radial-gradient(circle at center,rgba(127,157,189,.1),transparent 330px);
+        radial-gradient(circle at center,rgba(99,199,255,.085),transparent 330px);
     z-index:-1;
 }
 
@@ -175,7 +176,7 @@ nav a:hover{
     margin:0 auto 28px;
     border-radius:18px;
     object-fit:cover;
-    box-shadow:0 0 90px rgba(127,157,189,.16);
+    box-shadow:0 0 90px rgba(99,199,255,.14);
 }
 
 .eyebrow{
@@ -184,6 +185,7 @@ nav a:hover{
     font-weight:900;
     letter-spacing:.16em;
     text-transform:uppercase;
+    text-shadow:0 0 18px rgba(99,199,255,.18);
 }
 
 h1,h2,h3{
@@ -197,7 +199,7 @@ h1,h2,h3{
     font-size:5.5rem;
     line-height:.9;
     letter-spacing:.02em;
-    text-shadow:0 0 28px rgba(127,157,189,.22);
+    text-shadow:0 0 28px rgba(99,199,255,.18);
 }
 
 .hero-text{
@@ -262,6 +264,11 @@ h1,h2,h3{
     margin-bottom:34px;
 }
 
+.section-head.no-title{
+    grid-template-columns:.42fr 1fr;
+    align-items:center;
+}
+
 .section h2,
 .service-box h2,
 .modal-info h2{
@@ -302,8 +309,8 @@ h1,h2,h3{
 
 .product:hover{
     transform:translateY(-5px);
-    border-color:rgba(127,157,189,.42);
-    background:linear-gradient(180deg,rgba(127,157,189,.09),rgba(255,255,255,.02));
+    border-color:rgba(99,199,255,.42);
+    background:linear-gradient(180deg,rgba(99,199,255,.08),rgba(255,255,255,.02));
 }
 
 .product-img{
@@ -335,8 +342,9 @@ h1,h2,h3{
 
 .price{
     margin-top:8px;
-    color:#b9c7d8;
+    color:var(--price);
     font-weight:900;
+    text-shadow:0 0 16px rgba(99,199,255,.16);
 }
 
 .product-actions{
@@ -347,8 +355,8 @@ h1,h2,h3{
 }
 
 .add-btn{
-    border:1px solid rgba(127,157,189,.45);
-    background:rgba(127,157,189,.12);
+    border:1px solid rgba(99,199,255,.42);
+    background:rgba(99,199,255,.1);
     color:#d9e0e8;
 }
 
@@ -380,7 +388,7 @@ h1,h2,h3{
     border:1px solid var(--line);
     border-radius:7px;
     background:
-        linear-gradient(135deg,rgba(127,157,189,.075),transparent 45%),
+        linear-gradient(135deg,rgba(99,199,255,.065),transparent 45%),
         #07080b;
 }
 
@@ -422,7 +430,7 @@ h1,h2,h3{
     display:flex;
     flex-direction:column;
     background:
-        linear-gradient(180deg,rgba(127,157,189,.055),transparent 240px),
+        linear-gradient(180deg,rgba(99,199,255,.052),transparent 240px),
         #050609;
     border-left:1px solid var(--line2);
     transform:translateX(100%);
@@ -480,7 +488,7 @@ h1,h2,h3{
     margin-bottom:12px;
     border:1px solid var(--line);
     border-radius:8px;
-    background:linear-gradient(135deg,rgba(127,157,189,.075),rgba(255,255,255,.025));
+    background:linear-gradient(135deg,rgba(99,199,255,.068),rgba(255,255,255,.025));
 }
 
 .cart-card img{
@@ -500,7 +508,7 @@ h1,h2,h3{
 
 .cart-price{
     margin-top:7px;
-    color:#b9c7d8;
+    color:var(--price);
     font-weight:900;
 }
 
@@ -537,7 +545,7 @@ h1,h2,h3{
 }
 
 #total{
-    color:#d9e0e8;
+    color:var(--price);
     font-size:1.35rem;
 }
 
@@ -573,7 +581,7 @@ h1,h2,h3{
     border:1px solid var(--line2);
     border-radius:10px;
     background:
-        linear-gradient(135deg,rgba(127,157,189,.075),transparent 45%),
+        linear-gradient(135deg,rgba(99,199,255,.065),transparent 45%),
         #07080b;
     box-shadow:0 30px 120px rgba(0,0,0,.78);
 }
@@ -649,7 +657,7 @@ h1,h2,h3{
 
 #modal-thumbs button.active{
     opacity:1;
-    border-color:var(--point2);
+    border-color:var(--point);
 }
 
 #modal-thumbs img{
@@ -669,9 +677,10 @@ h1,h2,h3{
 
 #modal-price{
     margin-top:16px;
-    color:#b9c7d8;
+    color:var(--price);
     font-size:1.25rem;
     font-weight:900;
+    text-shadow:0 0 16px rgba(99,199,255,.14);
 }
 
 .detail-list{
@@ -816,6 +825,7 @@ h1,h2,h3{
     }
 
     .section-head,
+    .section-head.no-title,
     .service-section{
         grid-template-columns:1fr;
     }
