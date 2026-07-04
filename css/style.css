@@ -62,9 +62,8 @@ button{
     display:flex;
     align-items:center;
     padding:0 34px;
-    background:rgba(2,3,4,.88);
+    background:#020304;
     border-bottom:1px solid var(--line);
-    backdrop-filter:blur(18px);
 }
 
 .logo{
@@ -157,19 +156,7 @@ nav a:hover{
 
 .hero{
     min-height:78vh;
-    position:relative;
-    overflow:hidden;
-    background:
-        linear-gradient(180deg,rgba(2,3,4,.04),#020304 98%),
-        url("../images/hero-bg.jpg") center center / cover no-repeat;
-}
-
-.hero-overlay{
-    position:absolute;
-    inset:0;
-    background:
-        radial-gradient(circle at center,rgba(0,200,255,.06),transparent 420px),
-        linear-gradient(180deg,rgba(0,0,0,.02),rgba(2,3,4,.2) 72%,#020304 100%);
+    background:url("../images/hero-bg.jpg") center center / cover no-repeat;
 }
 
 .eyebrow{
@@ -861,9 +848,7 @@ h1,h2,h3{
 
     .hero{
         min-height:76vh;
-        background:
-            linear-gradient(180deg,rgba(2,3,4,.04),#020304 98%),
-            url("../images/hero-bg.jpg") center center / cover no-repeat;
+        background:url("../images/hero-bg.jpg") center center / cover no-repeat;
     }
 
     .category-band{
