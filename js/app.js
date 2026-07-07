@@ -25,35 +25,34 @@ const sonicOptions = [
 ];
 
 const products = [
-    { id:1, category:"chain", name:"Moissanite tennis chain", price:450000, image:"images/3체인.jpg", detailImages:detailImages("images/3체인.jpg"), material:"Moissanite setting" },
-    { id:2, category:"pendant", name:"Corteiz pendant", price:250000, image:"images/검.jpg", detailImages:detailImages("images/검.jpg"), material:"Pendant" },
-    { id:3, category:"pendant", name:"LIVE YOURS pendant", price:410000, image:"images/글씨.jpg", detailImages:detailImages("images/글씨.jpg"), material:"Lettering pendant" },
-    { id:4, category:"pendant", name:"YVL pendant", price:370000, image:"images/나무.jpg", detailImages:detailImages("images/나무.jpg"), material:"Hand-set stones" },
-    { id:5, category:"pendant", name:"King von O'block pendant", price:370000, image:"images/노랑오.jpg", detailImages:detailImages("images/노랑오.jpg"), material:"Color pendant", optionName:"컬러", options:oblockOptions },
-    { id:6, category:"pendant", name:"Playboi carti star pendant", price:380000, image:"images/별.jpg", detailImages:detailImages("images/별.jpg"), material:"Star pendant" },
-    { id:7, category:"pendant", name:"King von O'block pendant", price:370000, image:"images/빨간오.jpg", detailImages:detailImages("images/빨간오.jpg"), material:"Color pendant", optionName:"컬러", options:oblockOptions },
-    { id:8, category:"character", name:"Murakami yeti pendant", price:290000, image:"images/빨강예티.jpg", detailImages:detailImages("images/빨강예티.jpg"), material:"Character pendant", optionName:"예티 컬러", options:yetiOptions },
-    { id:9, category:"pendant", name:"Candy pendant", price:270000, image:"images/사탕.jpg", detailImages:detailImages("images/사탕.jpg"), material:"Pendant" },
-    { id:10, category:"character", name:"Sonic pendant", price:380000, image:"images/소닉.jpg", detailImages:detailImages("images/소닉.jpg"), material:"Character pendant", optionName:"소닉 컬러", options:sonicOptions },
-    { id:11, category:"pendant", name:"Cross pendant", price:260000, image:"images/십자가.jpg", detailImages:detailImages("images/십자가.jpg"), material:"Cross pendant" },
-    { id:12, category:"pendant", name:"Elizabeth pendant", price:300000, image:"images/얼굴.jpg", detailImages:detailImages("images/얼굴.jpg"), material:"Portrait pendant" },
-    { id:13, category:"pendant", name:"Elizabeth pendant", price:300000, image:"images/왼쪽얼굴.jpg", detailImages:detailImages("images/왼쪽얼굴.jpg"), material:"Portrait pendant" },
-    { id:14, category:"character", name:"Murakami yeti pendant", price:290000, image:"images/주황예티.jpg", detailImages:detailImages("images/주황예티.jpg"), material:"Character pendant", optionName:"예티 컬러", options:yetiOptions },
-    { id:15, category:"character", name:"Hello kitty pendant", price:320000, image:"images/키티.jpg", detailImages:detailImages("images/키티.jpg"), material:"Character pendant" },
-    { id:16, category:"character", name:"Playboi carti rabbit pendant", price:230000, image:"images/토끼.jpg", detailImages:detailImages("images/토끼.jpg"), material:"Character pendant" },
-    { id:17, category:"character", name:"Sonic pendant", price:380000, image:"images/파랑소닉.jpg", detailImages:detailImages("images/파랑소닉.jpg"), material:"Character pendant", optionName:"소닉 컬러", options:sonicOptions },
-    { id:18, category:"character", name:"Murakami yeti pendant", price:290000, image:"images/파랑예티.jpg", detailImages:detailImages("images/파랑예티.jpg"), material:"Character pendant", optionName:"예티 컬러", options:yetiOptions },
-    { id:19, category:"character", name:"Murakami yeti pendant", price:290000, image:"images/하늘예티.jpg", detailImages:detailImages("images/하늘예티.jpg"), material:"Character pendant", optionName:"예티 컬러", options:yetiOptions },
-    { id:20, category:"pendant", name:"Skull pendant", price:370000, image:"images/해골.jpg", detailImages:detailImages("images/해골.jpg"), material:"Skull pendant" },
-    { id:21, category:"character", name:"Murakami yeti pendant", price:290000, image:"images/흰색예티.jpg", detailImages:detailImages("images/흰색예티.jpg"), material:"Character pendant", optionName:"예티 컬러", options:yetiOptions },
-    { id:22, category:"pendant", name:"King von O'block pendant", price:370000, image:"images/흰오.jpg", detailImages:detailImages("images/흰오.jpg"), material:"Color pendant", optionName:"컬러", options:oblockOptions }
+    { id:1, name:"Moissanite tennis chain", price:450000, image:"images/3체인.jpg", detailImages:detailImages("images/3체인.jpg"), material:"Moissanite setting" },
+    { id:2, name:"Corteiz pendant", price:250000, image:"images/검.jpg", detailImages:detailImages("images/검.jpg"), material:"Pendant" },
+    { id:3, name:"LIVE YOURS pendant", price:410000, image:"images/글씨.jpg", detailImages:detailImages("images/글씨.jpg"), material:"Lettering pendant" },
+    { id:4, name:"YVL pendant", price:370000, image:"images/나무.jpg", detailImages:detailImages("images/나무.jpg"), material:"Hand-set stones" },
+    { id:5, name:"King von O'block pendant", price:370000, image:"images/노랑오.jpg", detailImages:detailImages("images/노랑오.jpg"), material:"Color pendant", optionName:"컬러", options:oblockOptions },
+    { id:6, name:"Playboi carti star pendant", price:380000, image:"images/별.jpg", detailImages:detailImages("images/별.jpg"), material:"Star pendant" },
+    { id:7, name:"King von O'block pendant", price:370000, image:"images/빨간오.jpg", detailImages:detailImages("images/빨간오.jpg"), material:"Color pendant", optionName:"컬러", options:oblockOptions },
+    { id:8, name:"Murakami yeti pendant", price:290000, image:"images/빨강예티.jpg", detailImages:detailImages("images/빨강예티.jpg"), material:"Character pendant", optionName:"예티 컬러", options:yetiOptions },
+    { id:9, name:"Candy pendant", price:270000, image:"images/사탕.jpg", detailImages:detailImages("images/사탕.jpg"), material:"Pendant" },
+    { id:10, name:"Sonic pendant", price:380000, image:"images/소닉.jpg", detailImages:detailImages("images/소닉.jpg"), material:"Character pendant", optionName:"소닉 컬러", options:sonicOptions },
+    { id:11, name:"Cross pendant", price:260000, image:"images/십자가.jpg", detailImages:detailImages("images/십자가.jpg"), material:"Cross pendant" },
+    { id:12, name:"Elizabeth pendant", price:300000, image:"images/얼굴.jpg", detailImages:detailImages("images/얼굴.jpg"), material:"Portrait pendant" },
+    { id:13, name:"Elizabeth pendant", price:300000, image:"images/왼쪽얼굴.jpg", detailImages:detailImages("images/왼쪽얼굴.jpg"), material:"Portrait pendant" },
+    { id:14, name:"Murakami yeti pendant", price:290000, image:"images/주황예티.jpg", detailImages:detailImages("images/주황예티.jpg"), material:"Character pendant", optionName:"예티 컬러", options:yetiOptions },
+    { id:15, name:"Hello kitty pendant", price:320000, image:"images/키티.jpg", detailImages:detailImages("images/키티.jpg"), material:"Character pendant" },
+    { id:16, name:"Playboi carti rabbit pendant", price:230000, image:"images/토끼.jpg", detailImages:detailImages("images/토끼.jpg"), material:"Character pendant" },
+    { id:17, name:"Sonic pendant", price:380000, image:"images/파랑소닉.jpg", detailImages:detailImages("images/파랑소닉.jpg"), material:"Character pendant", optionName:"소닉 컬러", options:sonicOptions },
+    { id:18, name:"Murakami yeti pendant", price:290000, image:"images/파랑예티.jpg", detailImages:detailImages("images/파랑예티.jpg"), material:"Character pendant", optionName:"예티 컬러", options:yetiOptions },
+    { id:19, name:"Murakami yeti pendant", price:290000, image:"images/하늘예티.jpg", detailImages:detailImages("images/하늘예티.jpg"), material:"Character pendant", optionName:"예티 컬러", options:yetiOptions },
+    { id:20, name:"Skull pendant", price:370000, image:"images/해골.jpg", detailImages:detailImages("images/해골.jpg"), material:"Skull pendant" },
+    { id:21, name:"Murakami yeti pendant", price:290000, image:"images/흰색예티.jpg", detailImages:detailImages("images/흰색예티.jpg"), material:"Character pendant", optionName:"예티 컬러", options:yetiOptions },
+    { id:22, name:"King von O'block pendant", price:370000, image:"images/흰오.jpg", detailImages:detailImages("images/흰오.jpg"), material:"Color pendant", optionName:"컬러", options:oblockOptions }
 ];
 
 let cart = [];
 let currentProduct = null;
 let currentSlide = 0;
 let selectedOption = null;
-let currentFilter = "all";
 
 const grid = document.getElementById("product-grid");
 const cartPanel = document.getElementById("cart-panel");
@@ -63,23 +62,16 @@ const totalEl = document.getElementById("total");
 const cartCount = document.getElementById("cart-count");
 const navMenu = document.getElementById("nav-menu");
 const productModal = document.getElementById("product-modal");
-const filterButtons = document.getElementById("filter-buttons");
 
 const money = price => "\u20a9" + price.toLocaleString("ko-KR");
 
-function getVisibleProducts(){
-    if(currentFilter === "all") return products;
-    return products.filter(product => product.category === currentFilter);
-}
-
 function renderProducts(){
-    grid.innerHTML = getVisibleProducts().map(product => `
+    grid.innerHTML = products.map(product => `
         <div class="product">
             <div class="product-img" data-action="detail" data-id="${product.id}">
                 <img src="${product.image}" alt="${product.name}" loading="lazy">
             </div>
 
-            <p class="product-meta">${product.category}</p>
             <h3>${product.name}</h3>
             <p class="price">${money(product.price)}</p>
 
@@ -105,31 +97,6 @@ grid.addEventListener("click", function(event){
     if(action === "add"){
         handleProductAdd(id);
     }
-});
-
-filterButtons.addEventListener("click", function(event){
-    const button = event.target.closest("[data-filter]");
-    if(!button) return;
-
-    currentFilter = button.dataset.filter;
-
-    document.querySelectorAll("[data-filter]").forEach(btn => {
-        btn.classList.toggle("active", btn.dataset.filter === currentFilter);
-    });
-
-    renderProducts();
-});
-
-document.querySelectorAll("[data-filter-link]").forEach(link => {
-    link.addEventListener("click", () => {
-        currentFilter = link.dataset.filterLink;
-
-        document.querySelectorAll("[data-filter]").forEach(btn => {
-            btn.classList.toggle("active", btn.dataset.filter === currentFilter);
-        });
-
-        renderProducts();
-    });
 });
 
 function handleProductAdd(id){
