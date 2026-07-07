@@ -11,7 +11,7 @@
 <div class="top-strip">
     <span>SEOUL ICE JEWELRY</span>
     <span>BLACK LUXURY COLLECTION</span>
-    <span>PRIVATE ORDER AVAILABLE</span>
+    <span>READY PIECES AVAILABLE</span>
 </div>
 
 <header class="site-header">
@@ -33,7 +33,7 @@
         </button>
     </div>
 
-    <button class="menu-toggle" type="button" onclick="toggleMenu()">☰</button>
+    <button class="menu-toggle" type="button" onclick="toggleMenu()" aria-label="메뉴 열기">&#9776;</button>
 </header>
 
 <main>
@@ -113,7 +113,7 @@
             <p class="eyebrow">Selected pieces</p>
             <h3>Shopping Bag</h3>
         </div>
-        <button class="cart-close" type="button" onclick="closeCart()">×</button>
+        <button class="cart-close" type="button" onclick="closeCart()" aria-label="장바구니 닫기">&times;</button>
     </div>
 
     <div id="cart-items"></div>
@@ -133,12 +133,12 @@
 
 <div id="product-modal">
     <div class="modal-box">
-        <button class="modal-close" type="button" onclick="closeProductModal()">×</button>
+        <button class="modal-close" type="button" onclick="closeProductModal()" aria-label="상세창 닫기">&times;</button>
 
         <div class="modal-gallery">
-            <button class="slide-btn prev" type="button" onclick="changeSlide(-1)">‹</button>
+            <button class="slide-btn prev" type="button" onclick="changeSlide(-1)" aria-label="이전 이미지">&#8249;</button>
             <img id="modal-image" src="" alt="">
-            <button class="slide-btn next" type="button" onclick="changeSlide(1)">›</button>
+            <button class="slide-btn next" type="button" onclick="changeSlide(1)" aria-label="다음 이미지">&#8250;</button>
             <div id="modal-thumbs"></div>
         </div>
 

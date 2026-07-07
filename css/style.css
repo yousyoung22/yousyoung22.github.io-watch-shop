@@ -156,7 +156,11 @@ nav a:hover{
 
 .hero{
     min-height:78vh;
-    background:url("../images/hero-bg.jpg") center center / cover no-repeat;
+    background-color:#020304;
+    background-image:url("../images/hero-bg.jpg");
+    background-position:center center;
+    background-size:cover;
+    background-repeat:no-repeat;
 }
 
 .eyebrow{
@@ -187,7 +191,6 @@ h1,h2,h3{
     cursor:pointer;
 }
 
-.primary-btn,
 .buy-btn,
 #modal-add-btn{
     padding:0 22px;
@@ -196,7 +199,6 @@ h1,h2,h3{
     color:#030405;
 }
 
-.ghost-btn,
 .detail-btn,
 .back-btn{
     padding:0 22px;
@@ -380,7 +382,6 @@ h1,h2,h3{
 
 .add-btn:hover,
 .detail-btn:hover,
-.ghost-btn:hover,
 .back-btn:hover{
     background:#d9f5ff;
     color:#030405;
@@ -754,15 +755,28 @@ h1,h2,h3{
     font-weight:900;
 }
 
-.modal-options select{
-    width:100%;
-    height:46px;
-    padding:0 14px;
-    border:1px solid var(--line2);
+.option-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+.option-chip{
+    min-height:42px;
+    border:1px solid var(--line);
     border-radius:6px;
-    background:#050609;
-    color:#f2f2f2;
+    background:rgba(255,255,255,.04);
+    color:#d9e0e8;
+    font-size:.86rem;
     font-weight:900;
+    cursor:pointer;
+}
+
+.option-chip.active,
+.option-chip:hover{
+    border-color:rgba(0,200,255,.55);
+    background:rgba(0,200,255,.12);
+    color:#e8f8ff;
 }
 
 .option-required{
@@ -848,8 +862,13 @@ h1,h2,h3{
 
     .hero{
         min-height:76vh;
-        background:url("../images/hero-bg-mobile.jpg") center center / contain no-repeat;
         background-color:#020304;
+        background-image:
+            url("../images/hero-bg-mobile.jpg"),
+            url("../images/hero-bg.jpg");
+        background-position:center center, center center;
+        background-size:contain, cover;
+        background-repeat:no-repeat, no-repeat;
     }
 
     .category-band{
@@ -907,5 +926,9 @@ h1,h2,h3{
 
     .modal-info h2{
         font-size:1.65rem;
+    }
+
+    .option-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 }
