@@ -72,15 +72,33 @@ function renderProducts(){
                 <img src="${product.image}" alt="${product.name}" loading="lazy">
             </div>
 
-            <h3>${product.name}</h3>
-            <p class="price">${money(product.price)}</p>
+            <div class="product-info">
+                <div class="product-meta">
+                    <span>SEOUL ICE</span>
+                    <span>${product.material}</span>
+                </div>
 
-            <div class="product-actions">
-                <button class="detail-btn" type="button" data-action="detail" data-id="${product.id}">상세보기</button>
-                <button class="add-btn" type="button" data-action="add" data-id="${product.id}">담기</button>
+                <h3>${product.name}</h3>
+
+                <div class="product-price-row">
+                    <p class="price">${money(product.price)}</p>
+                </div>
+
+                <div class="product-actions">
+                    <button class="detail-btn" type="button" data-action="detail" data-id="${product.id}">상세보기</button>
+                    <button class="add-btn" type="button" data-action="add" data-id="${product.id}">담기</button>
+                </div>
             </div>
         </div>
     `).join("");
+
+    grid.querySelectorAll(".product-img img").forEach(image => {
+        image.addEventListener("error", () => {
+            const frame = image.closest(".product-img");
+            frame.classList.add("missing");
+            image.remove();
+        }, { once:true });
+    });
 }
 
 grid.addEventListener("click", function(event){
