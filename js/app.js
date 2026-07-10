@@ -5,18 +5,12 @@ function detailImages(image){
     return [image, `${base}_상세1${ext}`, `${base}_상세2${ext}`];
 }
 
-const oblockOptions = [
-    { label:"노랑", image:"images/노랑오.jpg", detailImages:detailImages("images/노랑오.jpg") },
-    { label:"빨강", image:"images/빨간오.jpg", detailImages:detailImages("images/빨간오.jpg") },
-    { label:"흰색", image:"images/흰오.jpg", detailImages:detailImages("images/흰오.jpg") }
-];
-
 const yetiOptions = [
+    { label:"흰색", image:"images/흰색예티.jpg", detailImages:detailImages("images/흰색예티.jpg") },
     { label:"빨강", image:"images/빨강예티.jpg", detailImages:detailImages("images/빨강예티.jpg") },
     { label:"주황", image:"images/주황예티.jpg", detailImages:detailImages("images/주황예티.jpg") },
     { label:"파랑", image:"images/파랑예티.jpg", detailImages:detailImages("images/파랑예티.jpg") },
-    { label:"하늘", image:"images/하늘예티.jpg", detailImages:detailImages("images/하늘예티.jpg") },
-    { label:"흰색", image:"images/흰색예티.jpg", detailImages:detailImages("images/흰색예티.jpg") }
+    { label:"하늘", image:"images/하늘예티.jpg", detailImages:detailImages("images/하늘예티.jpg") }
 ];
 
 const sonicOptions = [
@@ -25,28 +19,20 @@ const sonicOptions = [
 ];
 
 const products = [
-    { id:1, name:"Moissanite tennis chain", price:450000, image:"images/3체인.jpg", detailImages:detailImages("images/3체인.jpg"), material:"Moissanite setting" },
     { id:2, name:"Corteiz pendant", price:250000, image:"images/검.jpg", detailImages:detailImages("images/검.jpg"), material:"Pendant" },
     { id:3, name:"LIVE YOURS pendant", price:410000, image:"images/글씨.jpg", detailImages:detailImages("images/글씨.jpg"), material:"Lettering pendant" },
     { id:4, name:"YVL pendant", price:370000, image:"images/나무.jpg", detailImages:detailImages("images/나무.jpg"), material:"Hand-set stones" },
-    { id:5, name:"King von O'block pendant", price:370000, image:"images/노랑오.jpg", detailImages:detailImages("images/노랑오.jpg"), material:"Color pendant", optionName:"컬러", options:oblockOptions },
     { id:6, name:"Playboi carti star pendant", price:380000, image:"images/별.jpg", detailImages:detailImages("images/별.jpg"), material:"Star pendant" },
-    { id:7, name:"King von O'block pendant", price:370000, image:"images/빨간오.jpg", detailImages:detailImages("images/빨간오.jpg"), material:"Color pendant", optionName:"컬러", options:oblockOptions },
-    { id:8, name:"Murakami yeti pendant", price:290000, image:"images/빨강예티.jpg", detailImages:detailImages("images/빨강예티.jpg"), material:"Character pendant", optionName:"예티 컬러", options:yetiOptions },
     { id:9, name:"Candy pendant", price:270000, image:"images/사탕.jpg", detailImages:detailImages("images/사탕.jpg"), material:"Pendant" },
     { id:10, name:"Sonic pendant", price:380000, image:"images/소닉.jpg", detailImages:detailImages("images/소닉.jpg"), material:"Character pendant", optionName:"소닉 컬러", options:sonicOptions },
     { id:11, name:"Cross pendant", price:260000, image:"images/십자가.jpg", detailImages:detailImages("images/십자가.jpg"), material:"Cross pendant" },
     { id:12, name:"Elizabeth pendant", price:300000, image:"images/얼굴.jpg", detailImages:detailImages("images/얼굴.jpg"), material:"Portrait pendant" },
     { id:13, name:"Elizabeth pendant", price:300000, image:"images/왼쪽얼굴.jpg", detailImages:detailImages("images/왼쪽얼굴.jpg"), material:"Portrait pendant" },
-    { id:14, name:"Murakami yeti pendant", price:290000, image:"images/주황예티.jpg", detailImages:detailImages("images/주황예티.jpg"), material:"Character pendant", optionName:"예티 컬러", options:yetiOptions },
     { id:15, name:"Hello kitty pendant", price:320000, image:"images/키티.jpg", detailImages:detailImages("images/키티.jpg"), material:"Character pendant" },
     { id:16, name:"Playboi carti rabbit pendant", price:230000, image:"images/토끼.jpg", detailImages:detailImages("images/토끼.jpg"), material:"Character pendant" },
-    { id:17, name:"Sonic pendant", price:380000, image:"images/파랑소닉.jpg", detailImages:detailImages("images/파랑소닉.jpg"), material:"Character pendant", optionName:"소닉 컬러", options:sonicOptions },
-    { id:18, name:"Murakami yeti pendant", price:290000, image:"images/파랑예티.jpg", detailImages:detailImages("images/파랑예티.jpg"), material:"Character pendant", optionName:"예티 컬러", options:yetiOptions },
-    { id:19, name:"Murakami yeti pendant", price:290000, image:"images/하늘예티.jpg", detailImages:detailImages("images/하늘예티.jpg"), material:"Character pendant", optionName:"예티 컬러", options:yetiOptions },
     { id:20, name:"Skull pendant", price:370000, image:"images/해골.jpg", detailImages:detailImages("images/해골.jpg"), material:"Skull pendant" },
     { id:21, name:"Murakami yeti pendant", price:290000, image:"images/흰색예티.jpg", detailImages:detailImages("images/흰색예티.jpg"), material:"Character pendant", optionName:"예티 컬러", options:yetiOptions },
-    { id:22, name:"King von O'block pendant", price:370000, image:"images/흰오.jpg", detailImages:detailImages("images/흰오.jpg"), material:"Color pendant", optionName:"컬러", options:oblockOptions }
+    { id:22, name:"King von O'block pendant", price:370000, image:"images/흰오.jpg", detailImages:detailImages("images/흰오.jpg"), material:"Color pendant" }
 ];
 
 let cart = [];
@@ -65,10 +51,36 @@ const productModal = document.getElementById("product-modal");
 
 const money = price => "\u20a9" + price.toLocaleString("ko-KR");
 
+function getOptionColor(label){
+    const colors = {
+        "노랑":"#f2c94c",
+        "빨강":"#d64545",
+        "흰색":"#f8fafc",
+        "주황":"#f2994a",
+        "파랑":"#2f80ed",
+        "하늘":"#8fd3ff",
+        "기본":"#111318"
+    };
+
+    return colors[label] || "#98a2b3";
+}
+
 function renderProducts(){
-    grid.innerHTML = products.map(product => `
+    grid.innerHTML = products.map(product => {
+        const optionDots = product.options
+            ? `
+                <div class="option-dots" aria-label="상품 옵션">
+                    ${product.options.map(option => `
+                        <span title="${option.label}" style="--dot:${getOptionColor(option.label)}"></span>
+                    `).join("")}
+                </div>
+            `
+            : "";
+
+        return `
         <div class="product">
             <div class="product-img" data-action="detail" data-id="${product.id}">
+                ${product.options ? `<span class="product-badge">OPTIONS</span>` : ""}
                 <img src="${product.image}" alt="${product.name}" loading="lazy">
             </div>
 
@@ -82,6 +94,7 @@ function renderProducts(){
 
                 <div class="product-price-row">
                     <p class="price">${money(product.price)}</p>
+                    ${optionDots}
                 </div>
 
                 <div class="product-actions">
@@ -90,7 +103,8 @@ function renderProducts(){
                 </div>
             </div>
         </div>
-    `).join("");
+    `;
+    }).join("");
 
     grid.querySelectorAll(".product-img img").forEach(image => {
         image.addEventListener("error", () => {

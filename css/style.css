@@ -10,7 +10,7 @@
     --soft:#98a2b3;
     --point:#5b4b5f;
     --point2:#2e3440;
-    --price:#7a3047;
+    --price:#3f4a5a;
     --button:#111318;
     --button2:#343a46;
     --shadow:0 18px 55px rgba(15,23,42,.09);
@@ -152,7 +152,7 @@ nav a:hover{
     align-items:center;
     justify-content:center;
     border-radius:50%;
-    background:var(--price);
+    background:#111318;
     color:#ffffff;
     font-size:.72rem;
 }
@@ -293,6 +293,26 @@ h1,h2,h3{
     cursor:pointer;
 }
 
+.product-badge{
+    position:absolute;
+    top:10px;
+    left:10px;
+    z-index:2;
+    min-height:24px;
+    display:inline-flex;
+    align-items:center;
+    padding:0 9px;
+    border:1px solid rgba(255,255,255,.72);
+    border-radius:999px;
+    background:rgba(255,255,255,.9);
+    color:#111318;
+    font-size:.62rem;
+    font-weight:900;
+    letter-spacing:.09em;
+    box-shadow:0 8px 20px rgba(15,23,42,.12);
+    backdrop-filter:blur(12px);
+}
+
 .product-img::after{
     content:"";
     position:absolute;
@@ -387,6 +407,10 @@ h1,h2,h3{
 }
 
 .product-price-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
     margin-top:auto;
     padding-top:12px;
     border-top:1px solid rgba(15,23,42,.08);
@@ -397,6 +421,22 @@ h1,h2,h3{
     color:var(--price);
     font-size:1.03rem;
     font-weight:900;
+}
+
+.option-dots{
+    display:flex;
+    justify-content:flex-end;
+    gap:5px;
+}
+
+.option-dots span{
+    width:12px;
+    height:12px;
+    display:block;
+    border:1px solid rgba(15,23,42,.2);
+    border-radius:50%;
+    background:var(--dot);
+    box-shadow:0 1px 4px rgba(15,23,42,.12);
 }
 
 .product-actions{
@@ -1018,6 +1058,14 @@ h1,h2,h3{
         border-radius:6px;
     }
 
+    .product-badge{
+        top:7px;
+        left:7px;
+        min-height:21px;
+        padding:0 7px;
+        font-size:.54rem;
+    }
+
     .product-info{
         margin-top:8px;
         padding:10px;
@@ -1056,6 +1104,15 @@ h1,h2,h3{
     .product-actions button{
         min-height:40px;
         font-size:.78rem;
+    }
+
+    .option-dots{
+        gap:4px;
+    }
+
+    .option-dots span{
+        width:10px;
+        height:10px;
     }
 
     .service-section{
