@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEOUL ICE</title>
-<link rel="stylesheet" href="css/style.css?v=price-midgray1">
+<link rel="stylesheet" href="css/style.css?v=admin-my-1">
 </head>
 
 <body>
@@ -28,6 +28,7 @@
             <a href="#contact">CONTACT</a>
         </nav>
 
+        <button id="account-btn" type="button">LOGIN</button>
         <button id="cart-btn" type="button">
             BAG <span id="cart-count">0</span>
         </button>
@@ -44,7 +45,7 @@
             <p class="eyebrow">Shop Seoul Ice</p>
             <h2>Jewelry</h2>
             <p class="sub">
-                체인, 펜던트, 캐릭터 피스까지 SEOUL ICE만의 깨끗한 화이트 럭셔리 무드로 정리한 컬렉션.
+                체인, 펜던트, 캐릭터 아이스까지 SEOUL ICE만의 깔끔한 주얼리 무드로 정리한 컬렉션입니다.
             </p>
         </div>
 
@@ -55,8 +56,8 @@
         <p class="eyebrow">Brand story</p>
         <h2>Built for presence</h2>
         <p class="sub">
-            SEOUL ICE는 단순히 반짝이는 액세서리가 아니라, 착용자의 분위기를 바꾸는 피스를 만듭니다.
-            깨끗한 배경 위에서 더 선명하게 살아나는 광택, 디테일한 세팅, 스트릿과 럭셔리 사이의 균형을 중심으로 제작합니다.
+            SEOUL ICE는 단순히 반짝이는 액세서리가 아니라 착용자의 분위기를 바꾸는 아이스 주얼리를 만듭니다.
+            깔끔한 배경 위에서 더 선명하게 살아나는 광택, 디테일한 세팅, 스트릿과 주얼리 사이의 균형을 중심으로 시작합니다.
         </p>
     </section>
 
@@ -70,26 +71,25 @@
         <div class="service-box">
             <p class="eyebrow">Payment</p>
             <h2>Secure Payment</h2>
-            <p class="sub">카드 / 계좌이체 / 간편결제</p>
+            <p class="sub">카드 결제 / 계좌이체</p>
         </div>
 
         <div id="contact" class="service-box">
             <p class="eyebrow">Contact</p>
-            <h2>+82 01-7799-7273</h2>
+            <h2>+82 10-7799-7273</h2>
             <p class="sub">주문 및 상담 문의</p>
         </div>
     </section>
 </main>
 
-<footer class="footer">
+<footer class="footer legal-footer">
     <div>
         <strong>SEOUL ICE</strong>
-        <p>White luxury jewelry pieces.</p>
-    </div>
-    <div>
-        <span>JEWELRY</span>
-        <span>BRAND</span>
-        <span>CONTACT</span>
+        <p>상호명: SEOUL ICE | 대표자: 홍길동 | 사업자등록번호: 000-00-00000</p>
+        <p>통신판매업신고번호: 제2026-서울○○-0000호 | 주소: 서울특별시 ○○구 ○○로 00</p>
+        <p>고객센터: 010-7799-7273 | 이메일: help@seoulice.example | 개인정보보호책임자: 홍길동</p>
+        <p>호스팅제공자: 예시호스팅 | <a href="https://www.ftc.go.kr/www/selectBizCommList.do?key=254" target="_blank" rel="noopener">사업자정보확인</a></p>
+        <small>위 정보는 예시입니다. 실제 판매 전 사업자 정보와 약관, 개인정보처리방침, 교환/환불 정책으로 교체해야 합니다.</small>
     </div>
 </footer>
 
@@ -111,7 +111,7 @@
         </div>
 
         <div class="cart-bottom-buttons">
-            <button class="buy-btn" type="button" onclick="buy()">구매하기</button>
+            <button class="buy-btn" type="button" onclick="buy()">결제하기</button>
             <button class="back-btn" type="button" onclick="closeCart()">계속 보기</button>
         </div>
     </div>
@@ -147,8 +147,8 @@
     </div>
 </div>
 
-<div id="backdrop" onclick="closeCart(); closeProductModal();"></div>
+<div id="backdrop" onclick="closeCart(); closeProductModal(); closeAccountModal(); closeMyPage(); closeCheckout();"></div>
 
-<script src="js/app.js?v=price-midgray1"></script>
+<script src="js/app.js?v=admin-my-1"></script>
 </body>
 </html>

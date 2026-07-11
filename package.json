@@ -1,0 +1,9 @@
+{
+  "name": "seoul-ice-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SEOUL ICE store site with login, admin product management, and checkout.",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

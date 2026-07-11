@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEOUL ICE 관리자</title>
+<style>
+    :root{
+        --bg:#f4f6f8;
+        --paper:#ffffff;
+        --panel:#f9fafb;
+        --text:#101828;
+        --muted:#667085;
+        --line:#d0d5dd;
+        --line2:#eaecf0;
+        --button:#111318;
+        --price:#3f4a5a;
+        --danger:#b42318;
+        --ok:#067647;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+        background:var(--bg);
+        color:var(--text);
+        font-family:Inter,Pretendard,"Noto Sans KR",Arial,sans-serif;
+    }
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    .admin-shell{
+        display:grid;
+        grid-template-columns:260px 1fr;
+        min-height:100vh;
+    }
+    aside{
+        position:sticky;
+        top:0;
+        height:100vh;
+        padding:26px;
+        background:#111318;
+        color:#ffffff;
+    }
+    .brand{
+        font-size:.86rem;
+        font-weight:900;
+        letter-spacing:.12em;
+    }
+    .side-title{
+        margin-top:26px;
+        font-size:2rem;
+        line-height:1.05;
+    }
+    .side-actions{
+        display:grid;
+        gap:10px;
+        margin-top:28px;
+    }
+    .side-actions a,
+    .side-actions button{
+        min-height:46px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border:1px solid rgba(255,255,255,.2);
+        border-radius:8px;
+        background:rgba(255,255,255,.08);
+        color:#ffffff;
+        text-decoration:none;
+        font-weight:900;
+    }
+    main{
+        padding:28px;
+    }
+    .topbar{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:18px;
+        margin-bottom:18px;
+    }
+    .eyebrow{
+        color:#5b4b5f;
+        font-size:.72rem;
+        font-weight:900;
+        letter-spacing:.16em;
+        text-transform:uppercase;
+    }
+    h1{
+        margin-top:7px;
+        font-size:2rem;
+    }
+    .admin-tabs{
+        display:flex;
+        gap:10px;
+        margin-bottom:18px;
+    }
+    .admin-tabs button{
+        min-height:48px;
+        padding:0 22px;
+        border:1px solid var(--line);
+        border-radius:8px;
+        background:#ffffff;
+        color:#344054;
+        font-weight:900;
+    }
+    .admin-tabs button.active{
+        border-color:#111318;
+        background:#111318;
+        color:#ffffff;
+    }
+    .stat-row{
+        display:grid;
+        grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:14px;
+        margin-bottom:18px;
+    }
+
+    #product-stats{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+    .stat{
+        padding:18px;
+        border:1px solid var(--line2);
+        border-radius:10px;
+        background:#ffffff;
+    }
+    .stat span{
+        color:var(--muted);
+        font-size:.78rem;
+        font-weight:900;
+    }
+    .stat strong{
+        display:block;
+        margin-top:8px;
+        font-size:1.45rem;
+    }
+    .tab-panel{display:none}
+    .tab-panel.active{display:block}
+    .order-filters{
+        display:flex;
+        flex-wrap:wrap;
+        gap:8px;
+        margin-bottom:14px;
+    }
+    .order-filters button{
+        min-height:38px;
+        padding:0 13px;
+        border:1px solid var(--line);
+        border-radius:999px;
+        background:#ffffff;
+        color:#344054;
+        font-size:.82rem;
+        font-weight:900;
+    }
+    .order-filters button.active{
+        border-color:#111318;
+        background:#111318;
+        color:#ffffff;
+    }
+    .layout{
+        display:grid;
+        grid-template-columns:minmax(380px,.95fr) minmax(0,1.2fr);
+        gap:18px;
+        align-items:start;
+    }
+    .panel{
+        border:1px solid var(--line2);
+        border-radius:12px;
+        background:var(--paper);
+        box-shadow:0 14px 40px rgba(16,24,40,.06);
+    }
+    .panel-head{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+        padding:18px;
+        border-bottom:1px solid var(--line2);
+    }
+    .panel-head h2{
+        font-size:1.08rem;
+    }
+    .panel-body{
+        padding:18px;
+    }
+    form{
+        display:grid;
+        gap:13px;
+    }
+    label{
+        display:grid;
+        gap:7px;
+        color:#344054;
+        font-size:.8rem;
+        font-weight:900;
+    }
+    input,select,textarea{
+        width:100%;
+        border:1px solid var(--line);
+        border-radius:8px;
+        background:#ffffff;
+        color:var(--text);
+    }
+    input,select{
+        height:44px;
+        padding:0 11px;
+    }
+    select:disabled{
+        background:#f8fafc;
+        color:#344054;
+        opacity:1;
+        cursor:not-allowed;
+    }
+    textarea{
+        min-height:92px;
+        padding:11px;
+        line-height:1.55;
+        resize:vertical;
+    }
+    .form-grid{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:12px;
+    }
+    .preview{
+        display:flex;
+        align-items:center;
+        gap:12px;
+        padding:10px;
+        border:1px solid var(--line2);
+        border-radius:10px;
+        background:var(--panel);
+    }
+    .upload-row,
+    .mini-upload-row{
+        display:grid;
+        grid-template-columns:1fr auto;
+        gap:10px;
+        align-items:end;
+    }
+    .file-input{
+        width:100%;
+        min-height:44px;
+        padding:9px 10px;
+        border:1px solid var(--line);
+        border-radius:8px;
+        background:#ffffff;
+        color:#344054;
+        font-size:.86rem;
+    }
+    .preview img{
+        width:76px;
+        height:76px;
+        border-radius:8px;
+        object-fit:cover;
+        background:#edf2f7;
+    }
+    .hint{
+        color:var(--muted);
+        font-size:.78rem;
+        line-height:1.5;
+    }
+    .button-row{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+    .primary,
+    .secondary,
+    .danger{
+        min-height:46px;
+        padding:0 18px;
+        border-radius:8px;
+        font-weight:900;
+    }
+    .primary{
+        border:none;
+        background:linear-gradient(135deg,#111318,#343a46);
+        color:#ffffff;
+    }
+    .secondary{
+        border:1px solid var(--line);
+        background:#ffffff;
+        color:#344054;
+    }
+    .danger{
+        border:1px solid rgba(180,35,24,.25);
+        background:#fff6f5;
+        color:var(--danger);
+    }
+    .option-tools{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:10px;
+        margin-top:4px;
+    }
+    .option-list{
+        display:grid;
+        gap:12px;
+        margin-top:10px;
+    }
+    .option-card{
+        display:grid;
+        gap:12px;
+        padding:14px;
+        border:1px solid var(--line2);
+        border-radius:10px;
+        background:#ffffff;
+    }
+    .option-card-head{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:10px;
+    }
+    .option-card-head strong{
+        font-size:.92rem;
+    }
+    .icon-danger{
+        width:38px;
+        height:38px;
+        border:1px solid rgba(180,35,24,.25);
+        border-radius:8px;
+        background:#fff6f5;
+        color:var(--danger);
+        font-weight:900;
+    }
+    .detail-select{
+        min-height:96px;
+        padding:8px;
+    }
+    .list{
+        display:grid;
+        gap:10px;
+    }
+    .product-row,
+    .order-row{
+        display:grid;
+        grid-template-columns:72px 1fr auto;
+        gap:12px;
+        align-items:center;
+        padding:12px;
+        border:1px solid var(--line2);
+        border-radius:10px;
+        background:#ffffff;
+    }
+    .product-row img{
+        width:72px;
+        height:72px;
+        border-radius:8px;
+        object-fit:cover;
+        background:#edf2f7;
+    }
+    .row-title{
+        font-weight:900;
+        line-height:1.35;
+    }
+    .row-meta{
+        margin-top:5px;
+        color:var(--muted);
+        font-size:.82rem;
+        line-height:1.5;
+    }
+    .row-price{
+        color:var(--price);
+        font-weight:900;
+    }
+    .row-actions{
+        display:flex;
+        gap:7px;
+    }
+    .row-actions button{
+        min-width:78px;
+        min-height:40px;
+        border-radius:7px;
+        font-size:.82rem;
+        font-weight:900;
+    }
+    .order-row{
+        grid-template-columns:1fr;
+        gap:14px;
+    }
+    .order-head{
+        display:flex;
+        align-items:flex-start;
+        justify-content:space-between;
+        gap:12px;
+    }
+    .order-items{
+        display:grid;
+        gap:9px;
+    }
+    .order-item{
+        display:grid;
+        grid-template-columns:58px 1fr;
+        gap:10px;
+        align-items:center;
+        padding:9px;
+        border:1px solid var(--line2);
+        border-radius:8px;
+        background:var(--panel);
+    }
+    .order-item img{
+        width:58px;
+        height:58px;
+        border-radius:8px;
+        object-fit:cover;
+        background:#edf2f7;
+    }
+    .order-item strong{
+        display:block;
+        font-size:.88rem;
+        line-height:1.35;
+    }
+    .order-item span{
+        display:block;
+        margin-top:4px;
+        color:var(--muted);
+        font-size:.78rem;
+        font-weight:800;
+    }
+    .delivery-flow{
+        padding:14px;
+        border-radius:10px;
+        background:#27465f;
+        color:#ffffff;
+    }
+    .delivery-line{
+        display:grid;
+        grid-template-columns:repeat(5,1fr);
+        gap:8px;
+    }
+    .delivery-step{
+        display:grid;
+        justify-items:center;
+        gap:7px;
+        position:relative;
+        min-width:0;
+    }
+    .delivery-step:not(:last-child)::after{
+        content:"";
+        position:absolute;
+        top:13px;
+        left:calc(50% + 15px);
+        width:calc(100% - 22px);
+        height:4px;
+        border-radius:999px;
+        background:rgba(255,255,255,.24);
+    }
+    .delivery-step.done:not(:last-child)::after{
+        background:#38c172;
+    }
+    .delivery-dot{
+        width:28px;
+        height:28px;
+        display:grid;
+        place-items:center;
+        border-radius:999px;
+        background:rgba(255,255,255,.9);
+        color:#98a2b3;
+        font-size:.8rem;
+        font-weight:900;
+        z-index:1;
+    }
+    .delivery-step.done .delivery-dot{
+        background:#38c172;
+        color:#ffffff;
+    }
+    .delivery-step span{
+        color:rgba(255,255,255,.78);
+        font-size:.68rem;
+        font-weight:900;
+        text-align:center;
+        word-break:keep-all;
+    }
+    .delivery-step.done span{
+        color:#ffffff;
+    }
+    .tracking-note{
+        display:grid;
+        gap:3px;
+        padding:10px 12px;
+        border:1px solid var(--line2);
+        border-radius:8px;
+        background:var(--panel);
+        color:#3f4a5a;
+        font-size:.8rem;
+        font-weight:800;
+        line-height:1.5;
+    }
+    .tracking-note strong{
+        color:#101828;
+    }
+    .tracking-note span{
+        display:block;
+    }
+    .order-edit{
+        display:grid;
+        grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:10px;
+    }
+    .order-edit textarea{
+        min-height:44px;
+    }
+    .status{
+        min-height:22px;
+        margin-top:12px;
+        color:var(--ok);
+        font-size:.84rem;
+        font-weight:900;
+    }
+    .empty{
+        padding:34px;
+        text-align:center;
+        color:var(--muted);
+        border:1px dashed var(--line);
+        border-radius:10px;
+        background:#ffffff;
+    }
+    @media(max-width:1100px){
+        .admin-shell{grid-template-columns:1fr}
+        aside{position:relative;height:auto}
+        .layout,.stat-row,#product-stats,.order-edit{grid-template-columns:1fr}
+    }
+    @media(max-width:620px){
+        main{padding:16px}
+        .topbar{align-items:flex-start;flex-direction:column}
+        .admin-tabs{display:grid;grid-template-columns:1fr 1fr}
+        .form-grid,.button-row,.upload-row,.mini-upload-row{grid-template-columns:1fr}
+        .product-row{grid-template-columns:62px 1fr}
+        .row-actions{grid-column:1/-1}
+        .delivery-flow{padding:12px 8px}
+        .delivery-line{gap:4px}
+        .delivery-step:not(:last-child)::after{
+            left:calc(50% + 13px);
+            width:calc(100% - 18px);
+        }
+        .delivery-dot{width:26px;height:26px}
+        .delivery-step span{font-size:.64rem}
+    }
+</style>
+</head>
+<body>
+<div class="admin-shell">
+    <aside>
+        <div class="brand">SEOUL ICE</div>
+        <h1 class="side-title">관리자</h1>
+        <div class="side-actions">
+            <a href="/" target="_blank">사이트 보기</a>
+            <button type="button" onclick="logout()">로그아웃</button>
+        </div>
+    </aside>
+
+    <main>
+        <div class="topbar">
+            <div>
+                <div class="eyebrow">Admin dashboard</div>
+                <h1>SEOUL ICE 관리</h1>
+            </div>
+        </div>
+
+        <div class="admin-tabs">
+            <button class="active" type="button" data-tab="products">상품관리</button>
+            <button type="button" data-tab="orders">주문관리</button>
+        </div>
+
+        <div id="product-stats" class="stat-row">
+            <div class="stat"><span>상품 수</span><strong id="stat-products">0</strong></div>
+            <div class="stat"><span>옵션 상품</span><strong id="stat-options">0</strong></div>
+            <div class="stat"><span>주문 수</span><strong id="stat-orders">0</strong></div>
+        </div>
+
+        <div id="order-stats" class="stat-row" style="display:none">
+            <div class="stat"><span>전체 주문</span><strong id="stat-order-total">0</strong></div>
+            <div class="stat"><span>배송중</span><strong id="stat-order-shipping">0</strong></div>
+            <div class="stat"><span>처리중</span><strong id="stat-order-processing">0</strong></div>
+            <div class="stat"><span>배송완료</span><strong id="stat-order-complete">0</strong></div>
+        </div>
+
+        <section id="products-panel" class="tab-panel active">
+            <div class="layout">
+                <section class="panel">
+                    <div class="panel-head">
+                        <h2 id="form-title">상품 추가</h2>
+                        <button class="secondary" type="button" onclick="resetForm()">새 상품</button>
+                    </div>
+                    <div class="panel-body">
+                        <form id="product-form">
+                            <input id="product-id" type="hidden">
+                            <label>
+                                상품명
+                                <input id="name" required placeholder="예: Custom pendant">
+                            </label>
+                            <div class="form-grid">
+                                <label>
+                                    가격
+                                    <input id="price" type="number" min="0" step="1000" required placeholder="290000">
+                                </label>
+                                <label>
+                                    재질/분류
+                                    <input id="material" required placeholder="Character pendant">
+                                </label>
+                            </div>
+                            <label>
+                                대표 이미지
+                                <select id="image" required></select>
+                            </label>
+                            <div class="upload-row">
+                                <label>
+                                    새 이미지 업로드
+                                    <input id="image-upload" class="file-input" type="file" accept="image/png,image/jpeg,image/webp">
+                                </label>
+                                <button class="secondary" type="button" onclick="uploadProductImage()">업로드</button>
+                            </div>
+                            <div class="preview">
+                                <img id="preview-image" alt="">
+                                <div>
+                                    <div class="row-title">이미지 미리보기</div>
+                                    <div class="hint">이미지를 올리면 대표 이미지와 옵션 이미지에서 바로 선택할 수 있습니다.</div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="option-tools">
+                                    <p class="hint">옵션이 없으면 그대로 비워두고, 필요하면 + 옵션 추가를 눌러주세요.</p>
+                                    <button class="secondary" type="button" onclick="addOptionRow()">+ 옵션 추가</button>
+                                </div>
+                                <div id="option-list" class="option-list"></div>
+                            </div>
+
+                            <div class="button-row">
+                                <button class="primary" type="submit">저장</button>
+                                <button class="secondary" type="button" onclick="resetForm()">취소</button>
+                            </div>
+                        </form>
+                        <div id="status" class="status"></div>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-head">
+                        <h2>상품 목록</h2>
+                        <button class="secondary" type="button" onclick="loadAll()">새로고침</button>
+                    </div>
+                    <div class="panel-body">
+                        <div id="product-list" class="list"></div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section id="orders-panel" class="tab-panel">
+            <section class="panel">
+                <div class="panel-head">
+                    <h2>주문관리</h2>
+                    <button class="secondary" type="button" onclick="loadAll()">새로고침</button>
+                </div>
+                <div class="panel-body">
+                    <div class="order-filters">
+                        <button class="active" type="button" data-order-filter="전체">전체 주문</button>
+                        <button type="button" data-order-filter="처리중">처리중</button>
+                        <button type="button" data-order-filter="배송중">배송중</button>
+                        <button type="button" data-order-filter="배송완료">배송완료</button>
+                    </div>
+                    <div id="order-list" class="list"></div>
+                </div>
+            </section>
+        </section>
+    </main>
+</div>
+
+<script>
+let products = [];
+let orders = [];
+let images = [];
+let optionRows = [];
+let orderFilter = "전체";
+
+const money = price => "₩" + Number(price || 0).toLocaleString("ko-KR");
+const $ = selector => document.querySelector(selector);
+const deliveryStages = ["결제완료","상품준비중","배송시작","배송중","배송완료"];
+const carriers = [
+    { id:"", name:"미등록" },
+    { id:"kr.cjlogistics", name:"CJ대한통운" },
+    { id:"kr.hanjin", name:"한진택배" },
+    { id:"kr.lotte", name:"롯데택배" },
+    { id:"kr.logen", name:"로젠택배" },
+    { id:"kr.epost", name:"우체국택배" },
+    { id:"kr.cupost", name:"CU 편의점택배" },
+    { id:"kr.coupangls", name:"쿠팡로지스틱스" }
+];
+const orderStatuses = [
+    { value:"주문 처리중", label:"결제 대기중" },
+    { value:"결제 완료", label:"결제 완료" },
+    { value:"취소", label:"결제 취소" }
+];
+const paymentMethodOptions = [
+    { value:"계좌이체", label:"계좌이체" },
+    { value:"카드 결제", label:"카드결제" }
+];
+
+function escapeHtml(value){
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+function imageSrc(value){
+    return "/" + String(value || "images/logo.png").replace(/^\/+/,"");
+}
+
+function normalizeStatus(value){
+    const raw = String(value || "주문 처리중").trim();
+    const normalized = raw.replace(/\s+/g,"");
+    if(normalized === "주문완료" || normalized === "배송완료") return "배송완료";
+    if(normalized === "상품준비중") return "상품 준비중";
+    if(normalized === "결제완료") return "결제 완료";
+    if(normalized === "결제대기중") return "주문 처리중";
+    if(normalized === "주문접수") return "주문 처리중";
+    return raw;
+}
+
+function statusRank(status){
+    return ["주문 처리중","결제 완료","상품 준비중","배송시작","배송중","배송완료"].indexOf(status);
+}
+
+function canonicalStatus(order){
+    const status = normalizeStatus(order.status);
+    const shippingStatus = normalizeStatus(order.shippingStatus);
+    if(status === "취소" || shippingStatus === "취소") return "취소";
+    return statusRank(shippingStatus) > statusRank(status) ? shippingStatus : status;
+}
+
+function displayStatus(order){
+    const status = canonicalStatus(order);
+    if(status === "취소") return "결제 취소";
+    return status === "주문 처리중" ? "결제 대기중" : status;
+}
+
+function manualPaymentStatus(order){
+    if(canonicalStatus(order) === "취소") return "취소";
+    return statusRank(canonicalStatus(order)) >= statusRank("결제 완료") ? "결제 완료" : "주문 처리중";
+}
+
+function paymentMethod(order){
+    const method = String(order.customer?.paymentMethod || order.paymentStatus || "").replace(/\s+/g,"");
+    return method === "계좌이체" ? "계좌이체" : "카드 결제";
+}
+
+function isProcessing(order){
+    return ["주문 처리중","결제 완료","상품 준비중"].includes(canonicalStatus(order));
+}
+
+function isShipping(order){
+    return ["배송시작","배송중"].includes(canonicalStatus(order));
+}
+
+function isDelivered(order){
+    return canonicalStatus(order) === "배송완료";
+}
+
+function stageIndex(order){
+    const status = canonicalStatus(order);
+    if(status === "주문 처리중") return -1;
+    if(status === "배송완료") return 4;
+    if(status === "배송중") return 3;
+    if(status === "배송시작") return 2;
+    if(status === "상품 준비중") return 1;
+    return 0;
+}
+
+async function api(path, options = {}){
+    const response = await fetch(path, {
+        ...options,
+        headers: {
+            "Content-Type": "application/json",
+            ...(options.headers || {})
+        }
+    });
+    const data = await response.json().catch(() => ({}));
+    if(response.status === 401){
+        location.href = "/admin/login";
+        return null;
+    }
+    if(!response.ok){
+        throw new Error(data.error || "요청에 실패했습니다.");
+    }
+    return data;
+}
+
+function makeOptions(items, selected = "", includeEmpty = false){
+    const list = includeEmpty ? ["", ...items] : items;
+    return list.map(item => {
+        const value = typeof item === "string" ? item : item.value;
+        const label = typeof item === "string" ? item.replace("images/","") : item.label;
+        return `<option value="${escapeHtml(value)}" ${value === selected ? "selected" : ""}>${escapeHtml(label || "선택 안 함")}</option>`;
+    }).join("");
+}
+
+function fillImages(selected = ""){
+    const imageSelect = $("#image");
+    const list = selected && !images.includes(selected) ? [selected, ...images] : images;
+    imageSelect.innerHTML = makeOptions(list, selected || list[0] || "", true);
+    updatePreview();
+    renderOptionRows();
+}
+
+function updatePreview(){
+    $("#preview-image").src = $("#image").value || "images/logo.png";
+}
+
+function renderProducts(){
+    $("#stat-products").textContent = products.length;
+    $("#stat-options").textContent = products.filter(product => product.options && product.options.length).length;
+
+    if(products.length === 0){
+        $("#product-list").innerHTML = '<div class="empty">등록된 상품이 없습니다.</div>';
+        return;
+    }
+
+    $("#product-list").innerHTML = products.map(product => `
+        <div class="product-row">
+            <img src="/${escapeHtml(product.image)}" alt="">
+            <div>
+                <div class="row-title">${escapeHtml(product.name)}</div>
+                <div class="row-meta">${escapeHtml(product.material)}${product.options ? ` · 옵션 ${product.options.length}개` : ""}</div>
+                <div class="row-price">${money(product.price)}</div>
+            </div>
+            <div class="row-actions">
+                <button class="secondary" type="button" onclick="editProduct(${Number(product.id)})">수정</button>
+                <button class="danger" type="button" onclick="deleteProduct(${Number(product.id)})">삭제</button>
+            </div>
+        </div>
+    `).join("");
+}
+
+function selectOptions(values, selected){
+    return values.map(item => {
+        const value = typeof item === "string" ? item : item.value;
+        const label = typeof item === "string" ? item : item.label;
+        return `<option value="${escapeHtml(value)}" ${value === selected ? "selected" : ""}>${escapeHtml(label || value)}</option>`;
+    }).join("");
+}
+
+function carrierOptions(selected){
+    const selectedKnown = carriers.some(carrier => carrier.id === selected);
+    const list = selected && !selectedKnown ? [...carriers, { id:selected, name:selected }] : carriers;
+    return list.map(carrier => `
+        <option value="${escapeHtml(carrier.id)}" data-name="${escapeHtml(carrier.name)}" ${carrier.id === selected ? "selected" : ""}>
+            ${escapeHtml(carrier.name)}
+        </option>
+    `).join("");
+}
+
+function deliveryFlow(order){
+    if(canonicalStatus(order) === "취소") return "";
+    const activeIndex = stageIndex(order);
+    return `
+        <div class="delivery-flow">
+            <div class="delivery-line">
+                ${deliveryStages.map((label, index) => `
+                    <div class="delivery-step ${index <= activeIndex ? "done" : ""}">
+                        <div class="delivery-dot">${index <= activeIndex ? "✓" : index + 1}</div>
+                        <span>${label}</span>
+                    </div>
+                `).join("")}
+            </div>
+        </div>
+    `;
+}
+
+function orderItems(order){
+    return (order.items || []).map(item => `
+        <div class="order-item">
+            <img src="${escapeHtml(imageSrc(item.image))}" alt="">
+            <div>
+                <strong>${escapeHtml(item.name || "상품")}</strong>
+                <span>${escapeHtml(item.selectedOption ? `${item.optionName || "옵션"}: ${item.selectedOption}` : "기본 옵션")}</span>
+            </div>
+        </div>
+    `).join("");
+}
+
+function trackingNote(order){
+    if(canonicalStatus(order) === "주문 처리중"){
+        return `<strong>현재 현황</strong><span>결제 확인 대기중입니다.</span>`;
+    }
+    if(order.trackingLastDescription || order.trackingLastText){
+        const main = order.trackingLastDescription || order.trackingLastText;
+        const sub = [
+            order.trackingLastLocation ? `위치 ${order.trackingLastLocation}` : "",
+            order.trackingLastTime ? `시간 ${order.trackingLastTime}` : "",
+            order.trackingEta ? `예상 도착 ${order.trackingEta}` : ""
+        ].filter(Boolean).join(" · ");
+        return `<strong>현재 현황</strong><span>${escapeHtml(main)}</span>${sub ? `<span>${escapeHtml(sub)}</span>` : ""}`;
+    }
+    if(order.trackingSyncError) return `<strong>현재 현황</strong><span>${escapeHtml(order.trackingSyncError)}</span>`;
+    if(order.trackingNumber) return `<strong>현재 현황</strong><span>${escapeHtml(order.carrierName || order.carrierId)} ${escapeHtml(order.trackingNumber)}</span>`;
+    return `<strong>현재 현황</strong><span>운송장번호 등록 전입니다.</span>`;
+}
+
+function renderOrders(){
+    $("#stat-orders").textContent = orders.length;
+    $("#stat-order-total").textContent = orders.length;
+    $("#stat-order-complete").textContent = orders.filter(isDelivered).length;
+    $("#stat-order-processing").textContent = orders.filter(isProcessing).length;
+    $("#stat-order-shipping").textContent = orders.filter(isShipping).length;
+
+    const filteredOrders = orders.filter(order => {
+        if(orderFilter === "전체") return true;
+        if(orderFilter === "처리중") return isProcessing(order);
+        if(orderFilter === "배송중") return isShipping(order);
+        if(orderFilter === "배송완료") return isDelivered(order);
+        return true;
+    });
+
+    if(filteredOrders.length === 0){
+        $("#order-list").innerHTML = '<div class="empty">아직 주문이 없습니다.</div>';
+        return;
+    }
+
+    $("#order-list").innerHTML = filteredOrders.map(order => `
+        <div class="order-row" data-order-id="${escapeHtml(order.id)}">
+            <div class="order-head">
+                <div>
+                    <div class="row-title">${escapeHtml(order.id)} · ${escapeHtml(order.customer?.name || "")} · ${escapeHtml(displayStatus(order))}</div>
+                    <div class="row-meta">${new Date(order.createdAt).toLocaleString("ko-KR")} · ${escapeHtml(order.customer?.phone || "")}</div>
+                    <div class="row-meta">${escapeHtml(order.customer?.address || "")}</div>
+                    <div class="row-price">${money(order.total)}</div>
+                </div>
+                <button class="primary" type="button" data-action="save-order">주문 저장</button>
+            </div>
+            ${deliveryFlow(order)}
+            <div class="order-items">${orderItems(order)}</div>
+            <div class="tracking-note">${trackingNote(order)}</div>
+            <div class="order-edit">
+                <label>처리상태<select data-field="status">${selectOptions(orderStatuses, manualPaymentStatus(order))}</select></label>
+                <label>결제방법<select disabled>${selectOptions(paymentMethodOptions, paymentMethod(order))}</select></label>
+                <label>택배사<select data-field="carrierId">${carrierOptions(order.carrierId || "")}</select></label>
+                <label>운송장번호<input data-field="trackingNumber" value="${escapeHtml(order.trackingNumber || "")}"></label>
+                <label style="grid-column:span 2">관리 메모<textarea data-field="adminMemo">${escapeHtml(order.adminMemo || "")}</textarea></label>
+            </div>
+        </div>
+    `).join("");
+}
+
+async function loadAll(){
+    const [productData, imageData, orderData] = await Promise.all([
+        api("/api/admin/products"),
+        api("/api/admin/images"),
+        api("/api/admin/orders")
+    ]);
+
+    products = productData || [];
+    images = imageData || [];
+    orders = (orderData || []).sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    fillImages($("#image").value);
+    renderProducts();
+    renderOrders();
+}
+
+function addOptionRow(option = {}){
+    const mainImage = option.image || images[0] || "";
+    const detailImages = Array.isArray(option.detailImages)
+        ? option.detailImages.filter(image => image && image !== mainImage)
+        : [];
+    optionRows.push({
+        label: option.label || "",
+        image: mainImage,
+        detailImages
+    });
+    renderOptionRows();
+}
+
+function renderOptionRows(){
+    const optionList = $("#option-list");
+    if(!optionList) return;
+
+    if(optionRows.length === 0){
+        optionList.innerHTML = '<div class="empty">옵션이 없습니다. 필요하면 + 옵션 추가를 눌러주세요.</div>';
+        return;
+    }
+
+    optionList.innerHTML = optionRows.map((option, index) => `
+        <div class="option-card" data-index="${index}">
+            <div class="option-card-head">
+                <strong>옵션 ${index + 1}</strong>
+                <button class="icon-danger" type="button" data-action="remove-option" aria-label="옵션 삭제">×</button>
+            </div>
+            <div class="form-grid">
+                <label>옵션명<input data-field="label" value="${escapeHtml(option.label)}" placeholder="예: 흰색"></label>
+                <label>첫 사진<select data-field="image">${makeOptions(images, option.image, true)}</select></label>
+            </div>
+            <label>
+                부가 사진
+                <select class="detail-select" data-field="detailImages" multiple>
+                    ${images.map(image => `<option value="${escapeHtml(image)}" ${option.detailImages.includes(image) ? "selected" : ""}>${escapeHtml(image.replace("images/",""))}</option>`).join("")}
+                </select>
+            </label>
+            <div class="mini-upload-row">
+                <label>옵션 첫 사진 업로드<input class="file-input" type="file" accept="image/png,image/jpeg,image/webp" data-upload="main"></label>
+                <button class="secondary" type="button" data-action="upload-option-main">업로드</button>
+            </div>
+            <div class="mini-upload-row">
+                <label>부가 사진 업로드<input class="file-input" type="file" accept="image/png,image/jpeg,image/webp" multiple data-upload="detail"></label>
+                <button class="secondary" type="button" data-action="upload-option-detail">업로드</button>
+            </div>
+        </div>
+    `).join("");
+}
+
+function syncOptionFromElement(element){
+    const card = element.closest(".option-card");
+    if(!card) return;
+    const index = Number(card.dataset.index);
+    const field = element.dataset.field;
+    if(!optionRows[index] || !field) return;
+
+    if(field === "detailImages"){
+        optionRows[index].detailImages = Array.from(element.selectedOptions).map(option => option.value).filter(Boolean);
+        return;
+    }
+
+    optionRows[index][field] = element.value;
+}
+
+function resetForm(){
+    $("#form-title").textContent = "상품 추가";
+    $("#product-id").value = "";
+    $("#name").value = "";
+    $("#price").value = "";
+    $("#material").value = "";
+    optionRows = [];
+    fillImages();
+    renderOptionRows();
+    $("#status").textContent = "";
+}
+
+function editProduct(id){
+    const product = products.find(item => Number(item.id) === Number(id));
+    if(!product) return;
+
+    $("#form-title").textContent = "상품 수정";
+    $("#product-id").value = product.id;
+    $("#name").value = product.name || "";
+    $("#price").value = product.price || "";
+    $("#material").value = product.material || "";
+    optionRows = (product.options || []).map(option => ({
+        label: option.label || "",
+        image: option.image || "",
+        detailImages: Array.isArray(option.detailImages)
+            ? option.detailImages.filter(image => image && image !== option.image)
+            : []
+    }));
+    fillImages(product.image);
+    renderOptionRows();
+    showTab("products");
+    window.scrollTo({ top:0, behavior:"smooth" });
+}
+
+function readOptions(){
+    const cleaned = optionRows
+        .map(option => ({
+            label: String(option.label || "").trim(),
+            image: String(option.image || "").trim(),
+            detailImages: [option.image, ...(option.detailImages || [])].filter(Boolean)
+        }))
+        .filter(option => option.label || option.image);
+
+    if(cleaned.length === 0) return [];
+
+    cleaned.forEach(option => {
+        if(!option.label || !option.image){
+            throw new Error("옵션명과 첫 사진을 모두 선택해주세요.");
+        }
+        option.detailImages = [...new Set(option.detailImages)];
+    });
+
+    return cleaned;
+}
+
+$("#product-form").addEventListener("submit", async event => {
+    event.preventDefault();
+    $("#status").textContent = "";
+
+    try{
+        const id = $("#product-id").value;
+        const options = readOptions();
+        const payload = {
+            name: $("#name").value,
+            price: Number($("#price").value),
+            material: $("#material").value,
+            image: $("#image").value,
+            optionName: options.length ? "옵션" : "",
+            options
+        };
+
+        if(id){
+            await api(`/api/admin/products/${id}`, {
+                method: "PUT",
+                body: JSON.stringify(payload)
+            });
+            $("#status").textContent = "상품을 수정했습니다.";
+        }else{
+            await api("/api/admin/products", {
+                method: "POST",
+                body: JSON.stringify(payload)
+            });
+            $("#status").textContent = "상품을 추가했습니다.";
+        }
+
+        resetForm();
+        await loadAll();
+    }catch(error){
+        $("#status").textContent = error.message;
+    }
+});
+
+async function deleteProduct(id){
+    const product = products.find(item => Number(item.id) === Number(id));
+    if(!product || !confirm(`${product.name} 상품을 삭제할까요?`)) return;
+    await api(`/api/admin/products/${id}`, { method:"DELETE" });
+    await loadAll();
+}
+
+function fileToDataUrl(file){
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error("이미지를 읽지 못했습니다."));
+        reader.readAsDataURL(file);
+    });
+}
+
+async function uploadOneFile(file){
+    if(!file) throw new Error("업로드할 이미지를 선택해주세요.");
+    if(!/^image\/(png|jpe?g|webp)$/i.test(file.type)){
+        throw new Error("jpg, png, webp 이미지만 업로드할 수 있습니다.");
+    }
+    if(file.size > 10 * 1024 * 1024){
+        throw new Error("이미지는 10MB 이하만 업로드할 수 있습니다.");
+    }
+
+    const data = await api("/api/admin/upload-image", {
+        method:"POST",
+        body:JSON.stringify({
+            fileName:file.name,
+            dataUrl:await fileToDataUrl(file)
+        })
+    });
+
+    images = [data.image, ...images.filter(image => image !== data.image)];
+    return data.image;
+}
+
+async function uploadProductImage(){
+    const input = $("#image-upload");
+    const status = $("#status");
+    status.textContent = "";
+
+    try{
+        const image = await uploadOneFile(input.files && input.files[0]);
+        fillImages(image);
+        input.value = "";
+        status.textContent = "이미지를 업로드했습니다.";
+    }catch(error){
+        status.textContent = error.message;
+    }
+}
+
+async function uploadOptionImage(index, type){
+    const card = document.querySelector(`.option-card[data-index="${index}"]`);
+    const input = card && card.querySelector(`[data-upload="${type}"]`);
+    const status = $("#status");
+    status.textContent = "";
+
+    try{
+        const files = Array.from(input.files || []);
+        if(files.length === 0) throw new Error("업로드할 이미지를 선택해주세요.");
+        const uploaded = [];
+        for(const file of files){
+            uploaded.push(await uploadOneFile(file));
+        }
+
+        if(type === "main"){
+            optionRows[index].image = uploaded[0];
+        }else{
+            optionRows[index].detailImages = [...new Set([...(optionRows[index].detailImages || []), ...uploaded])];
+        }
+
+        renderOptionRows();
+        status.textContent = "옵션 이미지를 업로드했습니다.";
+    }catch(error){
+        status.textContent = error.message;
+    }
+}
+
+async function saveOrder(button){
+    const row = button.closest(".order-row");
+    const orderId = row.dataset.orderId;
+    const carrierSelect = row.querySelector('[data-field="carrierId"]');
+    const selectedCarrier = carrierSelect.selectedOptions[0];
+    const payload = {};
+
+    row.querySelectorAll("[data-field]").forEach(field => {
+        payload[field.dataset.field] = field.value;
+    });
+
+    if(!payload.carrierName && selectedCarrier){
+        payload.carrierName = selectedCarrier.dataset.name || "";
+    }
+
+    await api(`/api/admin/orders/${encodeURIComponent(orderId)}`, {
+        method:"PUT",
+        body:JSON.stringify(payload)
+    });
+    await loadAll();
+}
+
+async function logout(){
+    await api("/api/admin/logout", { method:"POST", body:"{}" });
+    location.href = "/admin/login";
+}
+
+function showTab(tab){
+    document.querySelectorAll("[data-tab]").forEach(button => button.classList.toggle("active", button.dataset.tab === tab));
+    $("#products-panel").classList.toggle("active", tab === "products");
+    $("#orders-panel").classList.toggle("active", tab === "orders");
+    $("#product-stats").style.display = tab === "products" ? "grid" : "none";
+    $("#order-stats").style.display = tab === "orders" ? "grid" : "none";
+}
+
+document.querySelector(".admin-tabs").addEventListener("click", event => {
+    const button = event.target.closest("[data-tab]");
+    if(button) showTab(button.dataset.tab);
+});
+
+$("#image").addEventListener("change", updatePreview);
+$("#option-list").addEventListener("input", event => syncOptionFromElement(event.target));
+$("#option-list").addEventListener("change", event => syncOptionFromElement(event.target));
+$("#option-list").addEventListener("click", event => {
+    const card = event.target.closest(".option-card");
+    const index = card ? Number(card.dataset.index) : -1;
+    const action = event.target.dataset.action;
+    if(action === "remove-option"){
+        optionRows.splice(index, 1);
+        renderOptionRows();
+    }
+    if(action === "upload-option-main") uploadOptionImage(index, "main");
+    if(action === "upload-option-detail") uploadOptionImage(index, "detail");
+});
+$("#order-list").addEventListener("click", event => {
+    const button = event.target.closest('[data-action="save-order"]');
+    if(button) saveOrder(button).catch(error => alert(error.message));
+});
+document.querySelector(".order-filters").addEventListener("click", event => {
+    const button = event.target.closest("[data-order-filter]");
+    if(!button) return;
+    orderFilter = button.dataset.orderFilter;
+    document.querySelectorAll("[data-order-filter]").forEach(item => item.classList.toggle("active", item === button));
+    renderOrders();
+});
+
+loadAll().catch(error => {
+    $("#product-list").innerHTML = `<div class="empty">${escapeHtml(error.message)}</div>`;
+});
+</script>
+</body>
+</html>

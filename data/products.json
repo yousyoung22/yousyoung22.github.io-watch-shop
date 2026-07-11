@@ -1,0 +1,134 @@
+[
+  {
+    "id": 2,
+    "name": "Corteiz pendant",
+    "price": 250000,
+    "image": "images/검.jpg",
+    "material": "Pendant"
+  },
+  {
+    "id": 3,
+    "name": "LIVE YOURS pendant",
+    "price": 410000,
+    "image": "images/글씨.jpg",
+    "material": "Lettering pendant"
+  },
+  {
+    "id": 4,
+    "name": "YVL pendant",
+    "price": 370000,
+    "image": "images/나무.jpg",
+    "material": "Hand-set stones"
+  },
+  {
+    "id": 6,
+    "name": "Playboi carti star pendant",
+    "price": 380000,
+    "image": "images/별.jpg",
+    "material": "Star pendant"
+  },
+  {
+    "id": 9,
+    "name": "Candy pendant",
+    "price": 270000,
+    "image": "images/사탕.jpg",
+    "material": "Pendant"
+  },
+  {
+    "id": 10,
+    "name": "Sonic pendant",
+    "price": 380000,
+    "image": "images/소닉.jpg",
+    "material": "Character pendant",
+    "optionName": "소닉 컬러",
+    "options": [
+      {
+        "label": "기본",
+        "image": "images/소닉.jpg"
+      },
+      {
+        "label": "파랑",
+        "image": "images/파랑소닉.jpg"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Cross pendant",
+    "price": 260000,
+    "image": "images/십자가.jpg",
+    "material": "Cross pendant"
+  },
+  {
+    "id": 12,
+    "name": "Elizabeth pendant",
+    "price": 300000,
+    "image": "images/얼굴.jpg",
+    "material": "Portrait pendant"
+  },
+  {
+    "id": 13,
+    "name": "Elizabeth pendant",
+    "price": 300000,
+    "image": "images/왼쪽얼굴.jpg",
+    "material": "Portrait pendant"
+  },
+  {
+    "id": 15,
+    "name": "Hello kitty pendant",
+    "price": 320000,
+    "image": "images/키티.jpg",
+    "material": "Character pendant"
+  },
+  {
+    "id": 16,
+    "name": "Playboi carti rabbit pendant",
+    "price": 230000,
+    "image": "images/토끼.jpg",
+    "material": "Character pendant"
+  },
+  {
+    "id": 20,
+    "name": "Skull pendant",
+    "price": 370000,
+    "image": "images/해골.jpg",
+    "material": "Skull pendant"
+  },
+  {
+    "id": 21,
+    "name": "Murakami yeti pendant",
+    "price": 290000,
+    "image": "images/흰색예티.jpg",
+    "material": "Character pendant",
+    "optionName": "예티 컬러",
+    "options": [
+      {
+        "label": "흰색",
+        "image": "images/흰색예티.jpg"
+      },
+      {
+        "label": "빨강",
+        "image": "images/빨강예티.jpg"
+      },
+      {
+        "label": "주황",
+        "image": "images/주황예티.jpg"
+      },
+      {
+        "label": "파랑",
+        "image": "images/파랑예티.jpg"
+      },
+      {
+        "label": "하늘",
+        "image": "images/하늘예티.jpg"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "King von O'block pendant",
+    "price": 370000,
+    "image": "images/흰오.jpg",
+    "material": "Color pendant"
+  }
+]
