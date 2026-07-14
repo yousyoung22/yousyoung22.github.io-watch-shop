@@ -4,8 +4,9 @@ let currentProduct = null;
 let currentSlide = 0;
 let selectedOption = null;
 let sessionUser = null;
-let myOrders = [];
+let adminPath = "";
 let myProfile = { name:"", phone:"", address:"" };
+const ADMIN_LOGIN_ENDPOINT = "/api/seoul-ice-7799-vault-door-x9q7-auth";
 
 const grid = document.getElementById("product-grid");
 const cartPanel = document.getElementById("cart-panel");
@@ -231,13 +232,11 @@ function remove(index){
 function hasActiveOverlay(){
     const accountModal = document.getElementById("account-modal");
     const checkoutModal = document.getElementById("checkout-modal");
-    const myPageModal = document.getElementById("my-page-modal");
 
     return cartPanel.classList.contains("active")
         || productModal.classList.contains("active")
         || Boolean(accountModal && accountModal.classList.contains("active"))
-        || Boolean(checkoutModal && checkoutModal.classList.contains("active"))
-        || Boolean(myPageModal && myPageModal.classList.contains("active"));
+        || Boolean(checkoutModal && checkoutModal.classList.contains("active"));
 }
 
 function syncBackdrop(){
@@ -294,9 +293,11 @@ function renderOptions(){
 
     if(!currentProduct.options || currentProduct.options.length === 0){
         optionBox.innerHTML = "";
+        optionBox.hidden = true;
         return;
     }
 
+    optionBox.hidden = false;
     optionBox.innerHTML = `
         <label>${escapeHtml(currentProduct.optionName || "옵션 선택")}</label>
         <div class="option-grid">
@@ -352,6 +353,11 @@ function renderSlide(){
         currentSlide = 0;
     }
 
+    const galleryCount = document.getElementById("modal-gallery-count");
+    if(galleryCount){
+        galleryCount.textContent = `${currentSlide + 1} / ${images.length}`;
+    }
+
     const modalImage = document.getElementById("modal-image");
     modalImage.onerror = function(){
         this.onerror = null;
@@ -365,6 +371,12 @@ function renderSlide(){
             <img src="${escapeHtml(image)}" alt="" onerror="this.parentElement.style.display='none'">
         </button>
     `).join("");
+
+    const hasMultipleImages = images.length > 1;
+    document.querySelectorAll(".slide-btn").forEach(button => {
+        button.hidden = !hasMultipleImages;
+    });
+    document.getElementById("modal-thumbs").hidden = !hasMultipleImages;
 }
 
 function changeSlide(direction){
@@ -386,31 +398,23 @@ function toggleMenu(){
     navMenu.classList.toggle("active");
 }
 
-function setAdminNav(isAdmin){
-    let adminLink = document.getElementById("admin-nav-link");
-
-    if(adminLink){
-        adminLink.remove();
-    }
-}
-
 async function refreshSession(){
     try{
         const response = await fetch("/api/me");
         const data = await response.json();
         sessionUser = data.authenticated ? data.user : null;
+        adminPath = data.adminPath || "";
     }catch{
         sessionUser = null;
+        adminPath = "";
     }
 
     if(sessionUser){
         accountBtn.textContent = "MY";
         accountBtn.classList.add("logged-in");
-        setAdminNav(false);
     }else{
         accountBtn.textContent = "LOGIN";
         accountBtn.classList.remove("logged-in");
-        setAdminNav(false);
     }
 
     updateAccountModal();
@@ -482,7 +486,7 @@ function updateAccountModal(){
     if(sessionUser){
         userBox.innerHTML = `
             <strong>${escapeHtml(sessionUser.name || sessionUser.email)}</strong>
-            ${sessionUser.role === "admin" ? `<a class="admin-open-link" href="/admin">상품관리 열기</a>` : `<button class="utility-primary" type="button" onclick="openMyPage()">마이페이지 열기</button>`}
+            ${sessionUser.role === "admin" ? `<a class="admin-open-link" href="${escapeHtml(adminPath || "/")}">상품관리 열기</a>` : `<button class="utility-primary" type="button" onclick="openMyPage()">마이페이지 열기</button>`}
         `;
         userBox.style.display = "grid";
         tabs.style.display = "none";
@@ -497,80 +501,6 @@ function updateAccountModal(){
     }
 }
 
-async function loadMyOrders(){
-    try{
-        const response = await fetch("/api/my-orders");
-        const data = await response.json();
-        if(!response.ok) throw new Error(data.error || "주문내역을 불러오지 못했습니다.");
-        myOrders = data;
-        renderMyOrders();
-    }catch(error){
-        const allList = document.getElementById("my-orders-list");
-        if(allList) allList.innerHTML = `<div class="order-mini empty-mini">${escapeHtml(error.message)}</div>`;
-    }
-}
-
-function renderMyOrders(){
-    const shippingList = document.getElementById("my-shipping-list");
-    const allList = document.getElementById("my-orders-list");
-    if(!shippingList || !allList) return;
-
-    if(myOrders.length === 0){
-        shippingList.innerHTML = `<div class="order-mini empty-mini">배송중인 주문이 없습니다.</div>`;
-        allList.innerHTML = `<div class="order-mini empty-mini">아직 주문내역이 없습니다.</div>`;
-        return;
-    }
-
-    const shippingOrders = myOrders.filter(order => (order.status || order.shippingStatus) === "배송중");
-
-    shippingList.innerHTML = shippingOrders.length
-        ? shippingOrders.map(renderOrderCard).join("")
-        : `<div class="order-mini empty-mini">배송중인 주문이 없습니다.</div>`;
-
-    allList.innerHTML = myOrders.map(renderOrderCard).join("");
-}
-
-function renderOrderCard(order){
-    const status = order.status || order.shippingStatus || "주문 처리중";
-    return `
-        <div class="order-mini" data-order-id="${escapeHtml(order.id)}">
-            <div>
-                <strong>${escapeHtml(order.id)}</strong>
-                <span>${escapeHtml(status)}</span>
-            </div>
-            <p>${escapeHtml(order.items?.map(item => item.selectedOption ? `${item.name}(${item.selectedOption})` : item.name).join(", ") || "")}</p>
-            <p>${money(order.total)} · ${new Date(order.createdAt).toLocaleDateString("ko-KR")}</p>
-            ${order.trackingNumber ? `
-                <button type="button" onclick="trackOrder('${escapeHtml(order.id)}')">배송조회</button>
-                <div class="tracking-result" id="tracking-${escapeHtml(order.id)}">${escapeHtml(order.carrierName || order.carrierId)} ${escapeHtml(order.trackingNumber)}</div>
-            ` : `<div class="tracking-result">운송장번호 등록 전입니다.</div>`}
-        </div>
-    `;
-}
-
-async function trackOrder(orderId){
-    const result = document.getElementById(`tracking-${orderId}`);
-    if(!result) return;
-
-    result.textContent = "배송조회 중입니다.";
-
-    try{
-        const response = await fetch(`/api/tracking/${encodeURIComponent(orderId)}`);
-        const payload = await response.json();
-        if(!response.ok) throw new Error(payload.error || "배송조회에 실패했습니다.");
-
-        const data = payload.data || {};
-        const progress = Array.isArray(data.progresses) ? data.progresses : [];
-        const latest = progress.length ? progress[progress.length - 1] : null;
-        const statusText = data.state?.text || data.state?.id || "조회 완료";
-        result.textContent = latest
-            ? `${statusText} · ${latest.location?.name || ""} ${latest.description || latest.status?.text || ""}`.trim()
-            : statusText;
-    }catch(error){
-        result.textContent = error.message;
-    }
-}
-
 async function loadMyProfile(){
     if(!sessionUser || sessionUser.role !== "user") return;
 
@@ -580,58 +510,6 @@ async function loadMyProfile(){
     myProfile = data.profile || { name:"", phone:"", address:"" };
 }
 
-function ensureMyPageModal(){
-    if(document.getElementById("my-page-modal")) return;
-
-    document.body.insertAdjacentHTML("beforeend", `
-        <div id="my-page-modal" class="utility-modal">
-            <div class="utility-box my-page-box">
-                <button class="utility-close" type="button" onclick="closeMyPage()" aria-label="마이페이지 닫기">&times;</button>
-                <p class="eyebrow">My page</p>
-                <h2>마이페이지</h2>
-                <button class="utility-secondary mypage-logout" type="button" onclick="submitLogout()">로그아웃</button>
-
-                <section class="my-page-section">
-                    <h3>내 정보</h3>
-                    <form id="profile-form" class="auth-form">
-                        <label>이름<input id="profile-name" autocomplete="name"></label>
-                        <label>연락처<input id="profile-phone" autocomplete="tel"></label>
-                        <label>배송주소<input id="profile-address" autocomplete="street-address"></label>
-                        <button class="utility-primary" type="submit">저장</button>
-                    </form>
-                    <div id="profile-status" class="utility-status"></div>
-                </section>
-
-                <section class="my-page-section">
-                    <div class="my-orders-head">
-                        <h3>배송중</h3>
-                        <button type="button" onclick="loadMyOrders()">새로고침</button>
-                    </div>
-                    <div id="my-shipping-list" class="my-orders-list"></div>
-                </section>
-
-                <section class="my-page-section">
-                    <h3>주문내역</h3>
-                    <div id="my-orders-list" class="my-orders-list"></div>
-                </section>
-            </div>
-        </div>
-    `);
-
-    document.getElementById("profile-form").addEventListener("submit", saveProfile);
-}
-
-function fillProfileForm(){
-    const name = document.getElementById("profile-name");
-    const phone = document.getElementById("profile-phone");
-    const address = document.getElementById("profile-address");
-    if(!name || !phone || !address) return;
-
-    name.value = myProfile.name || sessionUser?.name || "";
-    phone.value = myProfile.phone || "";
-    address.value = myProfile.address || "";
-}
-
 async function openMyPage(){
     if(!sessionUser){
         openAccountModal();
@@ -639,44 +517,11 @@ async function openMyPage(){
     }
 
     if(sessionUser.role === "admin"){
-        location.href = "/admin";
+        location.href = adminPath || "/";
         return;
     }
 
     location.href = "/mypage";
-}
-
-function closeMyPage(){
-    const modal = document.getElementById("my-page-modal");
-    if(modal) modal.classList.remove("active");
-    syncBackdrop();
-}
-
-async function saveProfile(event){
-    event.preventDefault();
-    const status = document.getElementById("profile-status");
-    status.textContent = "";
-
-    const response = await fetch("/api/profile", {
-        method:"PUT",
-        headers:{ "Content-Type":"application/json" },
-        body:JSON.stringify({
-            name:document.getElementById("profile-name").value,
-            phone:document.getElementById("profile-phone").value,
-            address:document.getElementById("profile-address").value
-        })
-    });
-    const data = await response.json();
-
-    if(!response.ok){
-        status.textContent = data.error || "저장에 실패했습니다.";
-        return;
-    }
-
-    myProfile = data.profile || myProfile;
-    await refreshSession();
-    fillProfileForm();
-    status.textContent = "저장했습니다.";
 }
 
 function openAccountModal(){
@@ -701,7 +546,7 @@ async function submitLogin(event){
     const password = document.getElementById("login-password").value;
     const isAdminLogin = !loginId.includes("@");
 
-    const response = await fetch(isAdminLogin ? "/api/admin/login" : "/api/login", {
+    const response = await fetch(isAdminLogin ? ADMIN_LOGIN_ENDPOINT : "/api/login", {
         method:"POST",
         headers:{ "Content-Type":"application/json" },
         body:JSON.stringify(isAdminLogin
@@ -716,7 +561,7 @@ async function submitLogin(event){
     }
 
     if(data.user && data.user.role === "admin"){
-        location.href = "/admin";
+        location.href = data.adminPath || adminPath || "/";
         return;
     }
 
@@ -758,7 +603,6 @@ async function submitLogout(){
     await fetch("/api/logout", { method:"POST" });
     await refreshSession();
     closeAccountModal();
-    closeMyPage();
 }
 
 function ensureCheckoutModal(){
@@ -927,7 +771,7 @@ accountBtn.onclick = () => {
     }
 
     if(sessionUser.role === "admin"){
-        location.href = "/admin";
+        location.href = adminPath || "/";
         return;
     }
 
@@ -943,7 +787,6 @@ document.addEventListener("keydown", event => {
         closeCart();
         closeProductModal();
         closeAccountModal();
-        closeMyPage();
         closeCheckout();
         navMenu.classList.remove("active");
     }
@@ -966,12 +809,9 @@ window.goSlide = goSlide;
 window.toggleMenu = toggleMenu;
 window.closeAccountModal = closeAccountModal;
 window.openMyPage = openMyPage;
-window.closeMyPage = closeMyPage;
 window.submitLogout = submitLogout;
 window.closeCheckout = closeCheckout;
 window.resetCheckoutFields = resetCheckoutFields;
-window.loadMyOrders = loadMyOrders;
-window.trackOrder = trackOrder;
 
 loadProducts();
 refreshSession();

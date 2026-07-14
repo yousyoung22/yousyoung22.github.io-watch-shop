@@ -705,6 +705,7 @@ let images = [];
 let optionRows = [];
 let productDetailImages = [];
 let orderFilter = "전체";
+const ADMIN_LOGIN_PATH = "/seoul-ice-7799-vault-door-x9q7-login";
 
 const money = price => "₩" + Number(price || 0).toLocaleString("ko-KR");
 const $ = selector => document.querySelector(selector);
@@ -812,7 +813,7 @@ async function api(path, options = {}){
     });
     const data = await response.json().catch(() => ({}));
     if(response.status === 401){
-        location.href = "/admin/login";
+        location.href = ADMIN_LOGIN_PATH;
         return null;
     }
     if(!response.ok){
@@ -1325,7 +1326,7 @@ async function saveOrder(button){
 
 async function logout(){
     await api("/api/admin/logout", { method:"POST", body:"{}" });
-    location.href = "/admin/login";
+    location.href = ADMIN_LOGIN_PATH;
 }
 
 function showTab(tab){

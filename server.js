@@ -10,8 +10,14 @@ const VIEWS_DIR = path.join(ROOT, "views");
 const PORT = Number(process.env.PORT || 8800);
 const ADMIN_USER = process.env.ADMIN_USER || "seoulice";
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "seoul123";
+const ADMIN_PATH = normalizeRoute(process.env.ADMIN_PATH || "/seoul-ice-7799-vault-door-x9q7-admin");
+const ADMIN_LOGIN_PATH = normalizeRoute(process.env.ADMIN_LOGIN_PATH || "/seoul-ice-7799-vault-door-x9q7-login");
+const ADMIN_LOGIN_API_PATH = normalizeRoute(process.env.ADMIN_LOGIN_API_PATH || "/api/seoul-ice-7799-vault-door-x9q7-auth");
 const SESSION_AGE_SECONDS = 60 * 60 * 8;
+const ADMIN_LOGIN_WINDOW_MS = 10 * 60 * 1000;
+const ADMIN_LOGIN_MAX_FAILS = 8;
 const sessions = new Map();
+const adminLoginAttempts = new Map();
 
 const dataFile = name => path.join(DATA_DIR, name);
 
@@ -43,6 +49,44 @@ function sendJson(res, status, payload, headers = {}) {
 
 function redirect(res, location) {
   send(res, 302, "", { Location: location });
+}
+
+function normalizeRoute(value) {
+  const route = String(value || "").trim();
+  if (!route) return "/";
+  return route.startsWith("/") ? route : `/${route}`;
+}
+
+function clientKey(req) {
+  return String(req.headers["x-forwarded-for"] || req.socket.remoteAddress || "local")
+    .split(",")[0]
+    .trim();
+}
+
+function adminAttempt(req) {
+  const key = clientKey(req);
+  const attempt = adminLoginAttempts.get(key);
+  if (!attempt || Date.now() > attempt.expiresAt) {
+    adminLoginAttempts.delete(key);
+    return { key, count: 0 };
+  }
+  return { key, ...attempt };
+}
+
+function isAdminLoginLimited(req) {
+  return adminAttempt(req).count >= ADMIN_LOGIN_MAX_FAILS;
+}
+
+function recordAdminLoginFailure(req) {
+  const attempt = adminAttempt(req);
+  adminLoginAttempts.set(attempt.key, {
+    count: attempt.count + 1,
+    expiresAt: Date.now() + ADMIN_LOGIN_WINDOW_MS
+  });
+}
+
+function clearAdminLoginAttempts(req) {
+  adminLoginAttempts.delete(clientKey(req));
 }
 
 async function readJson(name, fallback) {
@@ -710,9 +754,17 @@ async function serveStatic(req, res, pathname) {
   const requestedPath = pathname === "/" ? "/index.html" : pathname;
   const decoded = decodeURIComponent(requestedPath);
   const target = path.resolve(ROOT, `.${decoded}`);
+  const publicDirs = [path.join(ROOT, "css"), path.join(ROOT, "js"), path.join(ROOT, "images")];
+  const indexFile = path.join(ROOT, "index.html");
+  const isPublicFile = target === indexFile || publicDirs.some(dir => target.startsWith(dir + path.sep));
 
   if (target !== ROOT && !target.startsWith(ROOT + path.sep)) {
     send(res, 403, "Forbidden", { "Content-Type": "text/plain; charset=utf-8" });
+    return;
+  }
+
+  if (!isPublicFile) {
+    send(res, 404, "Not found", { "Content-Type": "text/plain; charset=utf-8" });
     return;
   }
 
@@ -736,7 +788,8 @@ async function handleApi(req, res, pathname) {
     const session = getSession(req);
     sendJson(res, 200, {
       authenticated: Boolean(session),
-      user: publicUser(session)
+      user: publicUser(session),
+      ...(session?.role === "admin" ? { adminPath: ADMIN_PATH } : {})
     });
     return true;
   }
@@ -915,16 +968,23 @@ async function handleApi(req, res, pathname) {
     return true;
   }
 
-  if (method === "POST" && pathname === "/api/admin/login") {
+  if (method === "POST" && pathname === ADMIN_LOGIN_API_PATH) {
+    if (isAdminLoginLimited(req)) {
+      sendJson(res, 429, { error: "로그인 시도가 많습니다. 잠시 후 다시 시도해주세요." });
+      return true;
+    }
+
     const body = await readBody(req);
     const username = String(body.username || "").trim();
     const password = String(body.password || "");
 
     if (username !== ADMIN_USER || password !== ADMIN_PASSWORD) {
+      recordAdminLoginFailure(req);
       sendJson(res, 401, { error: "관리자 계정이 맞지 않습니다." });
       return true;
     }
 
+    clearAdminLoginAttempts(req);
     const admin = {
       id: "admin",
       name: "관리자",
@@ -932,7 +992,7 @@ async function handleApi(req, res, pathname) {
       role: "admin"
     };
     const sid = createSession(admin);
-    sendJson(res, 200, { user: admin }, { "Set-Cookie": sessionCookie(sid) });
+    sendJson(res, 200, { user: admin, adminPath: ADMIN_PATH }, { "Set-Cookie": sessionCookie(sid) });
     return true;
   }
 
@@ -1041,15 +1101,20 @@ async function handle(req, res) {
     const url = new URL(req.url, `http://${req.headers.host || "localhost"}`);
     const pathname = decodeURIComponent(url.pathname);
 
-    if (pathname === "/admin/login" && req.method === "GET") {
+    if (pathname === ADMIN_LOGIN_PATH && req.method === "GET") {
       await serveFile(res, path.join(VIEWS_DIR, "admin-login.html"));
       return;
     }
 
-    if (pathname === "/admin" && req.method === "GET") {
+    if ((pathname === "/admin" || pathname === "/admin/login") && req.method === "GET") {
+      send(res, 404, "Not found", { "Content-Type": "text/plain; charset=utf-8" });
+      return;
+    }
+
+    if (pathname === ADMIN_PATH && req.method === "GET") {
       const session = getSession(req);
       if (!session || session.role !== "admin") {
-        redirect(res, "/admin/login");
+        redirect(res, ADMIN_LOGIN_PATH);
         return;
       }
       await serveFile(res, path.join(VIEWS_DIR, "admin.html"));
@@ -1063,7 +1128,7 @@ async function handle(req, res) {
         return;
       }
       if (session.role === "admin") {
-        redirect(res, "/admin");
+        redirect(res, ADMIN_PATH);
         return;
       }
       await serveFile(res, path.join(VIEWS_DIR, "mypage.html"));
@@ -1077,7 +1142,7 @@ async function handle(req, res) {
         return;
       }
       if (session.role === "admin") {
-        redirect(res, "/admin");
+        redirect(res, ADMIN_PATH);
         return;
       }
       await serveFile(res, path.join(VIEWS_DIR, "my-orders.html"));
@@ -1105,7 +1170,7 @@ async function boot() {
 
   http.createServer(handle).listen(PORT, "0.0.0.0", () => {
     console.log(`SEOUL ICE server: http://127.0.0.1:${PORT}`);
-    console.log(`Admin login: http://127.0.0.1:${PORT}/admin/login`);
+    console.log(`Admin login: http://127.0.0.1:${PORT}${ADMIN_LOGIN_PATH}`);
   });
 }
 

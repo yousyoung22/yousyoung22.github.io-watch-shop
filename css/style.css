@@ -775,19 +775,19 @@ h1,h2,h3{
 
 .modal-box{
     position:relative;
-    width:min(1080px,100%);
+    width:min(1040px,100%);
     max-height:88vh;
     display:grid;
     grid-template-columns:1.05fr .95fr;
-    gap:24px;
+    gap:22px;
     overflow:auto;
-    padding:16px;
+    padding:14px;
     border:1px solid rgba(15,23,42,.16);
     border-radius:10px;
     background:
         linear-gradient(180deg,#ffffff,#f8fafc),
         #ffffff;
-    box-shadow:0 34px 120px rgba(15,23,42,.3);
+    box-shadow:0 28px 90px rgba(15,23,42,.25);
 }
 
 .modal-close{
@@ -801,11 +801,11 @@ h1,h2,h3{
 
 .modal-gallery{
     position:relative;
-    min-height:480px;
+    min-height:520px;
     display:flex;
     align-items:center;
     justify-content:center;
-    border:1px solid rgba(15,23,42,.1);
+    border:1px solid rgba(15,23,42,.08);
     border-radius:8px;
     background:
         linear-gradient(145deg,#e7ebf0,#ffffff 54%,#e9edf2);
@@ -817,15 +817,16 @@ h1,h2,h3{
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(0deg,rgba(15,23,42,.18),transparent 34%);
+    background:linear-gradient(0deg,rgba(15,23,42,.09),transparent 32%);
     pointer-events:none;
 }
 
 #modal-image{
     width:100%;
     height:100%;
-    max-height:640px;
-    object-fit:cover;
+    max-height:600px;
+    padding:22px;
+    object-fit:contain;
 }
 
 .slide-btn{
@@ -895,19 +896,53 @@ h1,h2,h3{
 }
 
 .modal-info{
-    padding:50px 18px 18px;
+    padding:44px 12px 14px;
+}
+
+.modal-brand-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    margin-bottom:16px;
+}
+
+#modal-gallery-count{
+    min-width:58px;
+    padding:7px 10px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    color:#475467;
+    font-size:.72rem;
+    font-weight:900;
+    text-align:center;
+    background:#ffffff;
 }
 
 .modal-info h2{
     color:#101828;
-    font-size:2rem;
+    font-size:2.05rem;
     line-height:1.12;
 }
 
-#modal-price{
+.modal-title-card{
+    padding-bottom:20px;
+    border-bottom:1px solid var(--line);
+}
+
+.modal-price-row{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:12px;
+    flex-wrap:wrap;
     margin-top:16px;
+}
+
+#modal-price{
+    margin-top:0;
     color:var(--price);
-    font-size:1.25rem;
+    font-size:1.3rem;
     font-weight:900;
 }
 
@@ -936,6 +971,8 @@ h1,h2,h3{
 
 .modal-options{
     margin-top:24px;
+    padding-bottom:22px;
+    border-bottom:1px solid var(--line);
 }
 
 .modal-options label{
@@ -961,6 +998,7 @@ h1,h2,h3{
     font-size:.86rem;
     font-weight:900;
     cursor:pointer;
+    transition:background .18s ease,border-color .18s ease,transform .18s ease;
 }
 
 .option-chip.active,
@@ -968,6 +1006,7 @@ h1,h2,h3{
     border-color:rgba(122,48,71,.38);
     background:#f3eef1;
     color:#111318;
+    transform:translateY(-1px);
 }
 
 .option-required{
@@ -979,7 +1018,15 @@ h1,h2,h3{
 
 #modal-add-btn{
     width:100%;
+    min-height:52px;
     margin-top:28px;
+    border:none;
+    border-radius:8px;
+    background:linear-gradient(135deg,#111318,#343a46);
+    color:#ffffff;
+    font-weight:900;
+    cursor:pointer;
+    box-shadow:0 16px 34px rgba(15,23,42,.18);
 }
 
 .empty-product-state{
@@ -1028,10 +1075,6 @@ h1,h2,h3{
 
 .checkout-box{
     width:min(680px,100%);
-}
-
-.my-page-box{
-    width:min(760px,100%);
 }
 
 .utility-close{
@@ -1238,83 +1281,6 @@ h1,h2,h3{
     font-weight:800;
 }
 
-.my-page-section{
-    display:grid;
-    gap:12px;
-    margin-top:18px;
-    padding-top:18px;
-    border-top:1px solid var(--line);
-}
-
-.my-page-section h3{
-    color:#101828;
-    font-size:1rem;
-}
-
-.my-orders{
-    display:grid;
-    gap:10px;
-    margin-top:12px;
-}
-
-.my-orders-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.my-orders-head button,
-.order-mini button{
-    min-height:34px;
-    padding:0 10px;
-    border:1px solid var(--line2);
-    border-radius:8px;
-    background:#ffffff;
-    color:#344054;
-    font-size:.78rem;
-    font-weight:900;
-    cursor:pointer;
-}
-
-.my-orders-list{
-    display:grid;
-    gap:8px;
-}
-
-.order-mini{
-    display:grid;
-    gap:6px;
-    padding:11px;
-    border:1px solid var(--line2);
-    border-radius:8px;
-    background:#ffffff;
-}
-
-.order-mini div:first-child{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.order-mini p,
-.tracking-result{
-    color:#667085;
-    font-size:.78rem;
-    line-height:1.45;
-}
-
-.tracking-result{
-    color:#3f4a5a;
-    font-weight:800;
-}
-
-.empty-mini{
-    color:#667085;
-    font-size:.82rem;
-}
-
 .admin-open-link{
     min-height:40px;
     display:flex;
@@ -1419,6 +1385,17 @@ h1,h2,h3{
 
     .modal-box{
         grid-template-columns:1fr;
+        overflow:auto;
+    }
+
+    .modal-gallery{
+        min-height:520px;
+        border-right:0;
+        border-bottom:1px solid rgba(15,23,42,.1);
+    }
+
+    .modal-info{
+        max-height:none;
     }
 }
 
@@ -1620,26 +1597,50 @@ h1,h2,h3{
         flex-direction:column;
     }
 
+    #product-modal{
+        padding:10px;
+    }
+
     .modal-box{
-        max-height:90vh;
-        padding:12px;
-        border-radius:10px;
+        max-height:92vh;
+        padding:0;
+        border-radius:8px;
     }
 
     .modal-gallery{
-        min-height:360px;
+        min-height:330px;
     }
 
     .modal-info{
-        padding:18px 4px 6px;
+        padding:24px 16px 18px;
     }
 
     .modal-info h2{
-        font-size:1.65rem;
+        font-size:1.55rem;
+    }
+
+    .modal-brand-row,
+    .modal-price-row{
+        align-items:flex-start;
     }
 
     .option-grid{
         grid-template-columns:repeat(2,1fr);
+    }
+
+    #modal-thumbs{
+        left:10px;
+        right:10px;
+        bottom:10px;
+        justify-content:flex-start;
+        overflow-x:auto;
+        padding-bottom:2px;
+    }
+
+    #modal-thumbs button{
+        flex:0 0 48px;
+        width:48px;
+        height:48px;
     }
 
     .utility-modal{
