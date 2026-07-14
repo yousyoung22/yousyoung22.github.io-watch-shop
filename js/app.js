@@ -39,6 +39,39 @@ function muteMedia(root = document){
 
 muteMedia();
 
+function prepareHeroVideo(){
+    const video = document.querySelector(".hero-video");
+    if(!video) return;
+
+    const tryPlay = () => {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.volume = 0;
+        video.playsInline = true;
+        video.setAttribute("muted", "");
+        video.setAttribute("playsinline", "");
+        video.setAttribute("webkit-playsinline", "");
+
+        const playRequest = video.play();
+        if(playRequest && typeof playRequest.catch === "function"){
+            playRequest.catch(() => {});
+        }
+    };
+
+    video.addEventListener("loadeddata", () => {
+        video.classList.add("is-ready");
+    }, { once:true });
+    video.addEventListener("canplay", tryPlay, { once:true });
+    window.addEventListener("pageshow", tryPlay);
+    document.addEventListener("visibilitychange", () => {
+        if(!document.hidden) tryPlay();
+    });
+    document.addEventListener("touchstart", tryPlay, { once:true, passive:true });
+    tryPlay();
+}
+
+prepareHeroVideo();
+
 new MutationObserver(mutations => {
     mutations.forEach(mutation => {
         mutation.addedNodes.forEach(node => {

@@ -734,11 +734,58 @@ function cleanOrderUpdate(input, existing) {
   };
 }
 
-async function serveFile(res, filePath) {
+async function serveFile(res, filePath, req = null) {
   const extension = path.extname(filePath).toLowerCase();
   const contentType = mimeTypes[extension] || "application/octet-stream";
 
   try {
+    if (contentType.startsWith("video/")) {
+      const stats = await fs.stat(filePath);
+      const range = req?.headers.range;
+
+      if (range) {
+        const match = /^bytes=(\d*)-(\d*)$/.exec(range);
+
+        if (!match) {
+          send(res, 416, "", { "Content-Range": `bytes */${stats.size}` });
+          return;
+        }
+
+        let start = match[1] ? Number(match[1]) : 0;
+        let end = match[2] ? Number(match[2]) : stats.size - 1;
+
+        if (!match[1] && match[2]) {
+          const suffixLength = Number(match[2]);
+          start = Math.max(stats.size - suffixLength, 0);
+          end = stats.size - 1;
+        }
+
+        end = Math.min(end, stats.size - 1);
+
+        if (!Number.isFinite(start) || !Number.isFinite(end) || start < 0 || start > end || start >= stats.size) {
+          send(res, 416, "", { "Content-Range": `bytes */${stats.size}` });
+          return;
+        }
+
+        res.writeHead(206, {
+          "Content-Type": contentType,
+          "Accept-Ranges": "bytes",
+          "Content-Range": `bytes ${start}-${end}/${stats.size}`,
+          "Content-Length": end - start + 1
+        });
+        fsSync.createReadStream(filePath, { start, end }).pipe(res);
+        return;
+      }
+
+      res.writeHead(200, {
+        "Content-Type": contentType,
+        "Accept-Ranges": "bytes",
+        "Content-Length": stats.size
+      });
+      fsSync.createReadStream(filePath).pipe(res);
+      return;
+    }
+
     const body = await fs.readFile(filePath);
     send(res, 200, body, { "Content-Type": contentType });
   } catch (error) {
@@ -773,7 +820,7 @@ async function serveStatic(req, res, pathname) {
     return;
   }
 
-  await serveFile(res, target);
+  await serveFile(res, target, req);
 }
 
 async function handleApi(req, res, pathname) {
