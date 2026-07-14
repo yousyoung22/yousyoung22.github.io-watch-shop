@@ -19,6 +19,33 @@ const accountBtn = document.getElementById("account-btn");
 
 const money = price => "₩" + Number(price || 0).toLocaleString("ko-KR");
 
+function muteMedia(root = document){
+    root.querySelectorAll("audio, video").forEach(media => {
+        media.muted = true;
+        media.defaultMuted = true;
+        media.volume = 0;
+        media.setAttribute("muted", "");
+
+        if(!media.dataset.soundGuarded){
+            media.dataset.soundGuarded = "true";
+            media.addEventListener("volumechange", () => {
+                if(!media.muted) media.muted = true;
+                if(media.volume !== 0) media.volume = 0;
+            });
+        }
+    });
+}
+
+muteMedia();
+
+new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+        mutation.addedNodes.forEach(node => {
+            if(node.nodeType === Node.ELEMENT_NODE) muteMedia(node);
+        });
+    });
+}).observe(document.documentElement, { childList:true, subtree:true });
+
 function escapeHtml(value){
     return String(value ?? "")
         .replaceAll("&","&amp;")
@@ -30,6 +57,14 @@ function escapeHtml(value){
 
 function getOptionColor(label){
     const colors = {
+        "Default":"#111318",
+        "White":"#f8fafc",
+        "Red":"#d64545",
+        "Orange":"#f2994a",
+        "Blue":"#2f80ed",
+        "Sky Blue":"#8fd3ff",
+        "Black":"#111318",
+        "Yellow":"#f2c94c",
         "노랑":"#f2c94c",
         "빨강":"#d64545",
         "흰색":"#f8fafc",
@@ -82,7 +117,6 @@ function renderProducts(){
             <div class="product-info">
                 <div class="product-meta">
                     <span>SEOUL ICE</span>
-                    <span>${escapeHtml(product.material)}</span>
                 </div>
 
                 <h3>${escapeHtml(product.name)}</h3>
@@ -240,7 +274,6 @@ function openProductModal(id){
 
     document.getElementById("modal-name").innerText = currentProduct.name;
     document.getElementById("modal-price").innerText = money(currentProduct.price);
-    document.getElementById("modal-material").innerText = currentProduct.material;
 
     renderOptions();
 

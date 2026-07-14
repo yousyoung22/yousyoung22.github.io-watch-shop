@@ -254,6 +254,23 @@
         object-fit:cover;
         background:#edf2f7;
     }
+    .detail-preview{
+        display:flex;
+        flex-wrap:wrap;
+        gap:8px;
+        min-height:44px;
+        padding:9px;
+        border:1px solid var(--line2);
+        border-radius:10px;
+        background:#ffffff;
+    }
+    .detail-preview img{
+        width:54px;
+        height:54px;
+        border-radius:8px;
+        object-fit:cover;
+        background:#edf2f7;
+    }
     .hint{
         color:var(--muted);
         font-size:.78rem;
@@ -607,8 +624,8 @@
                             </label>
                             <div class="upload-row">
                                 <label>
-                                    새 이미지 업로드
-                                    <input id="image-upload" class="file-input" type="file" accept="image/png,image/jpeg,image/webp">
+                                    상품 사진 업로드
+                                    <input id="image-upload" class="file-input" type="file" accept="image/png,image/jpeg,image/webp" multiple>
                                 </label>
                                 <button class="secondary" type="button" onclick="uploadProductImage()">업로드</button>
                             </div>
@@ -616,9 +633,21 @@
                                 <img id="preview-image" alt="">
                                 <div>
                                     <div class="row-title">이미지 미리보기</div>
-                                    <div class="hint">이미지를 올리면 대표 이미지와 옵션 이미지에서 바로 선택할 수 있습니다.</div>
+                                    <div class="hint">여러 장을 한 번에 올리면 첫 번째 사진은 대표 이미지, 나머지는 부가 사진으로 저장됩니다.</div>
                                 </div>
                             </div>
+                            <label>
+                                부가 사진
+                                <select id="detail-images" class="detail-select" multiple></select>
+                            </label>
+                            <div class="mini-upload-row">
+                                <label>
+                                    부가 사진만 업로드
+                                    <input id="detail-image-upload" class="file-input" type="file" accept="image/png,image/jpeg,image/webp" multiple>
+                                </label>
+                                <button class="secondary" type="button" onclick="uploadProductDetailImages()">업로드</button>
+                            </div>
+                            <div id="detail-preview" class="detail-preview"></div>
 
                             <div>
                                 <div class="option-tools">
@@ -674,6 +703,7 @@ let products = [];
 let orders = [];
 let images = [];
 let optionRows = [];
+let productDetailImages = [];
 let orderFilter = "전체";
 
 const money = price => "₩" + Number(price || 0).toLocaleString("ko-KR");
@@ -805,11 +835,41 @@ function fillImages(selected = ""){
     const list = selected && !images.includes(selected) ? [selected, ...images] : images;
     imageSelect.innerHTML = makeOptions(list, selected || list[0] || "", true);
     updatePreview();
+    fillDetailImages();
     renderOptionRows();
 }
 
 function updatePreview(){
-    $("#preview-image").src = $("#image").value || "images/logo.png";
+    const mainImage = $("#image").value || "";
+    $("#preview-image").src = mainImage || "images/logo.png";
+    productDetailImages = productDetailImages.filter(image => image && image !== mainImage);
+    fillDetailImages();
+}
+
+function fillDetailImages(){
+    const select = $("#detail-images");
+    const preview = $("#detail-preview");
+    if(!select || !preview) return;
+
+    const selected = new Set(productDetailImages.filter(Boolean));
+    const list = [...new Set([...productDetailImages, ...images])].filter(Boolean);
+    select.innerHTML = list.map(image => `
+        <option value="${escapeHtml(image)}" ${selected.has(image) ? "selected" : ""}>
+            ${escapeHtml(image.replace("images/",""))}
+        </option>
+    `).join("");
+
+    preview.innerHTML = productDetailImages.length
+        ? productDetailImages.map(image => `<img src="/${escapeHtml(image)}" alt="">`).join("")
+        : '<span class="hint">부가 사진이 없습니다.</span>';
+}
+
+function syncProductDetailImages(){
+    const mainImage = $("#image").value || "";
+    productDetailImages = Array.from($("#detail-images").selectedOptions)
+        .map(option => option.value)
+        .filter(image => image && image !== mainImage);
+    fillDetailImages();
 }
 
 function renderProducts(){
@@ -1034,6 +1094,7 @@ function resetForm(){
     $("#name").value = "";
     $("#price").value = "";
     $("#material").value = "";
+    productDetailImages = [];
     optionRows = [];
     fillImages();
     renderOptionRows();
@@ -1049,6 +1110,9 @@ function editProduct(id){
     $("#name").value = product.name || "";
     $("#price").value = product.price || "";
     $("#material").value = product.material || "";
+    productDetailImages = Array.isArray(product.detailImages)
+        ? product.detailImages.filter(image => image && image !== product.image)
+        : [];
     optionRows = (product.options || []).map(option => ({
         label: option.label || "",
         image: option.image || "",
@@ -1083,6 +1147,10 @@ function readOptions(){
     return cleaned;
 }
 
+function readProductDetailImages(){
+    return [...new Set([$("#image").value, ...productDetailImages].filter(Boolean))];
+}
+
 $("#product-form").addEventListener("submit", async event => {
     event.preventDefault();
     $("#status").textContent = "";
@@ -1095,6 +1163,7 @@ $("#product-form").addEventListener("submit", async event => {
             price: Number($("#price").value),
             material: $("#material").value,
             image: $("#image").value,
+            detailImages: readProductDetailImages(),
             optionName: options.length ? "옵션" : "",
             options
         };
@@ -1163,10 +1232,43 @@ async function uploadProductImage(){
     status.textContent = "";
 
     try{
-        const image = await uploadOneFile(input.files && input.files[0]);
-        fillImages(image);
+        const files = Array.from(input.files || []);
+        if(files.length === 0) throw new Error("업로드할 이미지를 선택해주세요.");
+        const uploaded = [];
+        for(const file of files){
+            uploaded.push(await uploadOneFile(file));
+        }
+
+        fillImages(uploaded[0]);
+        productDetailImages = [...new Set([...productDetailImages, ...uploaded.slice(1)])]
+            .filter(image => image && image !== $("#image").value);
+        fillDetailImages();
         input.value = "";
         status.textContent = "이미지를 업로드했습니다.";
+    }catch(error){
+        status.textContent = error.message;
+    }
+}
+
+async function uploadProductDetailImages(){
+    const input = $("#detail-image-upload");
+    const status = $("#status");
+    status.textContent = "";
+
+    try{
+        const files = Array.from(input.files || []);
+        if(files.length === 0) throw new Error("업로드할 이미지를 선택해주세요.");
+        const uploaded = [];
+        for(const file of files){
+            uploaded.push(await uploadOneFile(file));
+        }
+
+        productDetailImages = [...new Set([...productDetailImages, ...uploaded])]
+            .filter(image => image && image !== $("#image").value);
+        fillDetailImages();
+        renderOptionRows();
+        input.value = "";
+        status.textContent = "부가 사진을 업로드했습니다.";
     }catch(error){
         status.textContent = error.message;
     }
@@ -1240,6 +1342,7 @@ document.querySelector(".admin-tabs").addEventListener("click", event => {
 });
 
 $("#image").addEventListener("change", updatePreview);
+$("#detail-images").addEventListener("change", syncProductDetailImages);
 $("#option-list").addEventListener("input", event => syncOptionFromElement(event.target));
 $("#option-list").addEventListener("change", event => syncOptionFromElement(event.target));
 $("#option-list").addEventListener("click", event => {

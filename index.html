@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEOUL ICE</title>
-<link rel="stylesheet" href="css/style.css?v=admin-my-1">
+<link rel="stylesheet" href="css/style.css?v=hero-video-3">
 </head>
 
 <body>
@@ -38,7 +38,11 @@
 </header>
 
 <main>
-    <section id="home" class="hero"></section>
+    <section id="home" class="hero">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-label="SEOUL ICE 메인 영상">
+            <source src="images/seoul-ice-hero-video.mp4" type="video/mp4">
+        </video>
+    </section>
 
     <section id="products" class="section product-section">
         <div class="section-head">
@@ -129,16 +133,9 @@
         </div>
 
         <div class="modal-info">
-            <p class="eyebrow">SEOUL ICE SELECT</p>
+            <p class="eyebrow">SEOUL ICE</p>
             <h2 id="modal-name"></h2>
             <p id="modal-price"></p>
-
-            <div class="detail-list">
-                <div>
-                    <span>Material</span>
-                    <strong id="modal-material"></strong>
-                </div>
-            </div>
 
             <div id="modal-options" class="modal-options"></div>
 
@@ -149,6 +146,6 @@
 
 <div id="backdrop" onclick="closeCart(); closeProductModal(); closeAccountModal(); closeMyPage(); closeCheckout();"></div>
 
-<script src="js/app.js?v=admin-my-1"></script>
+<script src="js/app.js?v=sound-off-1"></script>
 </body>
 </html>

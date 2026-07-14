@@ -1,0 +1,16 @@
+SEOUL ICE GitHub 업로드용
+
+이 폴더는 GitHub 저장소에 올리기 좋게 정리한 버전입니다.
+
+실행 명령:
+npm start
+
+Render 같은 서비스에 연결할 때:
+Build command: npm install
+Start command: npm start
+
+.gitignore에서 data/users.json, data/orders.json은 제외했습니다.
+실제 회원정보와 주문내역은 GitHub에 올리지 않는 것이 안전합니다.
+
+상품 목록은 data/products.json에 들어 있습니다.
+이미지는 images 폴더에 들어 있습니다.

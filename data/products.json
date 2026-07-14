@@ -40,15 +40,21 @@
     "price": 380000,
     "image": "images/소닉.jpg",
     "material": "Character pendant",
-    "optionName": "소닉 컬러",
+    "optionName": "옵션",
     "options": [
       {
-        "label": "기본",
-        "image": "images/소닉.jpg"
+        "label": "Silver",
+        "image": "images/소닉.jpg",
+        "detailImages": [
+          "images/소닉.jpg"
+        ]
       },
       {
-        "label": "파랑",
-        "image": "images/파랑소닉.jpg"
+        "label": "Blue",
+        "image": "images/파랑소닉.jpg",
+        "detailImages": [
+          "images/파랑소닉.jpg"
+        ]
       }
     ]
   },
@@ -64,14 +70,11 @@
     "name": "Elizabeth pendant",
     "price": 300000,
     "image": "images/얼굴.jpg",
-    "material": "Portrait pendant"
-  },
-  {
-    "id": 13,
-    "name": "Elizabeth pendant",
-    "price": 300000,
-    "image": "images/왼쪽얼굴.jpg",
-    "material": "Portrait pendant"
+    "material": "Portrait pendant",
+    "detailImages": [
+      "images/얼굴.jpg",
+      "images/1784031443828-왼쪽얼굴.jpg"
+    ]
   },
   {
     "id": 15,
@@ -100,27 +103,42 @@
     "price": 290000,
     "image": "images/흰색예티.jpg",
     "material": "Character pendant",
-    "optionName": "예티 컬러",
+    "optionName": "옵션",
     "options": [
       {
-        "label": "흰색",
-        "image": "images/흰색예티.jpg"
+        "label": "White",
+        "image": "images/흰색예티.jpg",
+        "detailImages": [
+          "images/흰색예티.jpg"
+        ]
       },
       {
-        "label": "빨강",
-        "image": "images/빨강예티.jpg"
+        "label": "Red",
+        "image": "images/빨강예티.jpg",
+        "detailImages": [
+          "images/빨강예티.jpg"
+        ]
       },
       {
-        "label": "주황",
-        "image": "images/주황예티.jpg"
+        "label": "Orange",
+        "image": "images/주황예티.jpg",
+        "detailImages": [
+          "images/주황예티.jpg"
+        ]
       },
       {
-        "label": "파랑",
-        "image": "images/파랑예티.jpg"
+        "label": "Blue",
+        "image": "images/파랑예티.jpg",
+        "detailImages": [
+          "images/파랑예티.jpg"
+        ]
       },
       {
-        "label": "하늘",
-        "image": "images/하늘예티.jpg"
+        "label": "Sky Blue",
+        "image": "images/하늘예티.jpg",
+        "detailImages": [
+          "images/하늘예티.jpg"
+        ]
       }
     ]
   },

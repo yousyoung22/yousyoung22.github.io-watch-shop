@@ -8,8 +8,8 @@ const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, "data");
 const VIEWS_DIR = path.join(ROOT, "views");
 const PORT = Number(process.env.PORT || 8800);
-const ADMIN_USER = process.env.ADMIN_USER || "admin";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin";
+const ADMIN_USER = process.env.ADMIN_USER || "seoulice";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "seoul123";
 const SESSION_AGE_SECONDS = 60 * 60 * 8;
 const sessions = new Map();
 
@@ -24,6 +24,8 @@ const mimeTypes = {
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
   ".webp": "image/webp",
+  ".mp4": "video/mp4",
+  ".webm": "video/webm",
   ".ico": "image/x-icon"
 };
 
@@ -225,6 +227,11 @@ function cleanOptions(input) {
     });
 }
 
+function cleanImageList(input) {
+  if (!Array.isArray(input)) return [];
+  return [...new Set(input.map(normalizeImage).filter(Boolean))];
+}
+
 function cleanProduct(input, existing = {}) {
   const product = {
     id: existing.id || Number(input.id),
@@ -232,6 +239,7 @@ function cleanProduct(input, existing = {}) {
     price: Number(input.price),
     image: normalizeImage(input.image),
     material: String(input.material || "Pendant").trim(),
+    detailImages: cleanImageList(input.detailImages),
     optionName: String(input.optionName || "").trim(),
     options: cleanOptions(input.options)
   };
@@ -239,6 +247,8 @@ function cleanProduct(input, existing = {}) {
   if (!product.name) throw new Error("상품명을 입력해주세요.");
   if (!Number.isFinite(product.price) || product.price < 0) throw new Error("가격을 올바르게 입력해주세요.");
   if (!product.material) product.material = "Pendant";
+  product.detailImages = [...new Set([product.image, ...product.detailImages])];
+  if (product.detailImages.length <= 1) delete product.detailImages;
   if (!product.optionName) delete product.optionName;
   if (!product.options.length) delete product.options;
 
